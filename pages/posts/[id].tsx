@@ -9,15 +9,13 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "use-auth0-hooks";
 
-//https://localhost:3000/posts/1
-
 export default function Post({ postData }) {
   const { isAuthenticated, isLoading, login, logout, user } = useAuth();
   const { pathname, query, asPath } = useRouter();
 
   const date = new Date().toISOString();
   const [comment, setComment] = useState("");
-  // const [user, setUser] = useState("");
+  const [post, setPost] = useState(postData);
 
   const saveComment = async (comment) => {
     const commentWithMetadata = `---
@@ -43,6 +41,22 @@ ${comment}
         }
       );
       console.log("Comentario guardado correctamente", result);
+      await fetch(
+        `https://api.zeit.co/v1/integrations/deploy/QmV4UD3oa7bQmDAgD5sXQ9wTd1C4ykkNzmjHecvKzMyx3g/PCLFEpifPC`,
+        {
+          method: "POST",
+        }
+      );
+
+      const nextPostComments = [...postData.comments];
+      nextPostComments.push({
+        date,
+        user: user.name,
+        userPicture: user.picture,
+        content: comment,
+      });
+
+      setPost({ ...post, comments: nextPostComments });
     } catch (err) {
       console.error("Error al guardar comentario");
     }
@@ -53,27 +67,26 @@ ${comment}
     saveComment(comment);
   }
 
-  console.log({ user, isAuthenticated, isLoading });
   return (
-    <Layout title={postData.title}>
+    <Layout title={post.title}>
       <div className="bg-gray-50">
         <div className="max-w-screen-xl mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto"></div>
           <h2 className=" text-3xl leading-9 font-extrabold text-gray-900 sm:text-4xl sm:leading-10">
-            {postData.title}
+            {post.title}
           </h2>
 
-          <PostDate dateString={postData.date} />
+          <PostDate dateString={post.date} />
 
           <ReactMarkdown
             className="markdown mt-8"
-            source={postData.content}
+            source={post.content}
             renderers={{ code: CodeBlock }}
           />
 
-          {postData.comments.length ? (
+          {post.comments.length ? (
             <>
-              {postData.comments.map((comment, index) => (
+              {post.comments.map((comment, index) => (
                 <div
                   key={`${comment.id}-${index}`}
                   className="my-8 border border-b border-gray-400 p-4"
