@@ -29,9 +29,15 @@
   "homepage": "https://github.com/ivanbtrujillo/next-typescript-tailwind#readme",
   "dependencies": {
     "@types/jest": "^25.2.1",
+    "date-fns": "^2.12.0",
+    "gray-matter": "^4.0.2",
     "next": "^9.3.5",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-markdown": "^4.3.1",
+    "react-markdown-editor-lite": "^1.0.2",
+    "react-syntax-highlighter": "^12.2.1",
+    "use-auth0-hooks": "^0.7.0"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^2.1.2",
