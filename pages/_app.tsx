@@ -61,7 +61,7 @@ export default ({ Component, pageProps }: AppProps) => (
   <Auth0Provider
     domain={process.env.AUTH0_DOMAIN}
     clientId={process.env.AUTH0_CLIENT_ID}
-    redirectUri={process.env.REDIRECT_URI}
+    redirectUri="http://ivanbtrujillo.com"
     onLoginError={onLoginError}
     onAccessTokenError={onAccessTokenError}
     onRedirecting={onRedirecting}
