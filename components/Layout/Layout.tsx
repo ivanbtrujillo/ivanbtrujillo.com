@@ -76,13 +76,8 @@ export const Layout = ({ children, title }: ILayout) => {
           </div>
         </div>
       </Header>
-      <Auth0Provider
-        domain={process.env.auth0domain}
-        clientId={process.env.auth0clientid}
-        redirectUri={"http://localhost:3000/"}
-      >
-        <div className="flex flex-col flex-1 items-center ">{children}</div>
-      </Auth0Provider>
+
+      <div className="flex flex-col flex-1 items-center ">{children}</div>
     </div>
   );
 };
