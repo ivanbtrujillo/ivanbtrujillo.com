@@ -1,0 +1,10 @@
+{
+  "build": {
+    "env": {
+      "githubToken": "9ac344d846d37cbd642e0b83be8562ba1aba9c32",
+      "AUTH0_DOMAIN": "dev-rofqlla8.auth0.com",
+      "AUTH0_CLIENT_ID": "sL8K0Svso17s0Jv87uQkROUVVdHQE0Zp",
+      "REDIRECT_URI": "http://ivanbtrujillo.com"
+    }
+  }
+}
