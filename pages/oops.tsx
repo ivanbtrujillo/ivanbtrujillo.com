@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 
 export default function Oops() {
   const router = useRouter();
-  const { message } = router.query;
-
+  const { message, err } = router.query;
+  console.log({ err });
   return (
     <div>
       <h1>Oops</h1>

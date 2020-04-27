@@ -33,6 +33,7 @@ const onLoginError = (err) => {
     pathname: "/oops",
     query: {
       message: err.error_description || err.message,
+      err,
     },
   });
 };
