@@ -53,6 +53,7 @@ export default function Post({ postData }) {
         }));
 
       setComments(comments);
+      setComment("");
     };
     getPostComments(postData.comments_url);
   }, []);
@@ -193,7 +194,7 @@ ${comment}
                 </div>
                 <div className="flex flex-col justify-end">
                   <button
-                    className="flex justify-center items-center px-6 py-4 w-48  rounded-sm text-base leading-6 bg-red-500 text-white hover:bg-red-400 focus:outline-none focus:border-red-300 focus:shadow-outline-red active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150"
+                    className="flex justify-center items-center px-4 py-2 w-32  rounded-sm text-base leading-6 bg-red-500 text-white hover:bg-red-400 focus:outline-none focus:border-red-300 focus:shadow-outline-red active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150"
                     onClick={() =>
                       logout({
                         returnTo: process.env.AUTH0_LOGOUT_REDIRECT_URI,
@@ -215,7 +216,7 @@ ${comment}
                   >
                     Comentario
                   </label>
-                  <div style={{ height: "500px" }}>
+                  <div style={{ height: "400px" }}>
                     <MarkdownEditor
                       value={comment}
                       renderHTML={(text) => (
