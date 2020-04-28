@@ -43,7 +43,7 @@ export default function Home({ posts }) {
             <div className="flex flex-col items-center flex-1 mx-4">
               <div className="mb-8">
                 <h1 className="text-xl font-semibold text-gray-800 mb-4 ">
-                  últimas publicaciones
+                  Últimas publicaciones
                 </h1>
                 <div className="grid grid-cols-1 col-gap-4 md:grid-cols-3">
                   {posts

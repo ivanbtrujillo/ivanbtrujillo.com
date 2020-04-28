@@ -7,7 +7,7 @@ const user = {
 export default () => (
   <Layout title="Sobre mí">
     <div className="page">
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center mb-2">
         <img
           src="/images/ivan.png"
           className="w-48 h-48 rounded-full border-4 border-white object-cover"
