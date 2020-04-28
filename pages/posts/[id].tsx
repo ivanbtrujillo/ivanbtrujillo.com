@@ -90,7 +90,7 @@ ${comment}
         }
       );
 
-      const nextPostComments = [...postData.comments];
+      const nextPostComments = [...comments];
       nextPostComments.push({
         date,
         user: user.name,
@@ -98,7 +98,7 @@ ${comment}
         content: comment,
       });
 
-      setPost({ ...post, comments: nextPostComments });
+      setComments(nextPostComments);
     } catch (err) {
       console.error("Error al guardar comentario");
     }
