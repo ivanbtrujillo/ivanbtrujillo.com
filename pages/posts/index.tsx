@@ -1,5 +1,4 @@
 import { Layout, PostDate } from "@components/index";
-import { getSortedPostsData } from "../../lib/posts";
 import { GetStaticProps } from "next";
 import fetch from "node-fetch";
 import matter from "gray-matter";
@@ -47,7 +46,6 @@ export default function Home({ posts }) {
  * — so when you pre-render this page at build time, make sure to resolve them first!”
  */
 export const getStaticProps: GetStaticProps = async () => {
-  const allPostData = getSortedPostsData();
   const response = await getPostFromGithub();
 
   const posts = response.map((post) => {
