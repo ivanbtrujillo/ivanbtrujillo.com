@@ -7,7 +7,7 @@ interface ILayout {
   title: string;
 }
 
-export const siteTitle = "NextJS blog";
+export const siteTitle = "ivanbtrujillo.com";
 
 export const Layout = ({ children, title }: ILayout) => {
   return (
