@@ -30,7 +30,7 @@ export default () => (
             Dichos estudios me han servido de poco, donde realmente he
             encontrado la formación que necesito ha sido en libros, conociendo a
             muy buenos profesionales y en cursos de distintas plataformas
-            online. Durante este tiempo me enamoré de Javascript
+            online. Durante este tiempo me enamoré de Javascript.
           </p>
           <p className="mt-3 text-base text-gray-800 sm:mt-5 sm:text-lg  md:mt-5 lg:mx-0">
             Esta formación adicional me permitió en 2016 entrar a trabajar como
@@ -43,7 +43,7 @@ export default () => (
           <p className="mt-3 text-base text-gray-800 sm:mt-5 sm:text-lg  md:mt-5 lg:mx-0">
             A finales de 2018 dí el salto a Expero como Intermediate Frontend.
             Expero es una empresa americana ubicada en Houston que realiza
-            desarrollos para las principales empresas de país. Entrar a Expero
+            desarrollos para las principales empresas del país. Entrar a Expero
             me ha permitido ser mucho más independiente, aprender de grandes
             profesionales y seguir formándome y creciendo. En enero de 2020
             celebramos el summit anual, donde fuí premiado por la compañia con
