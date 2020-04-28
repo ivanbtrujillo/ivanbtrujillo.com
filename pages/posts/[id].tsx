@@ -53,7 +53,6 @@ export default function Post({ postData }) {
         }));
 
       setComments(comments);
-      setComment("");
     };
     getPostComments(postData.comments_url);
   }, []);
@@ -97,6 +96,7 @@ ${comment}
       });
 
       setComments(nextPostComments);
+      setComment("");
     } catch (err) {
       console.error("Error al guardar comentario");
     }
