@@ -67,8 +67,6 @@ ${comment}
     saveComment(comment);
   }
 
-  console.log({ user, isAuthenticated, isLoading });
-
   return (
     <Layout title={post.title}>
       <div className="bg-gray-50">
