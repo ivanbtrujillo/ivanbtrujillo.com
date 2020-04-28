@@ -28,7 +28,7 @@ export default function Home({ posts }) {
               </h2>
               <p className="mt-3 text-base text-gray-800 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 lg:mx-0">
                 Hola 👋, soy un desarrollador enfocado en Javascript y su
-                ecosistema. Me gusta aprender y seguir buenas práticas y
+                ecosistema. Me gusta aprender y seguir buenas prácticas y
                 mantener mi código simple.
               </p>
               <p className="mt-3 text-base text-gray-800 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 lg:mx-0">
