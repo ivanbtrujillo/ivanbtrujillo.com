@@ -170,7 +170,7 @@ ${comment}
                 Debes autenticarte para comentar 🙂
               </h1>
               <button
-                className="flex justify-center items-center px-6 py-4 w-48  rounded-sm text-base leading-6 bg-blue-500 text-white hover:bg-blue-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150"
+                className="flex justify-center items-center px-4 py-2 w-32  rounded-sm text-base leading-6 bg-blue-500 text-white hover:bg-blue-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150"
                 onClick={() =>
                   login({ appState: { returnTo: { pathname: asPath, query } } })
                 }
