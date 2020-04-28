@@ -73,7 +73,7 @@ export default function Home({ posts }) {
               <LinkBtn href="/posts">Ver mas artículos</LinkBtn>
             </div>
             <div className=" flex-1 mx-4 ">
-              <h1 className="text-xl font-semibold text-gray-800 mb-8">
+              <h1 className="text-xl mt-8 font-semibold text-gray-800 mb-8">
                 Me gusta trabajar con
               </h1>
               <div className="flex flex-row flex-wrap">

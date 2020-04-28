@@ -16,7 +16,7 @@ body {
 }
 
 .page {
-  @apply flex flex-col items-center bg-white  pt-8 pb-8;
+  @apply bg-white pt-8 pb-8;
 }
 
 /* Markdown CSS */
