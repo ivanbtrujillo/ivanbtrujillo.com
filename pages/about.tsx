@@ -30,7 +30,9 @@ export default () => (
             Dichos estudios me han servido de poco, donde realmente he
             encontrado la formación que necesito ha sido en libros, conociendo a
             muy buenos profesionales y en cursos de distintas plataformas
-            online. Durante este tiempo me enamoré de Javascript.
+            online. Durante este tiempo me enamoré de Javascript y la
+            posibilidad de poder crear aplicaciónes para cualquier plataforma
+            usando un mismo lenguage.
           </p>
           <p className="mt-3 text-base text-gray-800 sm:mt-5 sm:text-lg  md:mt-5 lg:mx-0">
             Esta formación adicional me permitió en 2016 entrar a trabajar como
@@ -50,11 +52,11 @@ export default () => (
             un Rising Star,un bonus y un ascenso a Senior Frontend debido a mi
             desempeño a lo largo del año. Este reconocimiento para mi es
             especial ya que es basado en el feedback que el resto de mi equipo
-            ha dado de mí. Siempre me he considerado un desarrollador de equipo
+            ha dado de mí. Siempre me he considerado un desarrollador de equipo.
           </p>
           <p className="mt-3 text-base text-gray-800 sm:mt-5 sm:text-lg  md:mt-5 lg:mx-0">
-            Actualmente sigo en Expero, me encuentro muy agusto y sigo
-            formándome y aprendiendo.
+            Actualmente sigo en Expero, me encuentro muy cómodo y sigo
+            formándome y aprendiendo en mis ratos libres.
           </p>
         </div>
       </div>
