@@ -32,7 +32,7 @@ export default () => (
             muy buenos profesionales y en cursos de distintas plataformas
             online. Durante este tiempo me enamoré de Javascript y la
             posibilidad de poder crear aplicaciónes para cualquier plataforma
-            usando un mismo lenguage.
+            usando un mismo lenguaje.
           </p>
           <p className="mt-3 text-base text-gray-800 sm:mt-5 sm:text-lg  md:mt-5 lg:mx-0">
             Esta formación adicional me permitió en 2016 entrar a trabajar como
