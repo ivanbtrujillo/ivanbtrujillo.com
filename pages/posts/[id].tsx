@@ -159,7 +159,7 @@ ${comment}
                     className="flex justify-center items-center px-6 py-4 w-48  rounded-sm text-base leading-6 bg-red-500 text-white hover:bg-red-400 focus:outline-none focus:border-red-300 focus:shadow-outline-red active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150"
                     onClick={() =>
                       logout({
-                        appState: { returnTo: { pathname: asPath, query } },
+                        returnTo: process.env.AUTH0_LOGOUT_REDIRECT_URI,
                       })
                     }
                   >
