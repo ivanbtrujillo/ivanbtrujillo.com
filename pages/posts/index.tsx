@@ -11,7 +11,7 @@ export default function Home({ posts }) {
       <div className="page">
         <div className=" px-4 sm:px-6 lg:px-8">
           <h1 className="text-xl font-semibold text-gray-800 mb-4 ">
-            Mis publicaciones
+            Publicaciones
           </h1>
           <div className="grid grid-cols-1 col-gap-4 md:grid-cols-3">
             {posts.map(({ date, title, id, img, summary, as }) => (

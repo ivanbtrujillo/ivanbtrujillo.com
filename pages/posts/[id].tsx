@@ -3,10 +3,28 @@ import ReactMarkdown from "react-markdown";
 import fetch from "node-fetch";
 import { GetStaticProps, GetStaticPaths } from "next";
 import matter from "gray-matter";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useRouter } from "next/router";
 import { useAuth } from "use-auth0-hooks";
+
+const getPostComments = async (comments_url) => {
+  const commentsResponse = await fetch(comments_url, {
+    headers: {
+      Authorization: `token ${process.env.githubToken}`,
+    },
+  });
+
+  const commentsData = await commentsResponse.json();
+
+  const comments = commentsData
+    .map((comment) => matter(comment.body))
+    .map((commentMatter) => ({
+      content: commentMatter.content,
+      ...commentMatter.data,
+    }));
+  return comments;
+};
 
 export default function Post({ postData }) {
   const { isAuthenticated, isLoading, login, logout, user } = useAuth();
@@ -14,7 +32,33 @@ export default function Post({ postData }) {
 
   const date = new Date().toISOString();
   const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
   const [post, setPost] = useState(postData);
+
+  useEffect(() => {
+    console.log("GET POST COMMENTS");
+    const getPostComments = async (comments_url) => {
+      const commentsResponse = await fetch(comments_url, {
+        headers: {
+          Authorization: `token ${process.env.githubToken}`,
+        },
+      });
+
+      const commentsData = await commentsResponse.json();
+
+      const comments = commentsData
+        .map((comment) => matter(comment.body))
+        .map((commentMatter) => ({
+          content: commentMatter.content,
+          ...commentMatter.data,
+        }));
+
+      setComments(comments);
+    };
+
+    console.log(postData);
+    getPostComments(postData.comments_url);
+  }, []);
 
   const saveComment = async (comment) => {
     const commentWithMetadata = `---
@@ -39,7 +83,6 @@ ${comment}
           }),
         }
       );
-      console.log("Comentario guardado correctamente", result);
       await fetch(
         `https://api.zeit.co/v1/integrations/deploy/QmV4UD3oa7bQmDAgD5sXQ9wTd1C4ykkNzmjHecvKzMyx3g/PCLFEpifPC`,
         {
@@ -83,9 +126,9 @@ ${comment}
             renderers={{ code: CodeBlock }}
           />
 
-          {post.comments.length ? (
+          {comments.length ? (
             <>
-              {post.comments.map((comment, index) => (
+              {comments.map((comment, index) => (
                 <div
                   key={`${comment.id}-${index}`}
                   className="my-8 border border-b border-gray-400 p-4"
@@ -260,27 +303,12 @@ const getPostDetailsFromGithub = async (id: string) => {
 
   const post = await response.json();
 
-  const commentsResponse = await fetch(post.comments_url, {
-    headers: {
-      Authorization: `token ${process.env.githubToken}`,
-    },
-  });
-
-  const commentsData = await commentsResponse.json();
-
-  const comments = commentsData
-    .map((comment) => matter(comment.body))
-    .map((commentMatter) => ({
-      content: commentMatter.content,
-      ...commentMatter.data,
-    }));
-
   const matterResult = matter(post.body);
   return {
     id: String(post.number),
     as: post.title.toLowerCase().replace(" ", "-"),
+    comments_url: post.comments_url,
     title: post.title,
-    comments,
     content: matterResult.content,
     ...matterResult.data,
   };
