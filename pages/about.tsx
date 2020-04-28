@@ -19,7 +19,7 @@ export default () => (
           <span className="text-blue-800">{user.lastName}</span>
         </h2>
       </div>
-      <div className=" px-32  ">
+      <div className=" px-6 md:px-32  ">
         <div className="sm:text-center lg:text-left">
           <p className="mt-3 text-base text-gray-800 sm:mt-5 sm:text-lg  md:mt-5 lg:mx-0">
             Soy originario de Fasnia, Tenerife y actualmente vivo en El Sauzal.
