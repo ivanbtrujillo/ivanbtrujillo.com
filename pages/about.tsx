@@ -15,8 +15,8 @@ export default () => (
         />
         <h2 className="text-2xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-3xl sm:leading-none md:text-4xl">
           {user.name}
-          <br className="xl:hidden" />
-          <span className="text-blue-800">{user.lastName}</span>
+
+          <span className="text-blue-800 ml-1">{user.lastName}</span>
         </h2>
       </div>
       <div className=" px-6 md:px-32  ">

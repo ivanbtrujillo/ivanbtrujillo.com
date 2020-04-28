@@ -1,4 +1,4 @@
-import { Layout, LinkBtn, PostDate } from "@components/index";
+import { Layout, PostDate } from "@components/index";
 import { getSortedPostsData } from "../../lib/posts";
 import { GetStaticProps } from "next";
 import fetch from "node-fetch";
@@ -10,26 +10,13 @@ export default function Home({ posts }) {
     <Layout title="Blog">
       <div className="page">
         <div className=" px-4 sm:px-6 lg:px-8">
-          <h1 className="text-xl font-semibold text-gray-800 ">
+          <h1 className="text-xl font-semibold text-gray-800 mb-4 ">
             Mis publicaciones
           </h1>
-          <div className="mt-6 grid gap-16  pt-10 grid-cols-1 md:grid-cols-3 lg:col-gap-4 ">
-            {[
-              ...posts,
-              ...posts,
-              ...posts,
-              ...posts,
-              ...posts,
-              ...posts,
-              ...posts,
-              ...posts,
-              ...posts,
-              ...posts,
-              ...posts,
-              ...posts,
-            ].map(({ date, title, id, img, summary, as }) => (
+          <div className="grid grid-cols-1 col-gap-4 md:grid-cols-3">
+            {posts.map(({ date, title, id, img, summary, as }) => (
               <Link href="/posts/[id]" as={`/posts/${as}`} key={id}>
-                <div className="-mx-4 py-4 px-4 hover:bg-gray-400 cursor-pointer">
+                <div className="py-4 px-4 hover:bg-gray-300 cursor-pointer">
                   <img
                     src={img}
                     alt={title}

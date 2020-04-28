@@ -1,9 +1,7 @@
 import { Layout, LinkBtn, PostDate } from "@components/index";
-import { getSortedPostsData } from "../lib/posts";
 import { GetStaticProps } from "next";
 import fetch from "node-fetch";
 import Link from "next/link";
-import { useEffect } from "react";
 import matter from "gray-matter";
 
 const user = {
@@ -44,13 +42,13 @@ export default function Home({ posts }) {
           <div className="flex flex-col ">
             <div className="flex flex-col items-center flex-1 mx-4">
               <div className="mb-8">
-                <h1 className="text-xl font-semibold text-gray-800 ">
+                <h1 className="text-xl font-semibold text-gray-800 mb-4 ">
                   Ultimos artículos que he publicado
                 </h1>
-                <div className="grid gridl-cols-1 col-gap-4 md:grid-cols-3">
+                <div className="grid grid-cols-1 col-gap-4 md:grid-cols-3">
                   {posts.map(({ date, title, id, img, summary }) => (
                     <Link href="/posts/[id]" as={`/posts/${id}`} key={id}>
-                      <div className=" py-4 px-4 hover:bg-gray-400 cursor-pointer">
+                      <div className=" py-4 px-4 hover:bg-gray-300 cursor-pointer">
                         <img
                           src={img}
                           alt={title}
@@ -163,5 +161,3 @@ const getPostFromGithub = async () => {
   );
   return response.json();
 };
-
-// curl -H "Authorization: token 9ac344d846d37cbd642e0b83be8562ba1aba9c32" https://api.github.com/repos/ivanbtrujillo/next-blog/issues

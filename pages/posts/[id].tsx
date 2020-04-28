@@ -1,8 +1,7 @@
 import { Layout, PostDate, CodeBlock, MarkdownEditor } from "@components/index";
-import { getAllPostIds, getPostData } from "../../lib/posts";
 import ReactMarkdown from "react-markdown";
 import fetch from "node-fetch";
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
+import { GetStaticProps, GetStaticPaths } from "next";
 import matter from "gray-matter";
 import { useState } from "react";
 
@@ -11,7 +10,7 @@ import { useAuth } from "use-auth0-hooks";
 
 export default function Post({ postData }) {
   const { isAuthenticated, isLoading, login, logout, user } = useAuth();
-  const { pathname, query, asPath } = useRouter();
+  const { query, asPath } = useRouter();
 
   const date = new Date().toISOString();
   const [comment, setComment] = useState("");
@@ -177,14 +176,6 @@ ${comment}
                     Comentario
                   </label>
                   <div style={{ height: "500px" }}>
-                    {/* <textarea
-                  id="message"
-                  rows={4}
-                  className="form-textarea py-3 px-4 block w-full border border-gray-500 transition ease-in-out duration-150"
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                ></textarea> */}
-
                     <MarkdownEditor
                       value={comment}
                       renderHTML={(text) => (
@@ -294,6 +285,3 @@ const getPostDetailsFromGithub = async (id: string) => {
     ...matterResult.data,
   };
 };
-
-// DOMAIN dev-rofqlla8.auth0.com
-// ID sL8K0Svso17s0Jv87uQkROUVVdHQE0Zp
