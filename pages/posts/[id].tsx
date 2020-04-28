@@ -36,7 +36,6 @@ export default function Post({ postData }) {
   const [post, setPost] = useState(postData);
 
   useEffect(() => {
-    console.log("GET POST COMMENTS");
     const getPostComments = async (comments_url) => {
       const commentsResponse = await fetch(comments_url, {
         headers: {
@@ -55,8 +54,6 @@ export default function Post({ postData }) {
 
       setComments(comments);
     };
-
-    console.log(postData);
     getPostComments(postData.comments_url);
   }, []);
 
