@@ -10,7 +10,7 @@ const user = {
 };
 export default function Home({ posts }) {
   return (
-    <Layout title="Ivan Trujillo | Inicio">
+    <Layout title="Inicio">
       <div className="page">
         <div className="flex flex-col lg:flex-row items-center justify-center">
           <img

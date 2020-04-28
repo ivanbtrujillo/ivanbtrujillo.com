@@ -5,7 +5,7 @@ const user = {
   lastName: "Trujillo",
 };
 export default () => (
-  <Layout title="Next + Typescript + TailwindCSS">
+  <Layout title="Sobre mí">
     <div className="page">
       <div className="flex flex-col items-center">
         <img

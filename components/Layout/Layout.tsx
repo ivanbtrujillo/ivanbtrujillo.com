@@ -13,7 +13,7 @@ export const Layout = ({ children, title }: ILayout) => {
   return (
     <div className=" flex flex-col h-screen max-w-screen-xl mx-auto overflow-y-visible">
       <Head>
-        <title>{title}</title>
+        <title>{`${title} - ivanbtrujillo.com`}</title>
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="viewport"
