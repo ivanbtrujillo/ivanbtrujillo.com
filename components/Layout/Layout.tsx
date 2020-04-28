@@ -77,7 +77,7 @@ export const Layout = ({ children, title }: ILayout) => {
         </div>
       </Header>
 
-      <div className="flex flex-col flex-1 items-center ">{children}</div>
+      <div>{children}</div>
     </div>
   );
 };

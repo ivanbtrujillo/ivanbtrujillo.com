@@ -14,7 +14,7 @@ export default function Home({ posts }) {
   return (
     <Layout title="Ivan Trujillo | Inicio">
       <div className="page">
-        <div className="flex flex-col lg:flex-row items-center">
+        <div className="flex flex-col lg:flex-row items-center justify-center">
           <img
             src="/images/ivan.png"
             className="w-48 h-48 rounded-full border-4 border-white object-cover"
@@ -22,11 +22,11 @@ export default function Home({ posts }) {
           />
 
           <div className="  px-4 sm:px-6  lg:px-8 ">
-            <div className="sm:text-center lg:text-left">
+            <div className="text-center lg:text-left">
               <h2 className="text-2xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-3xl sm:leading-none md:text-4xl">
                 {user.name}
-                <br className="xl:hidden" />
-                <span className="text-blue-800">{user.lastName}</span>
+
+                <span className="text-blue-800 ml-1">{user.lastName}</span>
               </h2>
               <p className="mt-3 text-base text-gray-800 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 lg:mx-0">
                 Hola 👋, soy un desarrollador enfocado en Javascript y su

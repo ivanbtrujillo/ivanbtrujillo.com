@@ -7,19 +7,20 @@ const user = {
 export default () => (
   <Layout title="Next + Typescript + TailwindCSS">
     <div className="page">
-      <img
-        src="/images/ivan.png"
-        className="w-48 h-48 rounded-full border-4 border-white object-cover"
-        alt={user.name}
-      />
-
+      <div className="flex flex-col items-center">
+        <img
+          src="/images/ivan.png"
+          className="w-48 h-48 rounded-full border-4 border-white object-cover"
+          alt={user.name}
+        />
+        <h2 className="text-2xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-3xl sm:leading-none md:text-4xl">
+          {user.name}
+          <br className="xl:hidden" />
+          <span className="text-blue-800">{user.lastName}</span>
+        </h2>
+      </div>
       <div className=" px-32  ">
         <div className="sm:text-center lg:text-left">
-          <h2 className="text-2xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-3xl sm:leading-none md:text-4xl">
-            {user.name}
-            <br className="xl:hidden" />
-            <span className="text-blue-800">{user.lastName}</span>
-          </h2>
           <p className="mt-3 text-base text-gray-800 sm:mt-5 sm:text-lg  md:mt-5 lg:mx-0">
             Soy originario de Fasnia, Tenerife y actualmente vivo en El Sauzal.
             Llevo en el mundo del desarrollo desde 2014 cuando terminé mis
