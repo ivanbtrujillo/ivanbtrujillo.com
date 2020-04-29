@@ -14,7 +14,7 @@ export const getPostsFromGithub = async () => {
   const data = await response.json();
 
   const posts = data.map((post) => {
-    const matterResult = matter(post.body);
+    const matterResult = matter(post.body || "");
     return {
       id: post.number,
       title: post.title,
@@ -48,7 +48,7 @@ export const getPostDetailsFromGithub = async (id: string) => {
 
   const post = await response.json();
 
-  const matterResult = matter(post.body);
+  const matterResult = matter(post.body || "");
   return {
     id: String(post.number),
     as: post.title.toLowerCase().replace(" ", "-"),
