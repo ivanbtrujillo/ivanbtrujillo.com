@@ -1,65 +1,58 @@
-import { Title, Layout, LinkBtn } from "@components/index";
+import { Layout, User, Paragraph } from "components";
 
 const user = {
   name: "Iván",
   lastName: "Trujillo",
 };
-export default () => (
-  <Layout title="Sobre mí">
+const About = () => (
+  <Layout title="About">
     <div className="page">
-      <div className="flex flex-col items-center mb-2">
-        <img
-          src="/images/ivan.png"
-          className="w-48 h-48 rounded-full border-4 border-white object-cover"
-          alt={user.name}
-        />
-        <h2 className="text-2xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-3xl sm:leading-none md:text-4xl">
-          {user.name}
-
-          <span className="text-blue-800 ml-1">{user.lastName}</span>
-        </h2>
-      </div>
+      <User imageUrl="/images/ivan.png" user={user} className="mb-8" />
       <div className=" px-6 md:px-32  ">
         <div className="sm:text-center lg:text-left">
-          <p className="mt-3 text-base text-gray-800 sm:mt-5 sm:text-lg  md:mt-5 lg:mx-0">
-            Soy originario de Fasnia, Tenerife y actualmente vivo en El Sauzal.
-            Llevo en el mundo del desarrollo desde 2014 cuando terminé mis
-            estudios de técnico en desarrollo de aplicaciones multiplataforma.
-          </p>
-          <p className="mt-3 text-base text-gray-800 sm:mt-5 sm:text-lg  md:mt-5 lg:mx-0">
-            Dichos estudios me han servido de poco, donde realmente he
-            encontrado la formación que necesito ha sido en libros, conociendo a
-            muy buenos profesionales y en cursos de distintas plataformas
-            online. Durante este tiempo me enamoré de Javascript y la
-            posibilidad de poder crear aplicaciónes para cualquier plataforma
-            usando un mismo lenguaje.
-          </p>
-          <p className="mt-3 text-base text-gray-800 sm:mt-5 sm:text-lg  md:mt-5 lg:mx-0">
-            Esta formación adicional me permitió en 2016 entrar a trabajar como
-            desarollador frontend a Blue Sky Technology, rol que posteriormente
-            paso a ser Frontend Lead donde me encargaba del desarrollo web y
-            mobile utilizand React y React Native. Aunque me gustaba mi puesto
-            de trabajo, quería seguir creciendo lo que hizo que no parara de
-            formarme y aprender (y aún sigo haciéndolo).
-          </p>
-          <p className="mt-3 text-base text-gray-800 sm:mt-5 sm:text-lg  md:mt-5 lg:mx-0">
-            A finales de 2018 dí el salto a Expero como Intermediate Frontend.
-            Expero es una empresa americana ubicada en Houston que realiza
-            desarrollos para las principales empresas del país. Entrar a Expero
-            me ha permitido ser mucho más independiente, aprender de grandes
-            profesionales y seguir formándome y creciendo. En enero de 2020
-            celebramos el summit anual, donde fuí premiado por la compañia con
-            un Rising Star,un bonus y un ascenso a Senior Frontend debido a mi
-            desempeño a lo largo del año. Este reconocimiento para mi es
-            especial ya que es basado en el feedback que el resto de mi equipo
-            ha dado de mí. Siempre me he considerado un desarrollador de equipo.
-          </p>
-          <p className="mt-3 text-base text-gray-800 sm:mt-5 sm:text-lg  md:mt-5 lg:mx-0">
-            Actualmente sigo en Expero, me encuentro muy cómodo y sigo
-            formándome y aprendiendo en mis ratos libres.
-          </p>
+          <Paragraph>
+            I am originally from Fasnia, Tenerife 🏝 and currently live in El
+            Sauzal, located in the north. I have been in the development world
+            since 2014 when I finished my studies as Cross-platform Application
+            Developer 📚.
+          </Paragraph>
+          <Paragraph>
+            Where I have really found the training I need has been in books, by
+            meeting new developers and doing courses on different on-line
+            platforms 👨‍💻. During this time I fell in love with Javascript and
+            the possibility of creating applications for any platform using the
+            same language.
+          </Paragraph>
+          <Paragraph>
+            This additional training allowed me in 2016 to start working as
+            Frontend Feveloper at Blue Sky Technology 🤘, role that later
+             becames Frontend Lead. During this time I started to work with
+            Angular 4 and Ionic, and once I became Lead, we migrated to React
+            and React Native. I was happy with my job, but I wanted to continue
+            growing so I didn't stop learning 🤓.
+          </Paragraph>
+          <Paragraph>
+            At the end of 2018 I joined Expero as Intermediate Frontend
+            Developer 🚀🇺🇸. Expero is an American company located in Houston
+            that performs developments for the main companies in the country.
+            Joining them allowed me to be much more independent, to learn from
+            great professionals and continue training myself and growing.
+          </Paragraph>
+          <Paragraph>
+            In January 2020 we celebrate the annual summit in Houston ✈️, where
+            I was awarded by the company with a Rising Star, a bonus and a
+            promotion to Senior Frontend 🏆. This recognition is special for me
+            since it is based on feedback they get from people that have worked
+            with me 🤝.
+          </Paragraph>
+          <Paragraph>
+            Currently I continue working and learning. Feel free to talk with me
+            via my RRSS 😜.
+          </Paragraph>
         </div>
       </div>
     </div>
   </Layout>
 );
+
+export default About;

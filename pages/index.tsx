@@ -1,40 +1,78 @@
-import { Layout, LinkBtn, PostDate } from "@components/index";
+import { Layout, LinkBtn, Title, User, Paragraph, Post } from "components";
 import { GetStaticProps } from "next";
-import fetch from "node-fetch";
+import { getPostsFromGithub } from "services/posts.service";
 import Link from "next/link";
-import matter from "gray-matter";
 
 const user = {
   name: "Iván",
   lastName: "Trujillo",
 };
-export default function Home({ posts }) {
+
+const technologies = [
+  {
+    alt: "javascript",
+    src: "/images/javascript.svg.png",
+  },
+
+  {
+    alt: "typescript",
+    src: "/images/typescript.svg",
+  },
+
+  {
+    alt: "next",
+    src: "/images/next.png",
+  },
+
+  {
+    alt: "react",
+
+    src: "/images/react.png",
+  },
+
+  {
+    alt: "tailwind",
+
+    src: "/images/tailwind.png",
+  },
+
+  {
+    alt: "node",
+
+    src: "/images/node.svg",
+  },
+
+  {
+    alt: "firestore",
+
+    src: "/images/firestore.png",
+  },
+
+  {
+    alt: "jest",
+
+    src: "/images/jest.png",
+  },
+];
+const Home = ({ posts }) => {
   return (
-    <Layout title="Inicio">
+    <Layout title="Home">
       <div className="page">
         <div className="flex flex-col lg:flex-row items-center justify-center">
-          <img
-            src="/images/ivan.png"
-            className="w-48 h-48 rounded-full border-4 border-white object-cover"
-            alt={user.name}
-          />
-
+          <User imageUrl="/images/ivan.png" user={user} />
           <div className="  px-4 sm:px-6  lg:px-8 ">
-            <div className="text-center lg:text-left">
-              <h2 className="text-2xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-3xl sm:leading-none md:text-4xl">
-                {user.name}
-
-                <span className="text-blue-800 ml-1">{user.lastName}</span>
-              </h2>
-              <p className="mt-3 text-base text-gray-800 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 lg:mx-0">
-                Hola 👋, soy un desarrollador enfocado en Javascript y su
-                ecosistema. Me gusta aprender y seguir buenas prácticas y
-                mantener mi código simple.
-              </p>
-              <p className="mt-3 text-base text-gray-800 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 lg:mx-0">
-                En mi opinión, el mejor código es aquel que es fácil de leer,
-                fácil de cambiar y fácil de eliminar.
-              </p>
+            <div className="text-center lg:text-left ">
+              <Paragraph className="sm:max-w-xl sm:mx-auto">
+                Hi 👋, I'm a developer focused on Javascript and it's ecosystem.
+                I like to learn, follow good practices and keep my code as
+                simple as posible.
+              </Paragraph>
+              <Paragraph className="sm:max-w-xl sm:mx-auto">
+                In my opinion, the best code is the one that is easy to read,
+                easy to change and easy to delete. This is not easy to do but if
+                you accomplish it you are adding a lot of value and helping your
+                team.
+              </Paragraph>
             </div>
           </div>
         </div>
@@ -42,83 +80,25 @@ export default function Home({ posts }) {
           <div className="flex flex-col ">
             <div className="flex flex-col items-center flex-1 mx-4">
               <div className="mb-8">
-                <h1 className="text-xl font-semibold text-gray-800 mb-4 ">
-                  Últimas publicaciones
-                </h1>
+                <Title>Lastest posts</Title>
                 <div className="grid grid-cols-1 col-gap-4 md:grid-cols-3">
-                  {posts
-                    .slice(0, 6)
-                    .map(({ date, title, id, img, summary }) => (
-                      <Link href="/posts/[id]" as={`/posts/${id}`} key={id}>
-                        <div className=" py-4 px-4 hover:bg-gray-300 cursor-pointer">
-                          <img
-                            src={img}
-                            alt={title}
-                            className="w-full h-56 object-cover mb-4"
-                          />
-                          <PostDate dateString={date} />
-                          <a href="#" className="block">
-                            <h3 className="mt-2 text-xl leading-7 font-semibold text-blue-800">
-                              {title}
-                            </h3>
-                            <p className="mt-3 text-base leading-6 text-gray-800">
-                              {summary}
-                            </p>
-                          </a>
-                        </div>
-                      </Link>
-                    ))}
+                  {posts.slice(0, 6).map((post) => (
+                    <Post {...post} />
+                  ))}
                 </div>
               </div>
-              {posts.length > 6 && (
-                <LinkBtn href="/posts">Ver publicaciones anteriores</LinkBtn>
-              )}
+              {posts.length > 6 && <LinkBtn href="/posts">More posts</LinkBtn>}
             </div>
             <div className=" flex-1 mx-4 ">
-              <h1 className="text-xl mt-8 font-semibold text-gray-800 mb-8">
-                Me gusta trabajar con
-              </h1>
+              <Title>I like to work with</Title>
               <div className="flex flex-row flex-wrap">
-                <img
-                  alt="javascript"
-                  className="h-24 w-24 mr-2 mb-2"
-                  src="/images/javascript.svg.png"
-                />
-                <img
-                  alt="typescript"
-                  className="h-24 w-24  mr-2 mb-2"
-                  src="/images/typescript.svg"
-                />
-                <img
-                  alt="jnext"
-                  className="h-24 w-24 bg-black mr-2 mb-2"
-                  src="/images/next.png"
-                />
-                <img
-                  alt="react"
-                  className="h-24 w-24 bg-black  mr-2 mb-2 p-2"
-                  src="/images/react.png"
-                />
-                <img
-                  alt="tailwind"
-                  className="h-24 w-24 bg-black  mr-2 mb-2"
-                  src="/images/tailwind.png"
-                />
-                <img
-                  alt="node"
-                  className="h-24 w-24 bg-black  mr-2 mb-2 p-2"
-                  src="/images/node.svg"
-                />
-                <img
-                  alt="firestore"
-                  className="h-24 w-24 bg-black  mr-2 mb-2"
-                  src="/images/firestore.png"
-                />
-                <img
-                  alt="jest"
-                  className="h-24 w-24 bg-black  mr-2 mb-2"
-                  src="/images/jest.png"
-                />
+                {technologies.map(({ alt, src }) => (
+                  <img
+                    alt={alt}
+                    className="h-24 w-24 mr-2 mb-2 bg-black p-2"
+                    src={src}
+                  />
+                ))}
               </div>
             </div>
           </div>
@@ -126,26 +106,10 @@ export default function Home({ posts }) {
       </div>
     </Layout>
   );
-}
-
-/*
- * Static generation generates the page with the data at build time
- * Essentially, getStaticProps allows you to tell Next.js: “Hey, this page has some data dependencies
- * — so when you pre-render this page at build time, make sure to resolve them first!”
- */
+};
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await getPostFromGithub();
-
-  const posts = response.map((post) => {
-    const matterResult = matter(post.body);
-    return {
-      id: post.number,
-      title: post.title,
-      content: matterResult.content,
-      ...matterResult.data,
-    };
-  });
+  const posts = await getPostsFromGithub();
 
   return {
     props: {
@@ -154,14 +118,4 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const getPostFromGithub = async () => {
-  const response = await fetch(
-    "https://api.github.com/repos/ivanbtrujillo/next-blog/issues",
-    {
-      headers: {
-        Authorization: `token ${process.env.githubToken}`,
-      },
-    }
-  );
-  return response.json();
-};
+export default Home;

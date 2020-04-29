@@ -1,15 +1,14 @@
 import Head from "next/head";
-import { Header, HeaderLink } from "@components/index";
-import { Auth0Provider } from "use-auth0-hooks";
+import { Header, HeaderLink } from "components";
 
-interface ILayout {
+type LayoutProps = {
   children: React.ReactChild | React.ReactChild[];
   title: string;
-}
+};
 
 export const siteTitle = "ivanbtrujillo.com";
 
-export const Layout = ({ children, title }: ILayout) => {
+export const Layout: React.SFC<LayoutProps> = ({ children, title }) => {
   return (
     <div className=" overflow-y-scroll">
       <div className="flex flex-col h-screen max-w-screen-xl mx-auto ">
@@ -37,8 +36,8 @@ export const Layout = ({ children, title }: ILayout) => {
         <Header>
           <div className="flex flex-1 justify-between ">
             <div className="flex-1 flex justify-start">
-              <HeaderLink path="/" name="Inicio" />
-              <HeaderLink path="/about" name="Sobre mí" />
+              <HeaderLink path="/" name="Home" />
+              <HeaderLink path="/about" name="About" />
             </div>
             <div className="flex ">
               <a

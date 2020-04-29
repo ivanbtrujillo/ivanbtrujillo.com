@@ -1,5 +1,3 @@
-import * as React from "react";
-
 type HeaderProps = {
   children: React.ReactChild | React.ReactChild[];
 };

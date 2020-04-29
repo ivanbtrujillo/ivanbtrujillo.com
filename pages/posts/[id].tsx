@@ -1,110 +1,71 @@
-import { Layout, PostDate, CodeBlock, MarkdownEditor } from "@components/index";
+import {
+  Layout,
+  PostDate,
+  CodeBlock,
+  MarkdownEditor,
+  PostTitle,
+  Title,
+  Button,
+} from "components";
 import ReactMarkdown from "react-markdown";
-import fetch from "node-fetch";
 import { GetStaticProps, GetStaticPaths } from "next";
-import matter from "gray-matter";
+import {
+  getPostDetailsFromGithub,
+  getAllPostIds,
+  getPostComments,
+  saveComment,
+  rebuild,
+} from "services/posts.service";
 import { useState, useEffect } from "react";
-
 import { useRouter } from "next/router";
 import { useAuth } from "use-auth0-hooks";
+import { generateComment } from "utils/post";
 
-const getPostComments = async (comments_url) => {
-  const commentsResponse = await fetch(comments_url, {
-    headers: {
-      Authorization: `token ${process.env.githubToken}`,
-    },
-  });
-
-  const commentsData = await commentsResponse.json();
-
-  const comments = commentsData
-    .map((comment) => matter(comment.body))
-    .map((commentMatter) => ({
-      content: commentMatter.content,
-      ...commentMatter.data,
-    }));
-  return comments;
-};
-
-export default function Post({ postData }) {
+export default function Post({ post }) {
   const { isAuthenticated, isLoading, login, logout, user } = useAuth();
   const { query, asPath } = useRouter();
-
-  const date = new Date().toISOString();
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
-  const [post, setPost] = useState(postData);
 
   useEffect(() => {
-    const getPostComments = async (comments_url) => {
-      const commentsResponse = await fetch(comments_url, {
-        headers: {
-          Authorization: `token ${process.env.githubToken}`,
-        },
-      });
-
-      const commentsData = await commentsResponse.json();
-
-      const comments = commentsData
-        .map((comment) => matter(comment.body))
-        .map((commentMatter) => ({
-          content: commentMatter.content,
-          ...commentMatter.data,
-        }));
-
+    const getPostCommentsFromAPI = async (comments_url) => {
+      const comments = await getPostComments(comments_url);
       setComments(comments);
     };
-    getPostComments(postData.comments_url);
+    getPostCommentsFromAPI(post.comments_url);
   }, []);
 
-  const saveComment = async (comment) => {
-    const commentWithMetadata = `---
-date: "${date}"
-user: "${user.name}"
-userPicture: "${user.picture}"
----
-
-${comment}
-    `;
-
+  const addComment = async (comment) => {
+    const date = new Date().toISOString();
     try {
-      const result = await fetch(
-        `https://api.github.com/repos/ivanbtrujillo/next-blog/issues/${postData.id}/comments`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `token ${process.env.githubToken}`,
-          },
-          body: JSON.stringify({
-            body: commentWithMetadata,
-          }),
-        }
-      );
-      await fetch(
-        `https://api.zeit.co/v1/integrations/deploy/QmV4UD3oa7bQmDAgD5sXQ9wTd1C4ykkNzmjHecvKzMyx3g/PCLFEpifPC`,
-        {
-          method: "POST",
-        }
-      );
-
-      const nextPostComments = [...comments];
-      nextPostComments.push({
-        date,
-        user: user.name,
-        userPicture: user.picture,
-        content: comment,
+      await saveComment({
+        postId: post.id,
+        comment: generateComment({ date, user, text: comment }),
       });
+      await rebuild();
+
+      const nextPostComments = [
+        ...comments,
+        ...[
+          {
+            date,
+            user: user.name,
+            userPicture: user.picture,
+            content: comment,
+          },
+        ],
+      ];
 
       setComments(nextPostComments);
       setComment("");
     } catch (err) {
-      console.error("Error al guardar comentario");
+      console.error("Error saving comment");
     }
   };
 
   function submitComment(event) {
     event.preventDefault();
-    saveComment(comment);
+    addComment(comment);
   }
 
   return (
@@ -112,18 +73,17 @@ ${comment}
       <div className="bg-gray-50">
         <div className="max-w-screen-xl w-full md:mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto"></div>
-          <h2 className=" text-3xl leading-9 font-extrabold text-gray-900 sm:text-4xl sm:leading-10">
-            {post.title}
-          </h2>
-
+          <PostTitle>{post.title}</PostTitle>
           <PostDate dateString={post.date} />
-
+          <div className="flex items-end">
+            <img src="/images/ivan.png" className="h-8 w-8 rounded-full mr-2" />
+            Iván Trujillo
+          </div>
           <ReactMarkdown
             className="markdown mt-8"
             source={post.content}
             renderers={{ code: CodeBlock }}
           />
-
           {comments.length ? (
             <>
               {comments.map((comment, index) => (
@@ -153,97 +113,86 @@ ${comment}
                 </div>
               ))}
               <h1 className="text-xl font-semibold text-gray-800 mb-4">
-                Envia tu comentario 😜
+                I appreciate feedback! 😜
               </h1>
             </>
           ) : (
-            <h1 className="text-xl font-semibold text-gray-800 mb-4">
-              Aún no hay comentarios. Sé el primero en opinar! 😎
-            </h1>
+            <Title>No comments yet. Be the first one! 😎</Title>
           )}
-
           {isLoading && <p> Cargando ...</p>}
-
           {!isAuthenticated && !isLoading && (
             <div className="flex flex-col">
-              <h1 className="text-xl font-semibold text-gray-800 mb-4">
-                Debes autenticarte para comentar 🙂
-              </h1>
-              <button
-                className="flex justify-center items-center px-4 py-2 w-32  rounded-sm text-base leading-6 bg-blue-500 text-white hover:bg-blue-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150"
+              <Title>You must be authenticated to comment 🙂</Title>
+
+              <Button
+                className="px-4 py-2 w-32 text-white bg-blue-500 hover:bg-blue-400 focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50"
                 onClick={() =>
                   login({ appState: { returnTo: { pathname: asPath, query } } })
                 }
               >
                 Login
-              </button>
+              </Button>
             </div>
           )}
-
-          {!isLoading && isAuthenticated && (
-            <div className="flex flex-col">
-              <div className="flex flex-row justify-between flex-1  w-full mb-8">
-                <div>
-                  <img
-                    src={user.picture}
-                    className="w-24 h-24 mb-4 rounded-full"
+          <div className="flex flex-col">
+            <div className="flex flex-row justify-between flex-1  w-full mb-8">
+              <div className="flex items-center">
+                <img
+                  src="/images/ivan.png"
+                  className="w-12 h-12 mb-4 rounded-full"
+                />
+                <p className="ml-4 font-semibold text-lg text-blue-600">Ivan</p>
+              </div>
+              <div className="flex flex-col justify-end">
+                <Button
+                  className=" px-4 py-2 w-32 text-white bg-red-500  hover:bg-red-400 focus:border-red-300 focus:shadow-outline-red active:text-gray-800 active:bg-gray-50"
+                  onClick={() =>
+                    logout({
+                      returnTo: process.env.AUTH0_LOGOUT_REDIRECT_URI,
+                    })
+                  }
+                >
+                  Logout
+                </Button>
+              </div>
+            </div>
+            <form
+              onSubmit={submitComment}
+              className="grid grid-cols-1 row-gap-6 sm:grid-cols-2 sm:col-gap-8"
+            >
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium leading-5 text-gray-700"
+                >
+                  Write your comment here
+                </label>
+                <div style={{ height: "400px" }}>
+                  <MarkdownEditor
+                    value={comment}
+                    renderHTML={(text) => (
+                      <ReactMarkdown
+                        className="markdown mt-2"
+                        source={text}
+                        renderers={{ code: CodeBlock }}
+                      />
+                    )}
+                    onChange={(e) => setComment(e.text)}
                   />
-                  <p className="font-semibold text-lg text-blue-600">
-                    {user.name}
-                  </p>
-                </div>
-                <div className="flex flex-col justify-end">
-                  <button
-                    className="flex justify-center items-center px-4 py-2 w-32  rounded-sm text-base leading-6 bg-red-500 text-white hover:bg-red-400 focus:outline-none focus:border-red-300 focus:shadow-outline-red active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150"
-                    onClick={() =>
-                      logout({
-                        returnTo: process.env.AUTH0_LOGOUT_REDIRECT_URI,
-                      })
-                    }
-                  >
-                    Logout
-                  </button>
                 </div>
               </div>
-              <form
-                onSubmit={submitComment}
-                className="grid grid-cols-1 row-gap-6 sm:grid-cols-2 sm:col-gap-8"
-              >
-                <div className="sm:col-span-2">
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium leading-5 text-gray-700"
+              <div className="sm:col-span-2">
+                <span className="w-full inline-flex rounded-md shadow-sm">
+                  <Button
+                    disabled={user === "" || comment === ""}
+                    className="px-6 py-3 w-full text-white bg-blue-600 hover:bg-blue-500 focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700"
                   >
-                    Comentario
-                  </label>
-                  <div style={{ height: "400px" }}>
-                    <MarkdownEditor
-                      value={comment}
-                      renderHTML={(text) => (
-                        <ReactMarkdown
-                          className="markdown mt-2"
-                          source={text}
-                          renderers={{ code: CodeBlock }}
-                        />
-                      )}
-                      onChange={(e) => setComment(e.text)}
-                    />
-                  </div>
-                </div>
-                <div className="sm:col-span-2">
-                  <span className="w-full inline-flex rounded-md shadow-sm">
-                    <button
-                      disabled={user === "" || comment === ""}
-                      type="submit"
-                      className="w-full inline-flex items-center disabled:opacity-50  justify-center px-6 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition ease-in-out duration-150"
-                    >
-                      Enviar comentario
-                    </button>
-                  </span>
-                </div>
-              </form>
-            </div>
-          )}
+                    Send comment
+                  </Button>
+                </span>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </Layout>
@@ -251,7 +200,7 @@ ${comment}
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await getAllPostIds2();
+  const paths = await getAllPostIds();
   return {
     paths,
     fallback: false,
@@ -259,55 +208,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const postData = await getPostDetailsFromGithub(params.id as string);
+  const post = await getPostDetailsFromGithub(params.id as string);
   return {
     props: {
-      postData,
+      post,
     },
-  };
-};
-
-export const getAllPostIds2 = async () => {
-  const response = await getPostsFromGithub();
-  const postsIDs = response.map((post) => ({
-    params: {
-      id: String(post.number),
-    },
-  }));
-  return postsIDs;
-};
-
-const getPostsFromGithub = async () => {
-  const response = await fetch(
-    "https://api.github.com/repos/ivanbtrujillo/next-blog/issues",
-    {
-      headers: {
-        Authorization: `token ${process.env.githubToken}`,
-      },
-    }
-  );
-  return response.json();
-};
-
-const getPostDetailsFromGithub = async (id: string) => {
-  const response = await fetch(
-    `https://api.github.com/repos/ivanbtrujillo/next-blog/issues/${id}`,
-    {
-      headers: {
-        Authorization: `token ${process.env.githubToken}`,
-      },
-    }
-  );
-
-  const post = await response.json();
-
-  const matterResult = matter(post.body);
-  return {
-    id: String(post.number),
-    as: post.title.toLowerCase().replace(" ", "-"),
-    comments_url: post.comments_url,
-    title: post.title,
-    content: matterResult.content,
-    ...matterResult.data,
   };
 };
