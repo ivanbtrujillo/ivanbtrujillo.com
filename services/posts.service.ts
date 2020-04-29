@@ -11,19 +11,7 @@ export const getPostsFromGithub = async () => {
     }
   );
 
-  const data = await response.json();
-
-  const posts = data.map((post) => {
-    const matterResult = matter(post.body || "");
-    return {
-      id: post.number,
-      title: post.title,
-      content: matterResult.content,
-      ...matterResult.data,
-    };
-  });
-
-  return posts;
+  return await response.json();
 };
 
 export const getAllPostIds = async () => {

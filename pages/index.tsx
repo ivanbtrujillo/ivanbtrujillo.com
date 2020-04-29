@@ -1,7 +1,7 @@
 import { Layout, LinkBtn, Title, User, Paragraph, Post } from "components";
 import { GetStaticProps } from "next";
 import { getPostsFromGithub } from "services/posts.service";
-import Link from "next/link";
+import matter from "gray-matter";
 
 const user = {
   name: "Iván",
@@ -83,7 +83,7 @@ const Home = ({ posts }) => {
                 <Title>Lastest posts</Title>
                 <div className="grid grid-cols-1 col-gap-4 md:grid-cols-3">
                   {posts.slice(0, 6).map((post) => (
-                    <Post {...post} />
+                    <Post key={post.id} {...post} />
                   ))}
                 </div>
               </div>
@@ -94,6 +94,7 @@ const Home = ({ posts }) => {
               <div className="flex flex-row flex-wrap">
                 {technologies.map(({ alt, src }) => (
                   <img
+                    key={alt}
                     alt={alt}
                     className="h-24 w-24 mr-2 mb-2 bg-black p-2"
                     src={src}
@@ -109,7 +110,17 @@ const Home = ({ posts }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = await getPostsFromGithub();
+  const data = await getPostsFromGithub();
+
+  const posts = data.map((post) => {
+    const matterResult = matter(post.body || "");
+    return {
+      id: post.number,
+      title: post.title,
+      content: matterResult.content,
+      ...matterResult.data,
+    };
+  });
 
   return {
     props: {
