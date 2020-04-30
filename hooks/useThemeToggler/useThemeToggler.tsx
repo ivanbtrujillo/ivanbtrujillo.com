@@ -40,7 +40,7 @@ export const useThemeToggler = () => {
       }
       role="checkbox"
       aria-checked="false"
-      className={`${theme} ${styles.toggler} focus:outline-none focus:shadow-outline`}
+      className={`${theme} ${styles.toggler} bg-background-secondary focus:outline-none focus:shadow-outline cursor-pointer`}
     >
       {theme === "theme-dark" && <Icon>🌙</Icon>}
       <Ball theme={theme} />
