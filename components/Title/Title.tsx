@@ -6,7 +6,7 @@ type TitleProps = {
 export const Title: React.SFC<TitleProps> = ({ children, className }) => {
   return (
     <h1
-      className={`text-xl font-semibold text-gray-800 mb-4   ${
+      className={`text-xl font-semibold text-font-primary mb-4   ${
         className || ""
       }`}
     >

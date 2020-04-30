@@ -8,7 +8,7 @@ type PostDateProps = {
 export const PostDate: React.SFC<PostDateProps> = ({ dateString }) => {
   const date = parseISO(dateString);
   return (
-    <p className="text-sm leading-5 text-gray-700">
+    <p className="text-sm leading-5 text-font-ternary">
       <time dateTime={dateString}>
         {format(date, "d LLLL, yyyy", { locale: enUS })}
       </time>

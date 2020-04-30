@@ -57,7 +57,7 @@ const technologies = [
 const Home = ({ posts }) => {
   return (
     <Layout title="Home">
-      <div className="page">
+      <div className="page ">
         <div className="flex flex-col lg:flex-row items-center justify-center">
           <User imageUrl="/images/ivan.png" user={user} />
           <div className="  px-4 sm:px-6  lg:px-8 ">
@@ -67,6 +67,7 @@ const Home = ({ posts }) => {
                 I like to learn, follow good practices and keep my code as
                 simple as posible.
               </Paragraph>
+
               <Paragraph className="sm:max-w-xl sm:mx-auto">
                 In my opinion, the best code is the one that is easy to read,
                 easy to change and easy to delete. This is not easy to do but if

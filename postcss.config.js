@@ -19,7 +19,7 @@ module.exports = {
 
             // Include any special characters you're using in this regular expression
             defaultExtractor: (content) =>
-              content.match(/[\w-/:]+(?<!:)/g) || [],
+              content.match(/[\w-/.:]+(?<!:)/g) || [],
           },
         }
       : {}),

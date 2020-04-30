@@ -13,8 +13,8 @@ export const HeaderLink: React.SFC<HeaderLinkProps> = ({ path, name }) => {
       <a
         className={`text-lg ${
           router.pathname === path
-            ? "text-blue-800 font-semibold "
-            : "text-gray-700"
+            ? "text-font-secondary font-semibold "
+            : "text-font-ternary"
         } mx-4`}
       >
         {name}

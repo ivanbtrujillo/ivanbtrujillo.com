@@ -1,9 +1,30 @@
 /* purgecss start ignore */
 @tailwind base;
 @tailwind components;
-/* purgecss end ignore */
 
 @tailwind utilities;
+
+/* Theme */
+
+/* purgecss start ignore */
+.theme-light {
+  --background-primary: #edf2f7;
+  --background-secondary: #2c5282;
+  --font-primary: #2d3748;
+  --font-secondary: #2c5282;
+  --font-ternary: #4a5568;
+  --background-accent: #e2e8f0;
+}
+
+.theme-dark {
+  --background-primary: #2d3748;
+  --background-secondary: #2c5282;
+  --font-primary: #edf2f7;
+  --font-secondary: #0289b4;
+  --font-ternary: #a0aec0;
+  --background-accent: #1a202c;
+}
+/* purgecss end ignore */
 
 html {
   margin: 0;
@@ -16,7 +37,7 @@ body {
 }
 
 .page {
-  @apply bg-white pt-8 pb-8;
+  @apply pt-8 pb-8;
 }
 
 /* Markdown CSS */
@@ -28,7 +49,7 @@ body {
 }
 
 .markdown {
-  @apply text-gray-900 leading-normal break-words;
+  @apply text-font-primary leading-normal break-words;
 }
 
 .markdown > * + * {
@@ -120,9 +141,9 @@ body {
 }
 
 /* Override pygments style background color. */
-.markdown .highlight pre {
+/* .markdown .highlight pre {
   @apply bg-gray-100 !important;
-}
+} */
 
 /* Markdown editor */
 

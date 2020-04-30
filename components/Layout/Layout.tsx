@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { Header, HeaderLink } from "components";
+import { useThemeToggler } from "hooks/useThemeToggler/useThemeToggler";
 
 type LayoutProps = {
   children: React.ReactChild | React.ReactChild[];
@@ -9,8 +10,10 @@ type LayoutProps = {
 export const siteTitle = "ivanbtrujillo.com";
 
 export const Layout: React.SFC<LayoutProps> = ({ children, title }) => {
+  const { theme, Toggler } = useThemeToggler();
+
   return (
-    <div className=" overflow-y-scroll">
+    <div className={`overflow-y-scroll ${theme} bg-background-primary`}>
       <div className="flex flex-col h-screen max-w-screen-xl mx-auto ">
         <Head>
           <title>{`${title} - ivanbtrujillo.com`}</title>
@@ -32,11 +35,14 @@ export const Layout: React.SFC<LayoutProps> = ({ children, title }) => {
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         </Head>
         <Header>
+          <Toggler />
+
           <div className="flex flex-1 justify-between ">
             <div className="flex-1 flex justify-start">
               <HeaderLink path="/" name="Home" />
               <HeaderLink path="/about" name="About" />
             </div>
+
             <div className="flex ">
               <a
                 target="_blank"

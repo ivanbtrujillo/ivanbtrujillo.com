@@ -8,7 +8,7 @@ export const Paragraph: React.SFC<ParagraphProps> = ({
   className,
 }) => (
   <p
-    className={`mt-3 text-base text-gray-800 sm:mt-5 sm:text-lg  md:mt-5 lg:mx-0 ${className}`}
+    className={`mt-3 text-base sm:mt-5 text-font-primary sm:text-lg  md:mt-5 lg:mx-0 ${className}`}
   >
     {children}
   </p>
