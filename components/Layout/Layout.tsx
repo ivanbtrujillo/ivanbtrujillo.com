@@ -35,15 +35,14 @@ export const Layout: React.SFC<LayoutProps> = ({ children, title }) => {
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         </Head>
         <Header>
-          <Toggler />
-
           <div className="flex flex-1 justify-between ">
             <div className="flex-1 flex justify-start">
               <HeaderLink path="/" name="Home" />
               <HeaderLink path="/about" name="About" />
             </div>
 
-            <div className="flex ">
+            <div className="flex items-center">
+              <Toggler />
               <a
                 target="_blank"
                 rel="noreferrer noopener"
@@ -51,7 +50,7 @@ export const Layout: React.SFC<LayoutProps> = ({ children, title }) => {
               >
                 <img
                   alt="perfil de github"
-                  className="h-8 w-8 mx-2"
+                  className="h-8 w-8 mx-2 ml-8"
                   src="https://ivanbtrujillo.github.io/personal-website/static/media/github.7b355fcc.png"
                 />
               </a>
