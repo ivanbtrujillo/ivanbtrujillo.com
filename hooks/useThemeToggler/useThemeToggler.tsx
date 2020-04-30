@@ -1,4 +1,3 @@
-import styles from "./useThemeToggler.module.css";
 import { useState, useEffect } from "react";
 
 type Theme = "theme-light" | "theme-dark";
@@ -40,7 +39,7 @@ export const useThemeToggler = () => {
       }
       role="checkbox"
       aria-checked="false"
-      className={`${theme} ${styles.toggler} bg-background-secondary focus:outline-none focus:shadow-outline cursor-pointer`}
+      className={`${theme} bg-background-secondary relative text-left align-middle inline-block flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full transition-colors ease-in-out duration-200 focus:outline-none focus:shadow-outline cursor-pointer`}
     >
       {theme === "theme-dark" && <Icon>🌙</Icon>}
       <Ball theme={theme} />

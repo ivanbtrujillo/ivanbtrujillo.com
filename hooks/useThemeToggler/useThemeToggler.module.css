@@ -1,3 +1,0 @@
-.toggler {
-  @apply relative text-left align-middle inline-block flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full transition-colors ease-in-out duration-200;
-}
