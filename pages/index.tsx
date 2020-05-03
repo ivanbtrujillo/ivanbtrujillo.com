@@ -77,7 +77,7 @@ const Home = ({ posts }) => {
             </div>
           </div>
         </div>
-        <div className=" mt-10 pt-4  border-t border-gray-300 ">
+        <div className=" mt-10 pt-4  ">
           <div className="flex flex-col ">
             <div className="flex flex-col items-center flex-1 mx-4">
               <div className="mb-8">
