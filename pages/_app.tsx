@@ -2,7 +2,7 @@ import { AppProps } from "next/app";
 import "../css/main.css";
 import Router from "next/router";
 import { Auth0Provider } from "use-auth0-hooks";
-
+import { useIsMounted } from 'hooks/useIsMounted/useIsMounted'
 /**
  * Where to send the user after they have signed in.
  */
@@ -58,16 +58,22 @@ const onRedirecting = () => {
  * Create a page which wraps the Auth0 provider.
  */
 
-export default ({ Component, pageProps }: AppProps) => (
-  <Auth0Provider
-    domain={process.env.AUTH0_DOMAIN}
-    clientId={process.env.AUTH0_CLIENT_ID}
-    redirectUri={process.env.AUTH0_REDIRECT_URI}
-    onLoginError={onLoginError}
-    onAccessTokenError={onAccessTokenError}
-    onRedirecting={onRedirecting}
-    onRedirectCallback={onRedirectCallback}
-  >
-    <Component {...pageProps} />
-  </Auth0Provider>
-);
+export default ({ Component, pageProps }: AppProps) => {
+  const { isMounted} = useIsMounted();
+
+  if(!isMounted) return null;
+
+  return(
+    <Auth0Provider
+      domain={process.env.AUTH0_DOMAIN}
+      clientId={process.env.AUTH0_CLIENT_ID}
+      redirectUri={process.env.AUTH0_REDIRECT_URI}
+      onLoginError={onLoginError}
+      onAccessTokenError={onAccessTokenError}
+      onRedirecting={onRedirecting}
+      onRedirectCallback={onRedirectCallback}
+    >
+      <Component {...pageProps} />
+    </Auth0Provider>
+  );
+}
