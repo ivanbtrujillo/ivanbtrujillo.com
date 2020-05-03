@@ -33,21 +33,22 @@ export const Layout: React.SFC<LayoutProps> = ({ children, title }) => {
           <meta property="og:description" content={description} />
           <meta
             property="og:image"
-            content="https://og-image.now.sh/Ivan%20Trujillo.png?theme=dark&md=1&fontSize=100px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-white-logo.svg&images=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1254434620894044161%2F1-1_PQWI_400x400.jpg"
+            content="https://ivanbtrujillo.com/images/ivan.png"
           />
 
           <meta
             property="og:image:secure_url"
-            content="https://og-image.now.sh/Ivan%20Trujillo.png?theme=dark&md=1&fontSize=100px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-white-logo.svg&images=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1254434620894044161%2F1-1_PQWI_400x400.jpg"
+            content="https://ivanbtrujillo.com/images/ivan.png"
           />
-
+          
+          <meta name="twitter:site" content="@ivanbtrujillo" />
           <meta property="twitter:card" content="summary_large_image" />
           <meta property="twitter:url" content="https://ivanbtrujillo.com/" />
           <meta property="twitter:title" content={`${title} - ${siteTitle}`} />
           <meta property="twitter:description" content={description} />
           <meta
             property="twitter:image"
-            content="https://og-image.now.sh/Ivan%20Trujillo.png?theme=dark&md=1&fontSize=100px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-white-logo.svg&images=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1254434620894044161%2F1-1_PQWI_400x400.jpg"
+            content="https://ivanbtrujillo.com/images/ivan.png"
           />
 
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
