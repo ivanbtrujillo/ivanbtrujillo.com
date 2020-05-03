@@ -8,6 +8,7 @@ type LayoutProps = {
 };
 
 export const siteTitle = "ivanbtrujillo.com";
+const description = "Iván Trujillo personal website";
 
 export const Layout: React.SFC<LayoutProps> = ({ children, title }) => {
   const { theme, Toggler } = useThemeToggler();
@@ -16,22 +17,34 @@ export const Layout: React.SFC<LayoutProps> = ({ children, title }) => {
     <div className={`overflow-y-scroll ${theme} bg-background-primary`}>
       <div className="flex flex-col h-screen max-w-screen-xl mx-auto ">
         <Head>
-          <title>{`${title} - ivanbtrujillo.com`}</title>
           <link rel="icon" href="/favicon.ico" />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1"
           ></meta>
-          <meta
-            name="description"
-            content="Ivan Trujillo personal website"
-          ></meta>
+
+          <title>{`${title} - ${siteTitle}`}</title>
+          <meta name="title" content={title} />
+          <meta name="description" content="Iván Trujillo personal website" />
+
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://ivanbtrujillo.com/" />
+          <meta property="og:title" content={`${title} - ${siteTitle}`} />
+          <meta property="og:description" content={description} />
           <meta
             property="og:image"
-            content={`https://og-image.now.sh/Ivan%20Trujillo.png?theme=dark&md=1&fontSize=100px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-white-logo.svg&images=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1254434620894044161%2F1-1_PQWI_400x400.jpg`}
-          ></meta>
-          <meta name="og:title" content={siteTitle} />
-          <meta name="twitter:card" content="summary_large_image" />
+            content="https://og-image.now.sh/Ivan%20Trujillo.png?theme=dark&md=1&fontSize=100px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-white-logo.svg&images=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1254434620894044161%2F1-1_PQWI_400x400.jpg"
+          />
+
+          <meta property="twitter:card" content="summary_large_image" />
+          <meta property="twitter:url" content="https://ivanbtrujillo.com/" />
+          <meta property="twitter:title" content={`${title} - ${siteTitle}`} />
+          <meta property="twitter:description" content={description} />
+          <meta
+            property="twitter:image"
+            content="https://og-image.now.sh/Ivan%20Trujillo.png?theme=dark&md=1&fontSize=100px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-white-logo.svg&images=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1254434620894044161%2F1-1_PQWI_400x400.jpg"
+          />
+
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         </Head>
         <Header>
