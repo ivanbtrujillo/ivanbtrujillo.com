@@ -83,10 +83,15 @@ export default function Post({ post }) {
           Iván Trujillo
         </div>
         <ReactMarkdown
-          className="markdown text-font-primary mt-8"
+          className="markdown text-font-primary mt-8 mb-8"
           source={post.content}
           renderers={{ code: CodeBlock }}
         />
+        <div className="bg-background-secondary mb-16 mt-16">
+          <div className="max-w-screen-xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between flex-wrap"></div>
+          </div>
+        </div>
         {comments.length ? (
           <>
             {comments.map((comment, index) => (
@@ -128,7 +133,7 @@ export default function Post({ post }) {
             <Title>You must be authenticated to comment 🙂</Title>
 
             <Button
-              className="px-4 py-2 w-32 text-white bg-blue-500 hover:bg-blue-400 focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50"
+              className="px-4 py-2 w-32 text-white bg-background-secondary hover:bg-background-secondary focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50"
               onClick={() =>
                 login({ appState: { returnTo: { pathname: asPath, query } } })
               }
@@ -192,7 +197,7 @@ export default function Post({ post }) {
                 <span className="w-full inline-flex rounded-md shadow-sm">
                   <Button
                     disabled={user === "" || comment === ""}
-                    className="px-6 py-3 w-full text-white bg-blue-600 hover:bg-blue-500 focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700"
+                    className="px-6 py-3 w-full text-white bg-background-secondary hover:bg-blue-500 focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700"
                   >
                     Send comment
                   </Button>
