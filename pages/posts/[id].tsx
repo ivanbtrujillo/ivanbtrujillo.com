@@ -151,7 +151,7 @@ export default function Post({ post }) {
                   src={user.picture}
                   className="w-12 h-12 mb-4 rounded-full"
                 />
-                <p className="ml-4 font-semibold text-lg text-blue-600">
+                <p className="ml-4 font-semibold text-lg text-font-primary">
                   {user.name}
                 </p>
               </div>
