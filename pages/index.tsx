@@ -1,12 +1,28 @@
-import { Layout, LinkBtn, Title, User, Paragraph, Post } from "components";
-import { GetStaticProps } from "next";
+import {
+  Layout,
+  LinkBtn,
+  Title,
+  User,
+  Paragraph,
+  Post,
+  PlaceholderPost,
+} from "components";
 import { getPostsFromGithub } from "services/posts.service";
 import matter from "gray-matter";
+import { useEffect, useState } from "react";
 
 const user = {
   name: "Iván",
   lastName: "Trujillo",
 };
+
+interface Post {
+  id: string;
+  img: string;
+  title: string;
+  date: string;
+  summary;
+}
 
 const technologies = [
   {
@@ -54,7 +70,30 @@ const technologies = [
     src: "/images/jest.png",
   },
 ];
-const Home = ({ posts }) => {
+const Home = () => {
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  const getPosts = async () => {
+    const data = await getPostsFromGithub();
+
+    const posts = data.map((post) => {
+      const matterResult = matter(post.body || "");
+      return {
+        id: post.number,
+        title: post.title,
+        content: matterResult.content,
+        ...matterResult.data,
+      };
+    });
+    setTimeout(() => {
+      setPosts(posts);
+    }, 500);
+  };
+
+  useEffect(() => {
+    getPosts();
+  }, []);
+
   return (
     <Layout title="Home">
       <div className="page ">
@@ -80,15 +119,19 @@ const Home = ({ posts }) => {
         <div className=" mt-10 pt-4  ">
           <div className="flex flex-col ">
             <div className="flex flex-col items-center flex-1 mx-4">
-              <div className="mb-8">
+              <div className="mb-8 w-full">
                 <Title>Lastest posts</Title>
-                <div className="grid grid-cols-1 col-gap-4 md:grid-cols-3">
-                  {posts.slice(0, 6).map((post) => (
+                <div className="grid grid-cols-1 col-gap-4 md:grid-cols-3 w-full">
+                  {posts.length === 0 &&
+                    Array.from({ length: 3 }).map((_, index) => (
+                      <PlaceholderPost key={`placeholder-${index}`} />
+                    ))}
+                  {posts.slice(0, 3).map((post) => (
                     <Post key={post.id} {...post} />
                   ))}
                 </div>
               </div>
-              {posts.length > 6 && <LinkBtn href="/posts">More posts</LinkBtn>}
+              {posts.length > 3 && <LinkBtn href="/posts">More posts</LinkBtn>}
             </div>
             <div className=" flex-1 mx-4 ">
               <Title>I like to work with</Title>
@@ -110,24 +153,24 @@ const Home = ({ posts }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  const data = await getPostsFromGithub();
+// export const getStaticProps: GetStaticProps = async () => {
+//   const data = await getPostsFromGithub();
 
-  const posts = data.map((post) => {
-    const matterResult = matter(post.body || "");
-    return {
-      id: post.number,
-      title: post.title,
-      content: matterResult.content,
-      ...matterResult.data,
-    };
-  });
+//   const posts = data.map((post) => {
+//     const matterResult = matter(post.body || "");
+//     return {
+//       id: post.number,
+//       title: post.title,
+//       content: matterResult.content,
+//       ...matterResult.data,
+//     };
+//   });
 
-  return {
-    props: {
-      posts,
-    },
-  };
-};
+//   return {
+//     props: {
+//       posts,
+//     },
+//   };
+// };
 
 export default Home;
