@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from "react";
+import { useState } from "react";
 
 type Theme = "theme-light" | "theme-dark";
 
@@ -18,14 +18,11 @@ const Ball = ({ theme }: { theme: Theme }) => (
 );
 
 export const useThemeToggler = () => {
-  const [theme, setTheme] = useState<Theme>("theme-light");
-
-  useLayoutEffect(() => {
-    const savedTheme = localStorage.getItem("theme") as
-      | "theme-light"
-      | "theme-dark";
-    setTheme(savedTheme || "theme-light");
-  }, []);
+  const [theme, setTheme] = useState<Theme>(
+    () =>
+      (localStorage.getItem("theme") as "theme-light" | "theme-dark") ||
+      "theme-light"
+  );
 
   const changeTheme = (theme: Theme) => {
     localStorage.setItem("theme", theme);
