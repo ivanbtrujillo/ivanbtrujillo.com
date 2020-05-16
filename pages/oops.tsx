@@ -7,8 +7,8 @@ export default function Oops() {
   return (
     <div>
       <h1>Oops</h1>
-      <p>An error occured when signing in!</p>
-      <pre>{message || "Unknown Error"}</pre>
+      <p>Ha ocurrido un error iniciando sesión!</p>
+      <pre>{message || "Error desconocido"}</pre>
     </div>
   );
 }

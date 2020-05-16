@@ -1,5 +1,5 @@
 import { parseISO, format } from "date-fns";
-import { enUS } from "date-fns/locale";
+import { es } from "date-fns/locale";
 
 type PostDateProps = {
   dateString: string;
@@ -10,7 +10,7 @@ export const PostDate: React.SFC<PostDateProps> = ({ dateString }) => {
   return (
     <p className="text-sm leading-5 text-font-ternary">
       <time dateTime={dateString}>
-        {format(date, "d LLLL, yyyy", { locale: enUS })}
+        {format(date, "d LLLL, yyyy", { locale: es })}
       </time>
     </p>
   );

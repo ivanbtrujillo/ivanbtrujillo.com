@@ -121,16 +121,16 @@ export default function Post({ post }) {
               </div>
             ))}
             <h1 className="text-xl font-semibold text-font-primary mb-4">
-              I appreciate feedback! 😜
+              ¿Te ha gustado el artículo? Agradezco si me dejas tu feedback 😜
             </h1>
           </>
         ) : (
-          <Title>No comments yet. Be the first one! 😎</Title>
+          <Title>Aún no hay comentarios. Se el primero! 😎</Title>
         )}
         {isLoading && <p> Cargando ...</p>}
         {!isAuthenticated && !isLoading && (
           <div className="flex flex-col">
-            <Title>You must be authenticated to comment 🙂</Title>
+            <Title>Debes de autenticarte para comentar 🙂</Title>
 
             <Button
               className="px-4 py-2 w-32 text-white bg-background-secondary hover:bg-background-secondary focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50"
@@ -138,7 +138,7 @@ export default function Post({ post }) {
                 login({ appState: { returnTo: { pathname: asPath, query } } })
               }
             >
-              Login
+              Autenticarme 🤙
             </Button>
           </div>
         )}
@@ -164,7 +164,7 @@ export default function Post({ post }) {
                     })
                   }
                 >
-                  Logout
+                  Salir 👋
                 </Button>
               </div>
             </div>

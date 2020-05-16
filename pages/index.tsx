@@ -85,23 +85,24 @@ const Home = () => {
   }, []);
 
   return (
-    <Layout title="Home">
+    <Layout title="Inicio">
       <div className="page ">
         <div className="flex flex-col lg:flex-row items-center justify-center">
           <User imageUrl="/images/ivan.png" user={user} />
           <div className="  px-4 sm:px-6  lg:px-8 ">
             <div className="text-center lg:text-left ">
               <Paragraph className="sm:max-w-xl sm:mx-auto">
-                Hi 👋, I'm a developer focused on Javascript and it's ecosystem.
-                I like to learn, follow good practices and keep my code as
-                simple as posible.
+                Hola 👋, soy un desarrollador enfocado en javascript y su
+                ecosistema. Me encanta aprender, seguir buenas practicas y
+                aportar a los equipos con los que trabajo.
               </Paragraph>
 
               <Paragraph className="sm:max-w-xl sm:mx-auto">
-                In my opinion, the best code is the one that is easy to read,
-                easy to change and easy to delete. This is not easy to do but if
-                you accomplish it you are adding a lot of value and helping your
-                team.
+                Creo que el mejor código es aquel que es facil de leer
+                (declarativo), facil de cambiar y facil de borrar (testeado e
+                inmutable). Esto no es sencillo y requiere dedicación, pero si
+                lo consigues estarás añadiendo un gran valor al producto, al
+                código y a tu equipo.
               </Paragraph>
             </div>
           </div>
@@ -110,17 +111,19 @@ const Home = () => {
           <div className="flex flex-col ">
             <div className="flex flex-col items-center flex-1 mx-4">
               <div className="mb-8 w-full">
-                <Title>Lastest posts</Title>
+                <Title>Últimos posts</Title>
                 <div className="grid grid-cols-1 col-gap-4 md:grid-cols-3 w-full">
                   {posts.slice(0, 3).map((post) => (
                     <Post key={post.id} {...post} />
                   ))}
                 </div>
               </div>
-              {posts.length > 3 && <LinkBtn href="/posts">More posts</LinkBtn>}
+              {posts.length > 3 && (
+                <LinkBtn href="/posts">Hay mas aquí 👇</LinkBtn>
+              )}
             </div>
             <div className=" flex-1 mx-4 ">
-              <Title>I like to work with</Title>
+              <Title>Me gusta trabajar con</Title>
               <div className="flex flex-row flex-wrap">
                 {technologies.map(({ alt, src }) => (
                   <img
@@ -138,25 +141,5 @@ const Home = () => {
     </Layout>
   );
 };
-
-// export const getStaticProps: GetStaticProps = async () => {
-//   const data = await getPostsFromGithub();
-
-//   const posts = data.map((post) => {
-//     const matterResult = matter(post.body || "");
-//     return {
-//       id: post.number,
-//       title: post.title,
-//       content: matterResult.content,
-//       ...matterResult.data,
-//     };
-//   });
-
-//   return {
-//     props: {
-//       posts,
-//     },
-//   };
-// };
 
 export default Home;

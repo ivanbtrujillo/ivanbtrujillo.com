@@ -5,49 +5,58 @@ const user = {
   lastName: "Trujillo",
 };
 const About = () => (
-  <Layout title="About">
+  <Layout title="Sobre mí">
     <div className="page">
       <User imageUrl="/images/ivan.png" user={user} className="mb-8" />
       <div className=" px-6 md:px-32  ">
         <div className="sm:text-center lg:text-left">
           <Paragraph>
-            I am originally from Fasnia, Tenerife 🏝 and currently live in El
-            Sauzal, located in the north. I have been in the development world
-            since 2014 when I finished my studies as Cross-platform Application
-            Developer 📚.
+            Soy de Fasnia, Tenerife 🏝 y actualmente vivo en El Sauzal, ubicado
+            en el norte de la isla. Me adentré en el mundo del desarrollo en
+            2014, cuando finalicé mis estudios como Técnico Superior de
+            Aplicaciones Multiplataforma 📚.
           </Paragraph>
           <Paragraph>
-            Where I have really found the training I need has been in books, by
-            meeting new developers and doing courses on different on-line
-            platforms 👨‍💻. During this time I fell in love with Javascript and
-            the possibility of creating applications for any platform using the
-            same language.
+            Siendo honesto, esos estudios me han servido de poco y dónde
+            realmente he encontrado la formación que me ha permitido avanzar en
+            mi carrera profesional ha sido en libros, cursos online impartidos
+            por referentes del sector y conociendo otros desarrolladores en
+            eventos 👨‍💻. Durante este tiempo me enamoré de Javascript y de la
+            posibilidad de crear apliaciones para cualquier plataforma
+            utilizando el mismo lenguaje. Realmente me pasaba mis tardes
+            programando, aprendiendo nuevas metodologías y conociendo otros
+            desarrolladores. Haciendo sideprojects solo para aprender.
           </Paragraph>
           <Paragraph>
-            This additional training allowed me in 2016 to start working as
-            Frontend Feveloper at Blue Sky Technology 🤘, role that later
-             becames Frontend Lead. During this time I started to work with
-            Angular 4 and Ionic, and once I became Lead, we migrated to React
-            and React Native. I was happy with my job, but I wanted to continue
-            growing so I didn't stop learning 🤓.
+            Esta formación adicional me permitió en 2016 empezar a trabajar como
+            Frontend Developer en Blue Sky Technology 🤘, rol que un año despues
+            se convirtió en Frontend Lead. Al principio empezamos a utilizar
+            Angular 4 junto con Ionic, pero una vez fuí el lead empezamos a
+            mover todo a React y a React native. Estaba contento con mi trabajo,
+            pero quería seguir creciendo y aprendiendo. Durante todo este tiempo
+            tampoco paré de aprender durante mi tiempo libre 🤓.
           </Paragraph>
           <Paragraph>
-            At the end of 2018 I joined Expero as Intermediate Frontend
-            Developer 🚀🇺🇸. Expero is an American company located in Houston
-            that performs developments for the main companies in the country.
-            Joining them allowed me to be much more independent, to learn from
-            great professionals and continue training myself and growing.
+            A finales de 2018 me uní a Expero como Intermediate Frontend
+            Developer 🚀🇺🇸. Expero es una empresa Americana ubicada en Houston /
+            Austin (Texas) que realiza desarrollos para importantes empresas de
+            USA. Unirme a ellos me ha permitido ser mucho mas independiente,
+            aprender de grandes compañeros y miembros de expero y continuar
+            creciendo.
           </Paragraph>
           <Paragraph>
-            In January 2020 we celebrate the annual summit in Houston ✈️, where
-            I was awarded by the company with a Rising Star, a bonus and a
-            promotion to Senior Frontend 🏆. This recognition is special for me
-            since it is based on feedback they get from people that have worked
-            with me 🤝.
+            A principios de cada año celebramos el summit anual en Texas, y el
+            equipo de Expero Tenerife viaja allí a pasar una semana con el resto
+            de la compañía. En el año 2020 fuí premiado por la compañía con un
+            Rising Star, un premio que otorgan a las personas de la empresa que
+            han destacado durante el año. Acompañado del premio, obtuve un bonus
+            económico y un ascenso a Senior Frontend Developer 🏆. Este
+            reconocimiento es especial para mi ya que se basa en el feedback que
+            han obtenido de los compañeros que han trabajado conmigo 🤝.
           </Paragraph>
           <Paragraph>
-            Currently I continue working and learning. Feel free to talk with me
-            via my RRSS 😜.
+            Actualmente continuo trabajando y aprendiendo. Puedes hablarme a
+            través de mis redes sociales, me encanta conocer gente nueva😜.
           </Paragraph>
         </div>
       </div>

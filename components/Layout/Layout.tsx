@@ -40,7 +40,7 @@ export const Layout: React.SFC<LayoutProps> = ({ children, title }) => {
             property="og:image:secure_url"
             content="https://ivanbtrujillo.com/images/ivan.png"
           />
-          
+
           <meta name="twitter:site" content="@ivanbtrujillo" />
           <meta property="twitter:card" content="summary_large_image" />
           <meta property="twitter:url" content="https://ivanbtrujillo.com/" />
@@ -56,8 +56,8 @@ export const Layout: React.SFC<LayoutProps> = ({ children, title }) => {
         <Header>
           <div className="flex flex-1 justify-between ">
             <div className="flex-1 flex justify-start">
-              <HeaderLink path="/" name="Home" />
-              <HeaderLink path="/about" name="About" />
+              <HeaderLink path="/" name="Inicio" />
+              <HeaderLink path="/about" name="Sobre mí" />
             </div>
 
             <div className="flex items-center">
