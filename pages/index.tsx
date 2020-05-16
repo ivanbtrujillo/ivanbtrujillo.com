@@ -1,12 +1,4 @@
-import {
-  Layout,
-  LinkBtn,
-  Title,
-  User,
-  Paragraph,
-  Post,
-  PlaceholderPost,
-} from "components";
+import { Layout, LinkBtn, Title, User, Paragraph, Post } from "components";
 import { getPostsFromGithub } from "services/posts.service";
 import matter from "gray-matter";
 import { useEffect, useState } from "react";
@@ -85,9 +77,7 @@ const Home = () => {
         ...matterResult.data,
       };
     });
-    setTimeout(() => {
-      setPosts(posts);
-    }, 500);
+    setPosts(posts);
   };
 
   useEffect(() => {
@@ -122,10 +112,6 @@ const Home = () => {
               <div className="mb-8 w-full">
                 <Title>Lastest posts</Title>
                 <div className="grid grid-cols-1 col-gap-4 md:grid-cols-3 w-full">
-                  {posts.length === 0 &&
-                    Array.from({ length: 3 }).map((_, index) => (
-                      <PlaceholderPost key={`placeholder-${index}`} />
-                    ))}
                   {posts.slice(0, 3).map((post) => (
                     <Post key={post.id} {...post} />
                   ))}

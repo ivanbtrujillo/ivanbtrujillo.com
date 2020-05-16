@@ -10,4 +10,3 @@ export * from "./Paragraph/Paragraph";
 export * from "./Post/Post";
 export * from "./PostTitle/PostTitle";
 export * from "./Button/Button";
-export * from "./PlaceholderPost/PlaceholderPost";
