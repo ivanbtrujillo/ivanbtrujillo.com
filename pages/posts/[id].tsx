@@ -215,7 +215,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getAllPostIds();
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
 
@@ -224,7 +224,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       post,
-      unstable_revalidate: 1,
     },
   };
 };
