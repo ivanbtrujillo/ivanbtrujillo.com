@@ -96,6 +96,7 @@ export const Layout: React.SFC<LayoutProps> = ({ children, title }) => {
             <div className="flex-1 flex justify-start">
               <HeaderLink path="/" name="Inicio" />
               <HeaderLink path="/about" name="Sobre mí" />
+              <HeaderLink path="/portfolio" name="Portfolio" />
             </div>
 
             <div className="flex items-center">
