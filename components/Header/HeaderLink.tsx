@@ -15,7 +15,7 @@ export const HeaderLink: React.SFC<HeaderLinkProps> = ({ path, name }) => {
           router.pathname === path
             ? "text-font-secondary font-semibold "
             : "text-font-ternary"
-        } mx-4`}
+        } px-4`}
       >
         {name}
       </a>
