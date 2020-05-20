@@ -86,10 +86,10 @@ export const saveComment = async ({
     }
   );
 
-export const rebuild = async () =>
-  await fetch(
-    `https://api.zeit.co/v1/integrations/deploy/QmV4UD3oa7bQmDAgD5sXQ9wTd1C4ykkNzmjHecvKzMyx3g/PCLFEpifPC`,
-    {
-      method: "POST",
-    }
-  );
+// export const rebuild = async () =>
+//   await fetch(
+//     `https://api.zeit.co/v1/integrations/deploy/QmV4UD3oa7bQmDAgD5sXQ9wTd1C4ykkNzmjHecvKzMyx3g/PCLFEpifPC`,
+//     {
+//       method: "POST",
+//     }
+//   );

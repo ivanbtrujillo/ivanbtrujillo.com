@@ -1,7 +1,6 @@
 import { Layout, LinkBtn, Title, User, Paragraph, Post } from "components";
 import { getPostsFromGithub } from "services/posts.service";
 import matter from "gray-matter";
-import { useEffect, useState } from "react";
 
 const user = {
   name: "Iván",

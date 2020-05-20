@@ -3,7 +3,6 @@ import {
   getAllPostIds,
   getPostComments,
   saveComment,
-  rebuild,
 } from "services/posts.service";
 import {
   Layout,
@@ -17,24 +16,16 @@ import {
 import ReactMarkdown from "react-markdown";
 import { GetStaticProps, GetStaticPaths } from "next";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "use-auth0-hooks";
 import { generateComment } from "utils/post";
 
-export default function Post({ post }) {
+export default function Post({ post, comments: apiComments }) {
   const { isAuthenticated, isLoading, login, logout, user } = useAuth();
   const { query, asPath } = useRouter();
   const [comment, setComment] = useState("");
-  const [comments, setComments] = useState([]);
-
-  useEffect(() => {
-    const getPostCommentsFromAPI = async (comments_url) => {
-      const comments = await getPostComments(comments_url);
-      setComments(comments);
-    };
-    getPostCommentsFromAPI(post.comments_url);
-  }, []);
+  const [comments, setComments] = useState(apiComments);
 
   const addComment = async (comment) => {
     const date = new Date().toISOString();
@@ -43,7 +34,6 @@ export default function Post({ post }) {
         postId: post.id,
         comment: generateComment({ date, user, text: comment }),
       });
-      await rebuild();
 
       const nextPostComments = [
         ...comments,
@@ -221,9 +211,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const post = await getPostDetailsFromGithub(params.id as string);
+  const comments = await getPostComments(post.comments_url);
+
   return {
     props: {
       post,
+      comments,
     },
+    unstable_revalidate: 1,
   };
 };
