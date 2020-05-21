@@ -1,13 +1,12 @@
 type UserProps = {
-  user: { name: string; lastName: string };
-  imageUrl: string;
+  user: { name: string; lastName: string; image: string };
   className?: string;
 };
 
-export const User: React.SFC<UserProps> = ({ user, imageUrl, className }) => (
+export const User: React.SFC<UserProps> = ({ user, className }) => (
   <div className={`flex flex-col items-center ${className}`}>
     <img
-      src={imageUrl}
+      src={user.image}
       className="w-48 h-48 rounded-full border-4 border-white object-cover"
       alt={user.name}
     />

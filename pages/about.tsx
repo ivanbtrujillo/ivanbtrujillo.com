@@ -1,13 +1,10 @@
 import { Layout, User, Paragraph } from "components";
+import { user } from "constants/user";
 
-const user = {
-  name: "Iván",
-  lastName: "Trujillo",
-};
 const About = () => (
   <Layout title="Sobre mí">
     <div className="page">
-      <User imageUrl="/images/ivan.png" user={user} className="mb-8" />
+      <User user={user} className="mb-8" />
       <div className=" px-6 md:px-32  ">
         <div className="sm:text-center lg:text-left">
           <Paragraph>

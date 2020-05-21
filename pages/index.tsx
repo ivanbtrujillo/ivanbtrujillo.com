@@ -1,71 +1,21 @@
 import { Layout, LinkBtn, Title, User, Paragraph, Post } from "components";
 import { getPostsFromGithub } from "services/posts.service";
 import matter from "gray-matter";
-
-const user = {
-  name: "Iván",
-  lastName: "Trujillo",
-};
+import { user } from "constants/user";
+import { technologies } from "constants/technologies";
 
 interface Post {
   id: string;
   img: string;
   title: string;
   date: string;
-  summary;
 }
 
-const technologies = [
-  {
-    alt: "javascript",
-    src: "/images/javascript.svg.png",
-  },
-
-  {
-    alt: "typescript",
-    src: "/images/typescript.svg",
-  },
-
-  {
-    alt: "next",
-    src: "/images/next.png",
-  },
-
-  {
-    alt: "react",
-
-    src: "/images/react.png",
-  },
-
-  {
-    alt: "tailwind",
-
-    src: "/images/tailwind.png",
-  },
-
-  {
-    alt: "node",
-
-    src: "/images/node.svg",
-  },
-
-  {
-    alt: "firestore",
-
-    src: "/images/firestore.png",
-  },
-
-  {
-    alt: "jest",
-
-    src: "/images/jest.png",
-  },
-];
 const Home = ({ posts }) => (
   <Layout title="Inicio">
     <div className="page ">
       <div className="flex flex-col lg:flex-row items-center justify-center">
-        <User imageUrl="/images/ivan.png" user={user} />
+        <User user={user} />
         <div className="  px-4 sm:px-6  lg:px-8 ">
           <div className="text-center lg:text-left ">
             <Paragraph className="sm:max-w-xl sm:mx-auto">
