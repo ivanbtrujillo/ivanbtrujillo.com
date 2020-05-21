@@ -3,7 +3,7 @@ import { useState } from "react";
 type Theme = "theme-light" | "theme-dark";
 
 const Icon = ({ children }: { children: React.ReactChild }) => (
-  <span className="absolute text-font-primary " style={{ marginTop: "-2px" }}>
+  <span className="absolute" style={{ marginTop: "-2px" }}>
     {children}
   </span>
 );

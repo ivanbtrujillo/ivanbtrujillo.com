@@ -13,6 +13,9 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <noscript>
+            <h3>Parece que estas usando un navegador sin javascript.</h3>
+          </noscript>
         </body>
       </Html>
     );

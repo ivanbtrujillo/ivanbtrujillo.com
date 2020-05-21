@@ -15,7 +15,7 @@ import {
 } from "components";
 import ReactMarkdown from "react-markdown";
 import { GetStaticProps, GetStaticPaths } from "next";
-
+import { user as Author } from "constants/user";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "use-auth0-hooks";
@@ -67,10 +67,10 @@ export default function Post({ post, comments: apiComments }) {
         <PostDate dateString={post.date} />
         <div className="flex items-end text-font-primary">
           <img
-            src="/images/ivan.png"
+            src={Author.image}
             className="h-8 w-8 rounded-full text-font-primary mr-2"
           />
-          Iván Trujillo
+          {Author.name}
         </div>
         <ReactMarkdown
           className="markdown text-font-primary mt-8 mb-8"

@@ -58,12 +58,29 @@ export const Layout: React.SFC<LayoutProps> = ({ children, title }) => {
           <link rel="icon" href="/favicon.ico" />
           <meta
             name="viewport"
-            content="width=device-width, initial-scale=1"
-          ></meta>
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
 
           <title>{`${title} - ${siteTitle}`}</title>
           <meta name="title" content={title} />
           <meta name="description" content="Iván Trujillo personal website" />
+          <meta name="keywords" content="ivanbtrujillo" />
+
+          <link rel="manifest" href="/manifest.json" />
+          <link
+            href="/favicon-16x16.png"
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+          />
+          <link
+            href="/favicon-32x32.png"
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+          />
+          <link rel="apple-touch-icon" href="/apple-icon.png"></link>
+          <meta name="theme-color" content="#000000" />
 
           <meta name="og:type" content="website" />
           <meta name="og:url" content="https://ivanbtrujillo.com/" />
@@ -89,7 +106,7 @@ export const Layout: React.SFC<LayoutProps> = ({ children, title }) => {
             content="https://ivanbtrujillo.com/images/ivan.png"
           />
 
-          <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+          <link rel="preload" href="https://rsms.me/inter/inter.css" />
         </Head>
         <Header>
           <div className="flex flex-1 justify-between flex-wrap">
