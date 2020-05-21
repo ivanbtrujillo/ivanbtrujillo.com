@@ -8,7 +8,7 @@ export const technologies = [
   {
     alt: "typescript",
     src:
-      "https://res.cloudinary.com/ivanbtrujillo/image/upload/c_scale,q_49,w_96/v1590084189/typescript_aj02wz",
+      "https://res.cloudinary.com/ivanbtrujillo/image/upload/c_scale,q_65,w_96/v1590085163/1_mn6bOs7s6Qbao15PMNRyOA_wosjs1",
   },
 
   {
