@@ -65,27 +65,27 @@ export const Layout: React.SFC<LayoutProps> = ({ children, title }) => {
           <meta name="title" content={title} />
           <meta name="description" content="Iván Trujillo personal website" />
 
-          <meta property="og:type" content="website" />
-          <meta property="og:url" content="https://ivanbtrujillo.com/" />
-          <meta property="og:title" content={`${title} - ${siteTitle}`} />
-          <meta property="og:description" content={description} />
+          <meta name="og:type" content="website" />
+          <meta name="og:url" content="https://ivanbtrujillo.com/" />
+          <meta name="og:title" content={`${title} - ${siteTitle}`} />
+          <meta name="og:description" content={description} />
           <meta
-            property="og:image"
+            name="og:image"
             content="https://ivanbtrujillo.com/images/ivan.png"
           />
 
           <meta
-            property="og:image:secure_url"
+            name="og:image:secure_url"
             content="https://ivanbtrujillo.com/images/ivan.png"
           />
 
           <meta name="twitter:site" content="@ivanbtrujillo" />
-          <meta property="twitter:card" content="summary_large_image" />
-          <meta property="twitter:url" content="https://ivanbtrujillo.com/" />
-          <meta property="twitter:title" content={`${title} - ${siteTitle}`} />
-          <meta property="twitter:description" content={description} />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:url" content="https://ivanbtrujillo.com/" />
+          <meta name="twitter:title" content={`${title} - ${siteTitle}`} />
+          <meta name="twitter:description" content={description} />
           <meta
-            property="twitter:image"
+            name="twitter:image"
             content="https://ivanbtrujillo.com/images/ivan.png"
           />
 
