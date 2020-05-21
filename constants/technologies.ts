@@ -21,7 +21,7 @@ export const technologies = [
     alt: "react",
 
     src:
-      "https://res.cloudinary.com/ivanbtrujillo/image/upload/c_scale,q_55,w_96/v1590084185/react_uzafdp",
+      "https://res.cloudinary.com/ivanbtrujillo/image/upload/c_scale,h_80,w_80/v1590084185/react_uzafdp",
   },
 
   {
