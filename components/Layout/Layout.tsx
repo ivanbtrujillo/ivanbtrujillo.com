@@ -34,7 +34,7 @@ export const Layout: React.SFC<LayoutProps> = ({ children, title }) => {
         <img
           alt="perfil de linkedin"
           className="h-8 w-8 mx-2"
-          src="https://res.cloudinary.com/ivanbtrujillo/image/upload/c_scale,q_66,w_32/v1590084189/typescript_aj02wz"
+          src="https://res.cloudinary.com/ivanbtrujillo/image/upload/c_scale,w_32/v1590085259/B6In1DFVNA905jsouZu45yQv4GixlQ0Yu4n8UdMssj3SXYVG1nRmIsNMBc0MlTM0s4yvJyG4h1pAypOO2OfIuFarGWuBn44lULaIklmfCsS3iDgECcYsRwPU64m7Nts_jq8kt8"
         />
       </a>
       <a
