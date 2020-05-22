@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { Header, HeaderLink } from "components";
 import { useThemeToggler } from "hooks/useThemeToggler/useThemeToggler";
+import { user } from "constants/user";
 
 type LayoutProps = {
   children: React.ReactChild | React.ReactChild[];
@@ -86,25 +87,16 @@ export const Layout: React.SFC<LayoutProps> = ({ children, title }) => {
           <meta name="og:url" content="https://ivanbtrujillo.com/" />
           <meta name="og:title" content={`${title} - ${siteTitle}`} />
           <meta name="og:description" content={description} />
-          <meta
-            name="og:image"
-            content="https://ivanbtrujillo.com/images/ivan.png"
-          />
+          <meta name="og:image" content={user.image} />
 
-          <meta
-            name="og:image:secure_url"
-            content="https://ivanbtrujillo.com/images/ivan.png"
-          />
+          <meta name="og:image:secure_url" content={user.image} />
 
           <meta name="twitter:site" content="@ivanbtrujillo" />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:url" content="https://ivanbtrujillo.com/" />
           <meta name="twitter:title" content={`${title} - ${siteTitle}`} />
           <meta name="twitter:description" content={description} />
-          <meta
-            name="twitter:image"
-            content="https://ivanbtrujillo.com/images/ivan.png"
-          />
+          <meta name="twitter:image" content={user.image} />
 
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         </Head>

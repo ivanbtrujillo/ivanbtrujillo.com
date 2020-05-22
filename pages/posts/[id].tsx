@@ -21,7 +21,10 @@ import { useRouter } from "next/router";
 import { useAuth } from "use-auth0-hooks";
 import { generateComment } from "utils/post";
 
-export default function Post({ post, comments: apiComments }) {
+export default function Post({
+  post = { title: "", id: "", date: "2020-05-08", content: "" },
+  comments: apiComments,
+}) {
   const { isAuthenticated, isLoading, login, logout, user } = useAuth();
   const { query, asPath } = useRouter();
   const [comment, setComment] = useState("");
