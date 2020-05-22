@@ -98,7 +98,10 @@ export const Layout: React.SFC<LayoutProps> = ({ children, title }) => {
           <meta name="twitter:description" content={description} />
           <meta name="twitter:image" content={user.image} />
 
-          <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap"
+            rel="stylesheet"
+          />
         </Head>
         <Header>
           <div className="flex flex-1 justify-between flex-wrap">
