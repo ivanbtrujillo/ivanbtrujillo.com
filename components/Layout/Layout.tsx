@@ -52,8 +52,8 @@ export const Layout: React.SFC<LayoutProps> = ({ children, title }) => {
   );
 
   return (
-    <div className={`overflow-y-scroll ${theme} bg-background-primary`}>
-      <div className="flex flex-col h-screen max-w-screen-xl mx-auto ">
+    <div className={`${theme} bg-background-primary`}>
+      <div className="flex flex-col  max-w-screen-xl mx-auto ">
         <Head>
           <link rel="icon" href="/favicon.ico" />
           <meta
@@ -106,7 +106,7 @@ export const Layout: React.SFC<LayoutProps> = ({ children, title }) => {
             content="https://ivanbtrujillo.com/images/ivan.png"
           />
 
-          <link rel="preload" href="https://rsms.me/inter/inter.css" />
+          <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         </Head>
         <Header>
           <div className="flex flex-1 justify-between flex-wrap">
