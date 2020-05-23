@@ -5,7 +5,7 @@ import matter from "gray-matter";
 
 export const Posts = ({ posts }) => {
   return (
-    <Layout title="Posts">
+    <Layout title="Posts" canonical="posts">
       <div className="page">
         <div className=" px-4 sm:px-6 lg:px-8">
           <Title>Posts</Title>

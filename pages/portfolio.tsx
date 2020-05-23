@@ -19,7 +19,7 @@ const projects = [
 
 export default () => {
   return (
-    <Layout title="Portfolio">
+    <Layout title="Portfolio" canonical="portfolio">
       <div className="page">
         <div className="sm:text-center lg:text-left">
           {projects.map((project) => (

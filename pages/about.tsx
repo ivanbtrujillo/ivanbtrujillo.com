@@ -2,7 +2,7 @@ import { Layout, User, Paragraph } from "components";
 import { user } from "constants/user";
 
 const About = () => (
-  <Layout title="Sobre mí">
+  <Layout title="Sobre mí" canonical="about">
     <div className="page">
       <User user={user} className="mb-8" />
       <div className=" px-6 md:px-32  ">

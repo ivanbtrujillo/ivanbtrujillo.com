@@ -65,7 +65,7 @@ const Post = ({
   }
 
   return (
-    <Layout title={post.title}>
+    <Layout title={post.title} canonical={`/posts/${post.id}`}>
       <div className="max-w-screen-xl w-full md:mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto"></div>
         <PostTitle>{post.title}</PostTitle>

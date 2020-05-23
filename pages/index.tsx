@@ -12,7 +12,7 @@ interface Post {
 }
 
 const Home = ({ posts }) => (
-  <Layout title="Inicio">
+  <Layout title="Inicio" canonical="">
     <div className="page ">
       <div className="flex flex-col lg:flex-row items-center justify-center">
         <User user={user} />

@@ -1,10 +1,10 @@
 {
   "name": "Ivan Trujillo ",
   "short_name": "ivanbtrujillo",
+  "description": "ivanbtrujillo website",
   "theme_color": "#ffffff",
   "background_color": "#000000",
   "display": "standalone",
-  "scope": "/",
   "start_url": "/",
   "icons": [
     {
