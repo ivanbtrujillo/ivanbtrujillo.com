@@ -4,7 +4,7 @@ import {
   getPostComments,
   saveComment,
 } from "services/posts.service";
-import { Auth0Provider } from "use-auth0-hooks";
+
 import {
   Layout,
   PostDate,
@@ -14,12 +14,7 @@ import {
   Title,
   Button,
 } from "components";
-import {
-  onLoginError,
-  onAccessTokenError,
-  onRedirectCallback,
-  onRedirecting,
-} from "utils/authentication";
+
 import ReactMarkdown from "react-markdown";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { user as Author } from "constants/user";
@@ -232,21 +227,4 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-export default function ({
-  post = { title: "", id: "", date: "2020-05-08", content: "" },
-  comments,
-}) {
-  return (
-    <Auth0Provider
-      domain={process.env.AUTH0_DOMAIN}
-      clientId={process.env.AUTH0_CLIENT_ID}
-      redirectUri={process.env.AUTH0_REDIRECT_URI}
-      onLoginError={onLoginError}
-      onAccessTokenError={onAccessTokenError}
-      onRedirecting={onRedirecting}
-      onRedirectCallback={onRedirectCallback}
-    >
-      <Post post={post} comments={comments} />
-    </Auth0Provider>
-  );
-}
+export default Post;
