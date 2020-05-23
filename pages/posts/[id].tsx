@@ -4,6 +4,7 @@ import {
   getPostComments,
   saveComment,
 } from "services/posts.service";
+import { Auth0Provider } from "use-auth0-hooks";
 import {
   Layout,
   PostDate,
@@ -13,6 +14,12 @@ import {
   Title,
   Button,
 } from "components";
+import {
+  onLoginError,
+  onAccessTokenError,
+  onRedirectCallback,
+  onRedirecting,
+} from "utils/authentication";
 import ReactMarkdown from "react-markdown";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { user as Author } from "constants/user";
@@ -21,10 +28,10 @@ import { useRouter } from "next/router";
 import { useAuth } from "use-auth0-hooks";
 import { generateComment } from "utils/post";
 
-export default function Post({
+const Post = ({
   post = { title: "", id: "", date: "2020-05-08", content: "" },
   comments: apiComments,
-}) {
+}) => {
   const { isAuthenticated, isLoading, login, logout, user } = useAuth();
   const { query, asPath } = useRouter();
   const [comment, setComment] = useState("");
@@ -202,7 +209,7 @@ export default function Post({
       </div>
     </Layout>
   );
-}
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getAllPostIds();
@@ -224,3 +231,22 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     unstable_revalidate: 1,
   };
 };
+
+export default function ({
+  post = { title: "", id: "", date: "2020-05-08", content: "" },
+  comments,
+}) {
+  return (
+    <Auth0Provider
+      domain={process.env.AUTH0_DOMAIN}
+      clientId={process.env.AUTH0_CLIENT_ID}
+      redirectUri={process.env.AUTH0_REDIRECT_URI}
+      onLoginError={onLoginError}
+      onAccessTokenError={onAccessTokenError}
+      onRedirecting={onRedirecting}
+      onRedirectCallback={onRedirectCallback}
+    >
+      <Post post={post} comments={comments} />
+    </Auth0Provider>
+  );
+}
