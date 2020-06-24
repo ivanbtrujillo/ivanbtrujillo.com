@@ -17,7 +17,7 @@ const Home = ({ posts }) => (
       <div className="flex flex-col lg:flex-row items-center justify-center">
         <User user={user} />
         <div className="  px-4 sm:px-6  lg:px-8 ">
-          <div className="text-center lg:text-left ">
+          <div className="text-left ">
             <Paragraph className="sm:max-w-xl sm:mx-auto">
               Hola 👋, soy un desarrollador enfocado en javascript y su
               ecosistema. Me encanta aprender, seguir buenas practicas y aportar
@@ -34,6 +34,7 @@ const Home = ({ posts }) => (
           </div>
         </div>
       </div>
+
       <div className=" mt-10 pt-4  ">
         <div className="flex flex-col ">
           <div className="flex flex-col items-center flex-1 mx-4">

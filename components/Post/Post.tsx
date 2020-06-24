@@ -24,7 +24,9 @@ export const Post: React.SFC<PostProps> = ({
         <h3 className="mt-2 text-xl leading-7 font-semibold text-font-secondary">
           {title}
         </h3>
-        <p className="mt-3 text-base leading-6 text-font-primary">{summary}</p>
+        <p className="mt-3 text-base font-light leading-6 text-font-primary">
+          {summary}
+        </p>
       </a>
     </div>
   </Link>

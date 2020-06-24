@@ -1,0 +1,27 @@
+/* purgecss start ignore */
+.theme-light {
+  --background-primary: #ffffff;
+  --background-secondary: #2c5282;
+  --background-accent: rgb(107, 112, 117);
+  --border-primary: #ffffff;
+  --border-secondary: #2c5282;
+  --border-accent: #e2e8f0;
+  --font-primary: #3b3e44;
+  --font-remark: #000000;
+  --font-secondary: #2c5282;
+  --font-ternary: #ffffff;
+}
+
+.theme-dark {
+  --background-primary: #2d3748;
+  --background-secondary: #2c5282;
+  --background-accent: #1a202c;
+  --border-primary: #2d3748;
+  --border-secondary: #181d24;
+  --border-accent: #1a202c;
+  --font-primary: #dddddd;
+  --font-remark: #ffffff;
+  --font-secondary: #0289b4;
+  --font-ternary: #a0aec0;
+}
+/* purgecss end ignore */

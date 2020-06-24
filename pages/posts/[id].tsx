@@ -5,13 +5,14 @@ import {
   saveComment,
 } from "services/posts.service";
 
+import { FiLogIn, FiLogOut } from "react-icons/fi";
+
 import {
   Layout,
   PostDate,
   CodeBlock,
   MarkdownEditor,
   PostTitle,
-  Title,
   Button,
 } from "components";
 
@@ -69,31 +70,29 @@ const Post = ({
       <div className="max-w-screen-xl w-full md:mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto"></div>
         <PostTitle>{post.title}</PostTitle>
-        <PostDate dateString={post.date} />
+
         <div className="flex items-end text-font-primary">
           <img
             src={Author.image}
             className="h-8 w-8 rounded-full text-font-primary mr-2"
           />
-          {Author.name}
+          {Author.name} -
+          <PostDate dateString={post.date} />
         </div>
         <ReactMarkdown
           className="markdown text-font-primary mt-8 mb-8"
           source={post.content}
           renderers={{ code: CodeBlock }}
         />
-        <div className="bg-background-secondary mb-16 mt-16">
-          <div className="max-w-screen-xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between flex-wrap"></div>
-          </div>
+        <div className="w-full border-t border-border-secondary mt-8 mb-4 pt-4">
+          <p className="text-medium font-semibold text-font-secondary  ">
+            ¿Te ha gustado el artículo? Agradezco si me dejas tu feedback 😜
+          </p>
         </div>
         {comments.length ? (
           <>
             {comments.map((comment, index) => (
-              <div
-                key={`${comment.id}-${index}`}
-                className="my-8 border border-b border-gray-400 p-4"
-              >
+              <div key={`${comment.id}-${index}`} className="my-8 p-4">
                 <div className="flex flex-row">
                   <img
                     src={comment.userPicture}
@@ -115,27 +114,22 @@ const Post = ({
                 }
               </div>
             ))}
-            <h1 className="text-xl font-semibold text-font-primary mb-4">
-              ¿Te ha gustado el artículo? Agradezco si me dejas tu feedback 😜
-            </h1>
           </>
         ) : (
-          <Title>Aún no hay comentarios. Se el primero! 😎</Title>
+          <p className="text-font-primary">Aún no hay comentarios</p>
         )}
         {isLoading && <p> Cargando ...</p>}
         {!isAuthenticated && !isLoading && (
-          <div className="flex flex-col">
-            <Title>Debes de autenticarte para comentar 🙂</Title>
-
-            <Button
-              className="px-4 py-2 w-32 text-white bg-background-secondary hover:bg-background-secondary focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50"
-              onClick={() =>
-                login({ appState: { returnTo: { pathname: asPath, query } } })
-              }
-            >
-              Autenticarme 🤙
-            </Button>
-          </div>
+          <Button
+            className="px-4 py-2  mt-4 w-auto text-white bg-background-secondary hover:bg-background-secondary focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50"
+            onClick={() =>
+              login({ appState: { returnTo: { pathname: asPath, query } } })
+            }
+          >
+            <>
+              Autenticarme <FiLogIn className="ml-2" />
+            </>
+          </Button>
         )}
 
         {!isLoading && isAuthenticated && (
@@ -159,7 +153,9 @@ const Post = ({
                     })
                   }
                 >
-                  Salir 👋
+                  <>
+                    Salir <FiLogOut className="ml-2" />
+                  </>
                 </Button>
               </div>
             </div>

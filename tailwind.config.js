@@ -11,13 +11,18 @@ module.exports = {
         background: {
           primary: "var(--background-primary)",
           secondary: "var(--background-secondary)",
-          ternary: "var(--background-ternary)",
           accent: "var(--background-accent)",
+        },
+        border: {
+          primary: "var(--border-primary)",
+          secondary: "var(--border-secondary)",
+          accent: "var(--border-accent)",
         },
         font: {
           primary: "var(--font-primary)",
           secondary: "var(--font-secondary)",
           ternary: "var(--font-ternary)",
+          remark: "var(--font-remark)",
         },
       },
     },

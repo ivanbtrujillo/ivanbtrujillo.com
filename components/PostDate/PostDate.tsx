@@ -1,5 +1,6 @@
 import { parseISO, format } from "date-fns";
 import { es } from "date-fns/locale";
+import { FiCalendar } from "react-icons/fi";
 
 type PostDateProps = {
   dateString: string;
@@ -8,10 +9,12 @@ type PostDateProps = {
 export const PostDate: React.SFC<PostDateProps> = ({ dateString }) => {
   const date = parseISO(dateString);
   return (
-    <p className="text-sm leading-5 text-font-ternary">
+    <div className="flex flex-row text-font-secondary">
+      <FiCalendar className="ml-1 mr-1 mt-1" />
+
       <time dateTime={dateString}>
         {format(date, "d LLLL, yyyy", { locale: es })}
       </time>
-    </p>
+    </div>
   );
 };

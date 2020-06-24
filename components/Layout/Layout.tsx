@@ -2,6 +2,7 @@ import Head from "next/head";
 import { Header, HeaderLink } from "components";
 import { useThemeToggler } from "hooks/useThemeToggler/useThemeToggler";
 import { user } from "constants/user";
+import { FiGithub, FiTwitter, FiLinkedin, FiHeart } from "react-icons/fi";
 
 type LayoutProps = {
   children: React.ReactChild | React.ReactChild[];
@@ -26,40 +27,28 @@ export const Layout: React.SFC<LayoutProps> = ({
         rel="noreferrer noopener"
         href="https://github.com/ivanbtrujillo"
       >
-        <img
-          alt="perfil de github"
-          className="h-10 w-10 mx-2 ml-8"
-          src="https://res.cloudinary.com/ivanbtrujillo/image/upload/c_scale,q_55,w_32/v1590084898/15221874341530102002-256_cbipec"
-        />
+        <FiGithub className="text-font-secondary w-6 h-6 ml-6" />
       </a>
       <a
         target="_blank"
         rel="noreferrer noopener"
         href="https://www.linkedin.com/in/ivanbtrujillo/"
       >
-        <img
-          alt="perfil de linkedin"
-          className="h-10 w-10 mx-2"
-          src="https://res.cloudinary.com/ivanbtrujillo/image/upload/c_scale,w_32/v1590085259/B6In1DFVNA905jsouZu45yQv4GixlQ0Yu4n8UdMssj3SXYVG1nRmIsNMBc0MlTM0s4yvJyG4h1pAypOO2OfIuFarGWuBn44lULaIklmfCsS3iDgECcYsRwPU64m7Nts_jq8kt8"
-        />
+        <FiLinkedin className="text-font-secondary w-6 h-6 ml-2" />
       </a>
       <a
         target="_blank"
         rel="noreferrer noopener"
         href="https://twitter.com/ivanbtrujillo/"
       >
-        <img
-          alt="perfil de twitter"
-          className="h-10 w-10 mx-2"
-          src="https://res.cloudinary.com/ivanbtrujillo/image/upload/c_scale,q_63,w_32/v1590085052/_65QFl7B_400x400_jelpuy"
-        />
+        <FiTwitter className="text-font-secondary w-6 h-6 ml-2" />
       </a>
     </div>
   );
 
   return (
     <div className={`${theme} bg-background-primary`}>
-      <div className="flex flex-col  max-w-screen-xl mx-auto ">
+      <div className="flex flex-col">
         <Head>
           <link rel="icon" href="/favicon.ico" />
           <meta
@@ -156,40 +145,41 @@ export const Layout: React.SFC<LayoutProps> = ({
           <meta name="og:title" content={`${title} - ${siteTitle}`} />
           <meta name="og:description" content={description} />
           <meta name="og:image" content={user.image} />
-
           <meta name="og:image:secure_url" content={user.image} />
 
-          <meta name="twitter:site" content="@ivanbtrujillo" />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:url" content="https://ivanbtrujillo.com/" />
+          <meta name="twitter:site" content="@ivanbtrujillo" />
+          <meta name="twitter:creator" content="@ivanbtrujillo" />
           <meta name="twitter:title" content={`${title} - ${siteTitle}`} />
           <meta name="twitter:description" content={description} />
           <meta name="twitter:image" content={user.image} />
 
           <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
             rel="stylesheet"
           />
         </Head>
         <Header>
-          <div className="flex flex-1 justify-between flex-wrap">
+          <div className="flex flex-1 justify-between flex-wrap max-w-screen-xl mx-auto ">
             <div className="flex-1 flex  my-2 justify-between sm:justify-start">
               <HeaderLink path="/" name="Inicio" />
               <HeaderLink path="/about" name="Sobre mí" />
               <HeaderLink path="/portfolio" name="Portfolio" />
             </div>
 
-            <div className="flex items-center mx-4 items-end flex-1 justify-between">
+            <div className="flex items-center mx-4 justify-between sm:justify-end flex-1 ">
               <Toggler />
               {socialLinks()}
             </div>
           </div>
         </Header>
 
-        <div>{children}</div>
-        <div className="bg-background-primary max-w-screen-xl py-12 px-12 border-t border-gray-300 ">
+        <div className="max-w-screen-xl mx-auto ">{children}</div>
+        <div className="bg-background-accent py-12 px-12 border-t border-gray-300 ">
           <div className="flex items-center justify-center">
-            <p className="text-font-primary">Hecho con 💟 por Iván Trujillo</p>
+            <div className="text-font-ternary flex flex-row w-auto">
+              Hecho con <FiHeart className="ml-1 mr-1 mt-1" /> por Iván Trujillo
+            </div>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { FiMoon, FiSun } from "react-icons/fi";
 type Theme = "theme-light" | "theme-dark";
 
 export const useThemeToggler = () => {
@@ -23,8 +23,8 @@ export const useThemeToggler = () => {
       aria-checked="false"
       className="text-xl cursor-pointer hover:text-3xl bg-background-secondary rounded-full h-8 w-8 flex items-center justify-center"
     >
-      {theme === "theme-dark" && "🌤"}
-      {theme === "theme-light" && "🌙"}
+      {theme === "theme-dark" && <FiSun />}
+      {theme === "theme-light" && <FiMoon />}
     </span>
   );
 
