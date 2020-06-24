@@ -8,19 +8,18 @@ type LayoutProps = {
   children: React.ReactChild | React.ReactChild[];
   title: string;
   canonical: string;
-  description: string;
-  image: string;
+  description?: string;
+  image?: string;
 };
 
 export const siteTitle = "ivanbtrujillo.com";
-const description = "Iván Trujillo personal website";
 
 export const Layout: React.SFC<LayoutProps> = ({
   children,
   title,
   canonical,
-  description,
-  image,
+  description = "",
+  image = "https://images.unsplash.com/photo-1497091071254-cc9b2ba7c48a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1353&q=80",
 }) => {
   const { theme, Toggler } = useThemeToggler();
 
