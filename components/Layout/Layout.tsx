@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { Header, HeaderLink } from "components";
 import { useThemeToggler } from "hooks/useThemeToggler/useThemeToggler";
-import { user } from "constants/user";
 import { FiGithub, FiTwitter, FiLinkedin, FiHeart } from "react-icons/fi";
 
 type LayoutProps = {
@@ -173,7 +172,7 @@ export const Layout: React.SFC<LayoutProps> = ({
         <div className="max-w-screen-xl mx-auto ">{children}</div>
         <div className="bg-background-accent py-12 px-12 border-t border-gray-300 ">
           <div className="flex items-center justify-center">
-            <div className="text-font-ternary flex flex-row w-auto">
+            <div className="text-font-remark flex flex-row w-auto">
               Hecho con <FiHeart className="ml-1 mr-1 mt-1" /> por Iván Trujillo
             </div>
           </div>
