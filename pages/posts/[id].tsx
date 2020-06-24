@@ -25,7 +25,14 @@ import { useAuth } from "use-auth0-hooks";
 import { generateComment } from "utils/post";
 
 const Post = ({
-  post = { title: "", id: "", date: "2020-05-08", content: "" },
+  post = {
+    title: "",
+    id: "",
+    date: "2020-05-08",
+    content: "",
+    img: "",
+    summary: "",
+  },
   comments: apiComments,
 }) => {
   const { isAuthenticated, isLoading, login, logout, user } = useAuth();
@@ -66,7 +73,12 @@ const Post = ({
   }
 
   return (
-    <Layout title={post.title} canonical={`/posts/${post.id}`}>
+    <Layout
+      title={post.title}
+      description={post.summary}
+      image={post.img}
+      canonical={`/posts/${post.id}`}
+    >
       <div className="max-w-screen-xl w-full md:mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto"></div>
         <PostTitle>{post.title}</PostTitle>

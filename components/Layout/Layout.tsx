@@ -8,6 +8,8 @@ type LayoutProps = {
   children: React.ReactChild | React.ReactChild[];
   title: string;
   canonical: string;
+  description: string;
+  image: string;
 };
 
 export const siteTitle = "ivanbtrujillo.com";
@@ -17,6 +19,8 @@ export const Layout: React.SFC<LayoutProps> = ({
   children,
   title,
   canonical,
+  description,
+  image,
 }) => {
   const { theme, Toggler } = useThemeToggler();
 
@@ -140,19 +144,12 @@ export const Layout: React.SFC<LayoutProps> = ({
           <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
           <meta name="theme-color" content="#000000" />
 
-          <meta name="og:type" content="website" />
-          <meta name="og:url" content="https://ivanbtrujillo.com/" />
-          <meta name="og:title" content={`${title} - ${siteTitle}`} />
-          <meta name="og:description" content={description} />
-          <meta name="og:image" content={user.image} />
-          <meta name="og:image:secure_url" content={user.image} />
-
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:site" content="@ivanbtrujillo" />
           <meta name="twitter:creator" content="@ivanbtrujillo" />
           <meta name="twitter:title" content={`${title} - ${siteTitle}`} />
           <meta name="twitter:description" content={description} />
-          <meta name="twitter:image" content={user.image} />
+          <meta name="twitter:image" content={image} />
 
           <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
