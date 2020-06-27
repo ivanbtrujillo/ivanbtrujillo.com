@@ -119,7 +119,7 @@ const Post = ({
 
                 {
                   <ReactMarkdown
-                    className="markdown text-font-primary mt-2"
+                    className="text-font-primary mt-2 "
                     source={comment.content}
                     renderers={{ code: CodeBlock }}
                   />

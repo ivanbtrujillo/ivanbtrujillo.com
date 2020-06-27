@@ -169,7 +169,7 @@ export const Layout: React.SFC<LayoutProps> = ({
           </div>
         </Header>
 
-        <div className="max-w-screen-xl mx-auto ">{children}</div>
+        <div className="max-w-screen-xl mx-auto w-full ">{children}</div>
         <div className="bg-background-accent py-12 px-12 border-t border-gray-300 ">
           <div className="flex items-center justify-center">
             <div className="text-font-remark flex flex-row w-auto">
