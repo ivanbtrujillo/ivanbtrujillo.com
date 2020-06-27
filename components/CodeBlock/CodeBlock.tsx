@@ -26,7 +26,7 @@ export const LineNo = styled.span`
   text-align: right;
   padding-right: 1em;
   user-select: none;
-  opacity: 0.5;
+  color: darkslategray;
 `;
 
 export const LineContent = styled.span`
