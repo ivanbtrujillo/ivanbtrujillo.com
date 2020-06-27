@@ -1,5 +1,6 @@
 import { AppProps } from "next/app";
 import "../css/main.css";
+import "github-markdown-css";
 import { Auth0Provider } from "use-auth0-hooks";
 import { useIsMounted } from "hooks/useIsMounted/useIsMounted";
 import {

@@ -40,7 +40,7 @@ const Post = ({
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState(apiComments);
 
-  const addComment = async (comment) => {
+  const addComment = async comment => {
     const date = new Date().toISOString();
     try {
       await saveComment({
@@ -185,14 +185,14 @@ const Post = ({
                 <div style={{ height: "400px" }}>
                   <MarkdownEditor
                     value={comment}
-                    renderHTML={(text) => (
+                    renderHTML={text => (
                       <ReactMarkdown
                         className="markdown mt-2"
                         source={text}
                         renderers={{ code: CodeBlock }}
                       />
                     )}
-                    onChange={(e) => setComment(e.text)}
+                    onChange={e => setComment(e.text)}
                   />
                 </div>
               </div>
