@@ -9,9 +9,6 @@ import {
   onRedirectCallback,
   onRedirecting,
 } from "utils/authentication";
-/**
- * Create a page which wraps the Auth0 provider.
- */
 
 export default ({ Component, pageProps }: AppProps) => {
   const { isMounted } = useIsMounted();

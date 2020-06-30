@@ -6,7 +6,7 @@ type PostProps = {
   img: string;
   title: string;
   date: string;
-  summary;
+  summary: string;
 };
 
 export const Post: React.SFC<PostProps> = ({
@@ -17,7 +17,7 @@ export const Post: React.SFC<PostProps> = ({
   summary,
 }) => (
   <Link href="/posts/[id]" as={`/posts/${id}`} key={id}>
-    <div className=" py-4 px-4 hover:bg-background-accent cursor-pointer">
+    <div className=" py-4 px-4 bg-background-accent border border-border-primary hover:border-border-secondary cursor-pointer">
       <img src={img} alt={title} className="w-full h-56 object-cover mb-4" />
       <PostDate dateString={date} />
       <a href="#" className="block">

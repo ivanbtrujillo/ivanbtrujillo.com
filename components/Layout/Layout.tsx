@@ -23,27 +23,30 @@ export const Layout: React.SFC<LayoutProps> = ({
   const { theme, Toggler } = useThemeToggler();
 
   const socialLinks = () => (
-    <div className="flex">
+    <div className="flex ">
       <a
         target="_blank"
+        className="w-8 h-8 ml-2 flex items-center"
         rel="noreferrer noopener"
         href="https://github.com/ivanbtrujillo"
       >
-        <FiGithub className="text-font-secondary w-6 h-6 ml-6" />
+        <FiGithub className="text-font-secondary w-6 h-6 hover:text-font-remark hover:w-7 hover:h-7 " />
       </a>
       <a
         target="_blank"
         rel="noreferrer noopener"
+        className="w-8 h-8 ml-2 flex items-center"
         href="https://www.linkedin.com/in/ivanbtrujillo/"
       >
-        <FiLinkedin className="text-font-secondary w-6 h-6 ml-2" />
+        <FiLinkedin className="text-font-secondary w-6 h-6  hover:text-font-remark hover:w-7 hover:h-7" />
       </a>
       <a
         target="_blank"
         rel="noreferrer noopener"
+        className="w-8 h-8 ml-2 flex items-center"
         href="https://twitter.com/ivanbtrujillo/"
       >
-        <FiTwitter className="text-font-secondary w-6 h-6 ml-2" />
+        <FiTwitter className="text-font-secondary  w-6 h-6  hover:text-font-remark hover:w-7 hover:h-7" />
       </a>
     </div>
   );
@@ -163,7 +166,9 @@ export const Layout: React.SFC<LayoutProps> = ({
             </div>
 
             <div className="flex items-center mx-4 justify-between sm:justify-end flex-1 ">
-              <Toggler />
+              <div className="sm:mr-8">
+                <Toggler />
+              </div>
               {socialLinks()}
             </div>
           </div>
@@ -173,7 +178,9 @@ export const Layout: React.SFC<LayoutProps> = ({
         <div className="bg-background-accent py-12 px-12 border-t border-gray-300 ">
           <div className="flex items-center justify-center">
             <div className="text-font-remark flex flex-row w-auto">
-              Hecho con <FiHeart className="ml-1 mr-1 mt-1" /> por Iván Trujillo
+              Hecho con
+              <FiHeart className="ml-1 mr-1 mt-1 text-font-secondary" /> por
+              Iván Trujillo
             </div>
           </div>
         </div>

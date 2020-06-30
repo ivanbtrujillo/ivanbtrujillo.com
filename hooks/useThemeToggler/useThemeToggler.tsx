@@ -6,7 +6,7 @@ export const useThemeToggler = () => {
   const [theme, setTheme] = useState<Theme>(
     () =>
       (localStorage.getItem("theme") as "theme-light" | "theme-dark") ||
-      "theme-light"
+      "theme-dark"
   );
 
   const changeTheme = (theme: Theme) => {

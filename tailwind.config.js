@@ -25,9 +25,17 @@ module.exports = {
           remark: "var(--font-remark)",
         },
       },
+      width: {
+        "7": "1.75rem",
+      },
+      height: {
+        "7": "1.75rem",
+      },
     },
   },
   variants: {
+    width: ["responsive", "hover", "focus"],
+    height: ["responsive", "hover", "focus"],
     opacity: ["responsive", "hover", "focus", "disabled"],
   },
   plugins: [require("@tailwindcss/ui")],
