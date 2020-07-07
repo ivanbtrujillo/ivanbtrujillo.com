@@ -13,4 +13,7 @@ export type PostResponseType = {
   title: string;
   body: string;
   comments_url?: string;
+  user: {
+    login: string;
+  };
 };

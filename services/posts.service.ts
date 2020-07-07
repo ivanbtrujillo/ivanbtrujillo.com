@@ -29,10 +29,15 @@ export const getPostsFromGithub = async () => {
 
   const data: PostResponseType[] = await response.json();
 
-  const posts: PostType[] = data.map((post: PostResponseType) => {
+  const userIssues = data.filter(
+    ghIssue => ghIssue.user.login === process.env.GH_ISSUES_USER
+  );
+
+  const posts: PostType[] = userIssues.map((post: PostResponseType) => {
     const matterResult = (matter(
       post.body || ""
     ) as unknown) as MatterResultPostType;
+
     return {
       id: String(post.number),
       title: post.title,
