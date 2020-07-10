@@ -26,6 +26,7 @@ export const Layout: React.SFC<LayoutProps> = ({
     <div className="flex ">
       <a
         target="_blank"
+        aria-label="github"
         className="w-8 h-8 ml-2 flex items-center"
         rel="noreferrer noopener"
         href="https://github.com/ivanbtrujillo"
@@ -34,23 +35,20 @@ export const Layout: React.SFC<LayoutProps> = ({
           aria-hidden="true"
           className="text-font-secondary w-6 h-6 hover:text-font-remark hover:w-7 hover:h-7 visible"
         />
-        <span className="hidden">Github Profile</span>
       </a>
       <a
         target="_blank"
         rel="noreferrer noopener"
+        aria-label="linkedin"
         className="w-8 h-8 ml-2 flex items-center"
         href="https://www.linkedin.com/in/ivanbtrujillo/"
       >
-        <FiLinkedin
-          aria-hidden="true"
-          className="text-font-secondary w-6 h-6  hover:text-font-remark hover:w-7 hover:h-7 visible"
-        />
-        <span className="hidden">Linkedin Profile</span>
+        <FiLinkedin className="text-font-secondary w-6 h-6  hover:text-font-remark hover:w-7 hover:h-7 visible" />
       </a>
       <a
         target="_blank"
         rel="noreferrer noopener"
+        aria-label="twitter"
         className="w-8 h-8 ml-2 flex items-center "
         href="https://twitter.com/ivanbtrujillo/"
       >
@@ -58,7 +56,6 @@ export const Layout: React.SFC<LayoutProps> = ({
           aria-hidden="true"
           className="text-font-secondary  w-6 h-6  hover:text-font-remark hover:w-7 hover:h-7 visible"
         />
-        <span className="hidden">Twitter Profile</span>
       </a>
     </div>
   );
