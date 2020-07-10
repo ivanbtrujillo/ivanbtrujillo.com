@@ -13,15 +13,15 @@
 }
 
 .theme-dark {
-  --background-primary: #2d3748;
+  --background-primary: #1f2022;
   --background-secondary: #0289b4;
-  --background-accent: #1a202c;
+  --background-accent: #0c0c0c;
   --border-primary: #2d3748;
   --border-secondary: #0289b4;
   --border-accent: #1a202c;
   --font-primary: #dddddd;
   --font-remark: #ffffff;
-  --font-secondary: #0289b4;
+  --font-secondary: #0486ad;
   --font-ternary: #a0aec0;
 }
 /* purgecss end ignore */
