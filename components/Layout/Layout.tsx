@@ -154,13 +154,6 @@ export const Layout: React.SFC<LayoutProps> = ({
           <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
           <meta name="theme-color" content="#000000" />
 
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:site" content="@ivanbtrujillo" />
-          <meta name="twitter:creator" content="@ivanbtrujillo" />
-          <meta name="twitter:title" content={`${title} - ${siteTitle}`} />
-          <meta name="twitter:description" content={description} />
-          <meta name="twitter:image" content={image} />
-
           <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
             rel="stylesheet"
