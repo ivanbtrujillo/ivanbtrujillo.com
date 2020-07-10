@@ -19,6 +19,9 @@ In order to show code in the blog posts I use prism-react-renderer.
 - TailwindCSS
 
 It is PWA ready.
+It has a 100% Lighthouse Performance Score.
+
+![Score](./docs/score.png)
 
 ## License
 
