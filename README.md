@@ -1,51 +1,25 @@
-![alt text](./docs/header.svg "Next with super powers")
+# ivanbtrujillo.com
 
-This is a boilerplate with some awesome tools pre-configured:
+This is my personal website. It is open source, so you can fork it or clone it if you want.
 
-- [Next](https://nextjs.org/)
-- [Typescript](https://www.typescriptlang.org/index.html) with custom paths to make easy import elements.
-- [Jest](https://jestjs.io/en/) and [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro)
-- [TailwindCSS](https://tailwindcss.com/) configured with PurgueCSS
+![Dark Theme](./docs/dark.png)
 
-I've added some components and examples.
+## The approach
 
-[Check the Codesandbox with the example](https://codesandbox.io/s/awesome-borg-x165z?file=/pages/index.tsx)
+I use Github issues as the repository for my blog posts and matter to parse metadata content. Then I use Auth0 to authenticate users, allowing them to leave comments if they want. They won't need a github account, due I store his name and image as comment metadata.
 
-## How to use
+I've created a theme toggler to switch between light and dark theme.
 
-```
-git clone https://github.com/ivanbtrujillo/next-typescript-tailwind.git
-```
+In order to show code in the blog posts I use prism-react-renderer.
 
-```
-npm install
-```
+## Technologies
 
-```
-npm run dev
-```
+- Typescript
+- NextJS
+- TailwindCSS
 
-## Customize TailwindCSS
+It is PWA ready.
 
-Take a look to tailwind documentation. In this project you will find a tailwind.js file that will be your guide to
-customize Tailwind (we read the config from tailwind.js). For example you can add a custom color this way:
+## License
 
-```javascript
-module.exports = {
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
-      },
-      colors: {
-        "my-orange": "#efb300",
-        "my-blue": "rgba(58,168,190, 0.75)",
-      },
-    },
-  },
-};
-```
-
-## Customize TS Paths
-
-In tsconfig.json, you will be able to add your custom paths or change the current ones in the paths section.
+MIT
