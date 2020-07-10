@@ -30,7 +30,11 @@ export const Layout: React.SFC<LayoutProps> = ({
         rel="noreferrer noopener"
         href="https://github.com/ivanbtrujillo"
       >
-        <FiGithub className="text-font-secondary w-6 h-6 hover:text-font-remark hover:w-7 hover:h-7 " />
+        <FiGithub
+          aria-hidden="true"
+          className="text-font-secondary w-6 h-6 hover:text-font-remark hover:w-7 hover:h-7 visible"
+        />
+        <span className="invisible h-0 w-0">Github Profile</span>
       </a>
       <a
         target="_blank"
@@ -38,15 +42,23 @@ export const Layout: React.SFC<LayoutProps> = ({
         className="w-8 h-8 ml-2 flex items-center"
         href="https://www.linkedin.com/in/ivanbtrujillo/"
       >
-        <FiLinkedin className="text-font-secondary w-6 h-6  hover:text-font-remark hover:w-7 hover:h-7" />
+        <FiLinkedin
+          aria-hidden="true"
+          className="text-font-secondary w-6 h-6  hover:text-font-remark hover:w-7 hover:h-7 visible"
+        />
+        <span className="invisible h-0 w-0">Linkedin Profile</span>
       </a>
       <a
         target="_blank"
         rel="noreferrer noopener"
-        className="w-8 h-8 ml-2 flex items-center"
+        className="w-8 h-8 ml-2 flex items-center "
         href="https://twitter.com/ivanbtrujillo/"
       >
-        <FiTwitter className="text-font-secondary  w-6 h-6  hover:text-font-remark hover:w-7 hover:h-7" />
+        <FiTwitter
+          aria-hidden="true"
+          className="text-font-secondary  w-6 h-6  hover:text-font-remark hover:w-7 hover:h-7 visible"
+        />
+        <span className="invisible h-0 w-0">Twitter Profile</span>
       </a>
     </div>
   );
