@@ -39,7 +39,6 @@ export const Layout: React.SFC<LayoutProps> = ({
       <a
         target="_blank"
         rel="noreferrer noopener"
-        alt="Github Profile"
         className="w-8 h-8 ml-2 flex items-center"
         href="https://www.linkedin.com/in/ivanbtrujillo/"
       >
