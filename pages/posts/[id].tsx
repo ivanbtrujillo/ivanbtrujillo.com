@@ -66,22 +66,17 @@ const Post = ({ post, comments }: PostProps) => {
 
   return (
     <div>
-      <header>
-        <Head>
-          <title>{post.title ? `${post.title} |` : ""} ivanbtrujillo.com</title>
-          <meta
-            name="description"
-            content="An example Next.js site using Notion for the blog"
-          />
-          <meta name="og:title" content="ivanbtrujillo.com" />
-          <meta property="og:image" content={post.img} />
-          <meta name="twitter:card" content="summary" />
-          <meta name="twitter:site" content="@ivanbtrujillo" />
-          <meta name="twitter:title" content={post.title} />
-          <meta name="twitter:description" content={post.summary} />
-          <meta name="twitter:image" content={post.img} />
-        </Head>
-      </header>
+      <Head>
+        <title>{post.title ? `${post.title} |` : ""} ivanbtrujillo.com</title>
+        <meta name="description" content={post.summary} />
+        <meta name="og:title" content="ivanbtrujillo.com" />
+        <meta property="og:image" content={post.img} />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@ivanbtrujillo" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={post.summary} />
+        <meta name="twitter:image" content={post.img} />
+      </Head>
       <Layout
         title={post.title}
         description={post.summary}
