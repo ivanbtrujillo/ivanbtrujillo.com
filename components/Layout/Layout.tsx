@@ -158,6 +158,13 @@ export const Layout: React.SFC<LayoutProps> = ({
             href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
             rel="stylesheet"
           />
+
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:site" content="@ivanbtrujillo" />
+          <meta name="twitter:creator" content="@ivanbtrujillo" />
+          <meta name="twitter:title" content={title} />
+          <meta name="twitter:description" content={description} />
+          <meta name="twitter:image" content={image} />
         </Head>
         <Header>
           <div className="flex flex-1 justify-between flex-wrap max-w-screen-xl mx-auto ">
