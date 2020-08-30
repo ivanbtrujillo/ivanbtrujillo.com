@@ -16,11 +16,7 @@ class MyDocument extends Document {
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
 
-          <meta name="title" content="ivanbtrujillo.com" />
-          <meta name="description" content="Blog personal" />
-
           <meta name="keywords" content="ivanbtrujillo" />
-
           <link rel="manifest" href="/manifest.json" />
 
           <link
