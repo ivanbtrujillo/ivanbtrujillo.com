@@ -9,7 +9,7 @@ interface PostProps {
 
 export const Posts = ({ posts }: PostProps) => {
   return (
-    <Layout title="Posts" canonical="posts">
+    <Layout>
       <div className="page">
         <div className="px-4">
           <Title>Posts</Title>
@@ -27,7 +27,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       posts,
     },
-    unstable_revalidate: 1,
+    revalidate: 1,
   };
 };
 

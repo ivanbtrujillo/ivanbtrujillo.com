@@ -77,12 +77,7 @@ const Post = ({ post, comments }: PostProps) => {
         <meta name="twitter:description" content={post.summary} />
         <meta name="twitter:image" content={post.img} />
       </Head>
-      <Layout
-        title={post.title}
-        description={post.summary}
-        image={post.img}
-        canonical={`/posts/${post.id}`}
-      >
+      <Layout>
         <div className="max-w-screen-xl w-full md:mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8">
           <PostHeader title={post.title} date={post.date} author={Author} />
           <ReactMarkdown
@@ -103,7 +98,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getAllPostIds();
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 };
 
@@ -116,7 +111,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       post,
       comments,
     },
-    unstable_revalidate: 1,
   };
 };
 

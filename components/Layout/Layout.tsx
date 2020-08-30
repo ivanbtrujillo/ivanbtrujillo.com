@@ -4,10 +4,6 @@ import { FiGithub, FiTwitter, FiLinkedin, FiHeart } from "react-icons/fi";
 
 type LayoutProps = {
   children: React.ReactChild | React.ReactChild[];
-  title: string;
-  canonical: string;
-  description?: string;
-  image?: string;
 };
 
 export const siteTitle = "ivanbtrujillo.com";

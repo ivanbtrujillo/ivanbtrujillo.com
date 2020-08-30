@@ -3,7 +3,7 @@ import { user } from "constants/user";
 import { about } from "constants/texts";
 
 const About = () => (
-  <Layout title="Sobre mí" canonical="about">
+  <Layout>
     <div className="page">
       <User user={user} className="mb-8" />
       <div className=" px-6 md:px-32  ">

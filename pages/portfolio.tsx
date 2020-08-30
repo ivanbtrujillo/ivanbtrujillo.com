@@ -17,7 +17,7 @@ const CodeSanboxIframe = ({ url }: { url: string }) => (
 
 const Portafolio = () => {
   return (
-    <Layout title="Portfolio" canonical="portfolio">
+    <Layout>
       <div className="page">
         <div className="sm:text-center lg:text-left">
           {portfolio.map(project => (

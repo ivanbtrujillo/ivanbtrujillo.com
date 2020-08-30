@@ -46,7 +46,7 @@ const MorePostButton = ({ amountOfPosts }: { amountOfPosts: number }) => {
 
 const Home = ({ posts }: HomeProps) => {
   return (
-    <Layout title="Inicio" canonical="">
+    <Layout>
       <div className="page ">
         <div className="flex flex-col lg:flex-row items-center justify-center">
           <User user={user} />
@@ -84,7 +84,7 @@ export const getStaticProps = async () => {
     props: {
       posts,
     },
-    unstable_revalidate: 1,
+    revalidate: 1,
   };
 };
 

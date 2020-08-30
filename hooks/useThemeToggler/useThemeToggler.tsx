@@ -1,18 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiMoon, FiSun } from "react-icons/fi";
+import { useIsMounted } from "hooks/useIsMounted/useIsMounted";
 type Theme = "theme-light" | "theme-dark";
 
 export const useThemeToggler = () => {
-  const [theme, setTheme] = useState<Theme>(
-    () =>
-      (localStorage.getItem("theme") as "theme-light" | "theme-dark") ||
-      "theme-dark"
-  );
+  const { isMounted } = useIsMounted();
+  const [theme, setTheme] = useState<Theme>("theme-dark");
 
   const changeTheme = (theme: Theme) => {
     localStorage.setItem("theme", theme);
     setTheme(theme);
   };
+
+  useEffect(() => {
+    if (isMounted) {
+      const storedTheme = localStorage.getItem("theme") as
+        | "theme-light"
+        | "theme-dark";
+      setTheme(storedTheme);
+    }
+  }, [isMounted]);
 
   const Toggler = () => (
     <span

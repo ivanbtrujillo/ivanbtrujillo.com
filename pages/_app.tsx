@@ -2,7 +2,6 @@ import { AppProps } from "next/app";
 import "../css/main.css";
 import "github-markdown-css";
 import { Auth0Provider } from "use-auth0-hooks";
-import { useIsMounted } from "hooks/useIsMounted/useIsMounted";
 import {
   onLoginError,
   onAccessTokenError,
@@ -11,10 +10,6 @@ import {
 } from "utils/authentication";
 
 export default ({ Component, pageProps }: AppProps) => {
-  const { isMounted } = useIsMounted();
-
-  if (!isMounted) return <p>Cargando ...</p>;
-
   return (
     <Auth0Provider
       domain={process.env.AUTH0_DOMAIN}
