@@ -3,7 +3,7 @@ import {
   getAllPostIds,
 } from "services/posts.service";
 import { getPostComments } from "services/comments.service";
-
+import Head from "next/head";
 import {
   Layout,
   PostDate,
@@ -65,24 +65,129 @@ const Post = ({ post, comments }: PostProps) => {
     setComments([...postComments, ...[newComment]]);
 
   return (
-    <Layout
-      title={post.title}
-      description={post.summary}
-      image={post.img}
-      canonical={`/posts/${post.id}`}
-    >
-      <div className="max-w-screen-xl w-full md:mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8">
-        <PostHeader title={post.title} date={post.date} author={Author} />
-        <ReactMarkdown
-          className="markdown text-font-primary mt-8 mb-8"
-          source={post.content}
-          renderers={{ code: CodeBlock }}
+    <div>
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
-        <PostFooter />
-        <Comments comments={postComments} />
-        <CommentForm postId={post.id} onAddComment={onAddComment} />
-      </div>
-    </Layout>
+        <title>{`${post.title}`}</title>
+        <meta name="title" content={post.title} />
+        <meta name="description" content="Iván Trujillo personal website" />
+        <link
+          rel="canonical"
+          href={`https://ivanbtrujillo.com//posts/${post.id}`}
+        />
+        <meta name="keywords" content="ivanbtrujillo" />
+
+        <link rel="manifest" href="/manifest.json" />
+
+        <link
+          rel="apple-touch-icon"
+          sizes="57x57"
+          href="icons/apple-icon-57x57.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="60x60"
+          href="icons/apple-icon-60x60.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="72x72"
+          href="icons/apple-icon-72x72.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="76x76"
+          href="icons/apple-icon-76x76.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="114x114"
+          href="icons/apple-icon-114x114.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="120x120"
+          href="icons/apple-icon-120x120.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="144x144"
+          href="icons/apple-icon-144x144.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="152x152"
+          href="icons/apple-icon-152x152.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="icons/apple-icon-180x180.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="192x192"
+          href="icons/android-icon-192x192.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="icons/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="96x96"
+          href="icons/favicon-96x96.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="icons/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+        <meta name="theme-color" content="#000000" />
+
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@ivanbtrujillo" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={post.summary} />
+        <meta name="twitter:image" content={post.img} />
+      </Head>
+
+      <Layout
+        title={post.title}
+        description={post.summary}
+        image={post.img}
+        canonical={`/posts/${post.id}`}
+      >
+        <div className="max-w-screen-xl w-full md:mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8">
+          <PostHeader title={post.title} date={post.date} author={Author} />
+          <ReactMarkdown
+            className="markdown text-font-primary mt-8 mb-8"
+            source={post.content}
+            renderers={{ code: CodeBlock }}
+          />
+          <PostFooter />
+          <Comments comments={postComments} />
+          <CommentForm postId={post.id} onAddComment={onAddComment} />
+        </div>
+      </Layout>
+    </div>
   );
 };
 
