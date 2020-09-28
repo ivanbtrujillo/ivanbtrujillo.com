@@ -14,9 +14,8 @@ export const useThemeToggler = () => {
 
   useEffect(() => {
     if (isMounted) {
-      const storedTheme = localStorage.getItem("theme") as
-        | "theme-light"
-        | "theme-dark";
+      const storedTheme =
+        (localStorage.getItem("theme") as Theme) || "theme-dark";
       setTheme(storedTheme);
     }
   }, [isMounted]);

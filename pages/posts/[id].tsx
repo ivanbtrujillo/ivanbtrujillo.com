@@ -67,7 +67,9 @@ const Post = ({ post, comments }: PostProps) => {
   return (
     <div>
       <Head>
-        <title>{post.title ? `${post.title} |` : ""} ivanbtrujillo.com</title>
+        <title key="title">
+          {post.title ? `${post.title} |` : ""} ivanbtrujillo.com
+        </title>
         <meta name="description" content={post.summary} />
         <meta name="og:title" content="ivanbtrujillo.com" />
         <meta property="og:image" content={post.img} />
