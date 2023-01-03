@@ -29,7 +29,9 @@ export const getPostsFromGithub = async () => {
 
   const data = (await response.json()) as PostResponseType[];
 
-  const userIssues = data.filter(
+  console.log({data});
+
+  const userIssues = (data ?? []).filter(
     ghIssue => ghIssue.user.login === process.env.NEXT_PUBLIC_GH_ISSUES_USER
   );
 
