@@ -22,14 +22,14 @@ export const getPostsFromGithub = async () => {
     "https://api.github.com/repos/ivanbtrujillo/ivanbtrujillo.com/issues",
     {
       headers: {
-        Authorization: `token ${process.env.NEXT_PUBLIC_githubToken}`,
+        Authorization: `token ${process.env.NEXT_PUBLIC_GH_TOKEN}`,
       },
     }
   );
 
   const data = (await response.json()) as PostResponseType[];
 
-  console.log({data, token: process.env.NEXT_PUBLIC_githubToken});
+  console.log({data, token: process.env.NEXT_PUBLIC_GH_TOKEN});
 
   const userIssues = (data ?? []).filter(
     ghIssue => ghIssue.user.login === process.env.NEXT_PUBLIC_GH_ISSUES_USER
@@ -67,7 +67,7 @@ export const getPostDetailsFromGithub = async (id: string) => {
     `https://api.github.com/repos/ivanbtrujillo/ivanbtrujillo.com/issues/${id}`,
     {
       headers: {
-        Authorization: `token ${process.env.NEXT_PUBLIC_githubToken}`,
+        Authorization: `token ${process.env.NEXT_PUBLIC_GH_TOKEN}`,
       },
     }
   );
