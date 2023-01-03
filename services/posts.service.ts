@@ -29,10 +29,8 @@ export const getPostsFromGithub = async () => {
 
   const data = (await response.json()) as PostResponseType[];
 
-  console.log({data, token: process.env.NEXT_PUBLIC_GH_TOKEN});
-
   const userIssues = (data ?? []).filter(
-    ghIssue => ghIssue.user.login === process.env.NEXT_PUBLIC_GH_ISSUES_USER
+    ghIssue => ghIssue.author_association === "OWNER"
   );
 
   const posts: PostType[] = userIssues.map((post: PostResponseType) => {

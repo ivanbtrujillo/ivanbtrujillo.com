@@ -13,6 +13,7 @@ export type PostResponseType = {
   title: string;
   body: string;
   comments_url?: string;
+  author_association: "OWNER" | "NONE";
   user: {
     login: string;
   };
