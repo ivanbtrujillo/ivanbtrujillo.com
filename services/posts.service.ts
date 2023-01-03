@@ -29,7 +29,7 @@ export const getPostsFromGithub = async () => {
 
   const data = (await response.json()) as PostResponseType[];
 
-  console.log({data});
+  console.log({data, token: process.env.NEXT_PUBLIC_githubToken});
 
   const userIssues = (data ?? []).filter(
     ghIssue => ghIssue.user.login === process.env.NEXT_PUBLIC_GH_ISSUES_USER
