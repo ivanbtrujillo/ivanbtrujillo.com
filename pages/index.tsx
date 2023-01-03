@@ -50,7 +50,7 @@ const Home = ({posts}: HomeProps) => {
       <div className="page ">
         <div className="flex flex-col lg:flex-row items-center justify-center">
           <User user={user} />
-          <div className=" p-4 mt-2 lg:mt-0 sm:mx-6 lg:mx-8 border border-border-secondary border-dashed bg-background-accent">
+          <div className=" p-4 mt-2 lg:mt-0 sm:mx-6 lg:mx-8 bg-background-accent">
             <div className="text-left ">
               <Paragraph>{introduction}</Paragraph>
             </div>
