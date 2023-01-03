@@ -1,8 +1,5 @@
-import {
-  getPostDetailsFromGithub,
-  getAllPostIds,
-} from "services/posts.service";
-import { getPostComments } from "services/comments.service";
+import {getPostDetailsFromGithub, getAllPostIds} from "services/posts.service";
+import {getPostComments} from "services/comments.service";
 import Head from "next/head";
 import {
   Layout,
@@ -14,13 +11,13 @@ import {
 } from "components";
 
 import ReactMarkdown from "react-markdown";
-import { GetStaticProps, GetStaticPaths } from "next";
-import { user as Author } from "constants/user";
-import { useState } from "react";
-import { CommentType } from "model/Comment";
-import { PostType } from "model/Post";
+import {GetStaticProps, GetStaticPaths} from "next";
+import {user as Author} from "constants/user";
+import {useState} from "react";
+import {CommentType} from "model/Comment";
+import {PostType} from "model/Post";
 
-const PostHeader = ({ title, date, author }) => (
+const PostHeader = ({title, date, author}) => (
   <>
     <PostTitle>{title}</PostTitle>
     <div className="flex items-end text-font-primary">
@@ -41,7 +38,7 @@ const PostFooter = () => (
   </div>
 );
 
-const Comments = ({ comments }: { comments: CommentType[] }) => (
+const Comments = ({comments}: {comments: CommentType[]}) => (
   <>
     {comments.length ? (
       comments.map((comment: CommentType) => (
@@ -58,7 +55,7 @@ interface PostProps {
   comments: CommentType[];
 }
 
-const Post = ({ post, comments }: PostProps) => {
+const Post = ({post, comments}: PostProps) => {
   const [postComments, setComments] = useState(comments);
 
   const onAddComment = (newComment: CommentType) =>
@@ -85,11 +82,11 @@ const Post = ({ post, comments }: PostProps) => {
           <ReactMarkdown
             className="markdown text-font-primary mt-8 mb-8"
             source={post.content}
-            renderers={{ code: CodeBlock }}
+            renderers={{code: CodeBlock}}
           />
-          <PostFooter />
-          <Comments comments={postComments} />
-          <CommentForm postId={post.id} onAddComment={onAddComment} />
+          {/* <PostFooter /> */}
+          {/* <Comments comments={postComments} />*/}
+          {/*<CommentForm postId={post.id} onAddComment={onAddComment} /> */}
         </div>
       </Layout>
     </div>
@@ -104,7 +101,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({params}) => {
   const post = await getPostDetailsFromGithub(params.id as string);
   const comments = await getPostComments(post.comments_url);
 
