@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
-import matter from 'gray-matter'
-import { PostResponseType, PostType } from "model/Post";
+import matter from "gray-matter";
+import {PostResponseType, PostType} from "model/Post";
 
 type MatterResultPostType = {
   data: {
@@ -19,7 +19,7 @@ type PostIdType = {
 
 export const getPostsFromGithub = async () => {
   const response = await fetch(
-    "https://api.github.com/repos/ivanbtrujillo/next-blog/issues",
+    "https://api.github.com/repos/ivanbtrujillo/ivanbtrujillo.com/issues",
     {
       headers: {
         Authorization: `token ${process.env.NEXT_PUBLIC_githubToken}`,
@@ -27,17 +27,16 @@ export const getPostsFromGithub = async () => {
     }
   );
 
-
-  const data = await response.json() as PostResponseType[];
+  const data = (await response.json()) as PostResponseType[];
 
   const userIssues = data.filter(
     ghIssue => ghIssue.user.login === process.env.NEXT_PUBLIC_GH_ISSUES_USER
   );
 
   const posts: PostType[] = userIssues.map((post: PostResponseType) => {
-    const matterResult = (matter(
+    const matterResult = matter(
       post.body || ""
-    ) as unknown) as MatterResultPostType;
+    ) as unknown as MatterResultPostType;
 
     return {
       id: String(post.number),
@@ -63,7 +62,7 @@ export const getAllPostIds = async () => {
 
 export const getPostDetailsFromGithub = async (id: string) => {
   const response = await fetch(
-    `https://api.github.com/repos/ivanbtrujillo/next-blog/issues/${id}`,
+    `https://api.github.com/repos/ivanbtrujillo/ivanbtrujillo.com/issues/${id}`,
     {
       headers: {
         Authorization: `token ${process.env.NEXT_PUBLIC_githubToken}`,
@@ -71,11 +70,11 @@ export const getPostDetailsFromGithub = async (id: string) => {
     }
   );
 
-  const responseData  = await response.json() as PostResponseType;
+  const responseData = (await response.json()) as PostResponseType;
 
-  const matterResult = (matter(
+  const matterResult = matter(
     responseData.body || ""
-  ) as unknown) as MatterResultPostType;
+  ) as unknown as MatterResultPostType;
   const post = {
     id: String(responseData.number),
     as: responseData.title.toLowerCase().replace(" ", "-"),
