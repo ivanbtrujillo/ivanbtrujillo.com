@@ -1,10 +1,10 @@
-import { Layout, LinkBtn, Title, User, Paragraph, PostList } from "components";
-import { getPostsFromGithub } from "services/posts.service";
-import { user } from "constants/user";
-import { technologies } from "constants/technologies";
-import { FiChevronDown } from "react-icons/fi";
-import { PostType } from "model/Post";
-import { introduction } from "constants/texts";
+import {Layout, LinkBtn, Title, User, Paragraph, PostList} from "components";
+import {getPostsFromGithub} from "services/posts.service";
+import {user} from "constants/user";
+import {technologies} from "constants/technologies";
+import {FiChevronDown} from "react-icons/fi";
+import {PostType} from "model/Post";
+import {introduction} from "constants/texts";
 
 interface HomeProps {
   posts: PostType[];
@@ -15,9 +15,9 @@ type TechnologyType = {
   src: string;
 };
 
-const Technologies = ({ technologies }: { technologies: TechnologyType[] }) => (
+const Technologies = ({technologies}: {technologies: TechnologyType[]}) => (
   <div className="flex flex-row flex-wrap">
-    {technologies.map(({ alt, src }: TechnologyType) => (
+    {technologies.map(({alt, src}: TechnologyType) => (
       <img
         key={alt}
         alt={alt}
@@ -28,7 +28,7 @@ const Technologies = ({ technologies }: { technologies: TechnologyType[] }) => (
   </div>
 );
 
-const MorePostButton = ({ amountOfPosts }: { amountOfPosts: number }) => {
+const MorePostButton = ({amountOfPosts}: {amountOfPosts: number}) => {
   const showMorePostsBtn = amountOfPosts > 6;
 
   return (
@@ -44,13 +44,13 @@ const MorePostButton = ({ amountOfPosts }: { amountOfPosts: number }) => {
   );
 };
 
-const Home = ({ posts }: HomeProps) => {
+const Home = ({posts}: HomeProps) => {
   return (
     <Layout>
       <div className="page ">
         <div className="flex flex-col lg:flex-row items-center justify-center">
           <User user={user} />
-          <div className=" px-4 sm:px-6 lg:px-8 ">
+          <div className=" p-4 mt-2 lg:mt-0 sm:mx-6 lg:mx-8 border border-border-secondary border-dashed bg-background-accent">
             <div className="text-left ">
               <Paragraph>{introduction}</Paragraph>
             </div>

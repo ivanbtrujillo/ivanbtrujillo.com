@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import matter from "gray-matter";
+import matter from 'gray-matter'
 import { PostResponseType, PostType } from "model/Post";
 
 type MatterResultPostType = {
@@ -22,15 +22,16 @@ export const getPostsFromGithub = async () => {
     "https://api.github.com/repos/ivanbtrujillo/next-blog/issues",
     {
       headers: {
-        Authorization: `token ${process.env.githubToken}`,
+        Authorization: `token ${process.env.NEXT_PUBLIC_githubToken}`,
       },
     }
   );
 
-  const data: PostResponseType[] = await response.json();
+
+  const data = await response.json() as PostResponseType[];
 
   const userIssues = data.filter(
-    ghIssue => ghIssue.user.login === process.env.GH_ISSUES_USER
+    ghIssue => ghIssue.user.login === process.env.NEXT_PUBLIC_GH_ISSUES_USER
   );
 
   const posts: PostType[] = userIssues.map((post: PostResponseType) => {
@@ -65,12 +66,12 @@ export const getPostDetailsFromGithub = async (id: string) => {
     `https://api.github.com/repos/ivanbtrujillo/next-blog/issues/${id}`,
     {
       headers: {
-        Authorization: `token ${process.env.githubToken}`,
+        Authorization: `token ${process.env.NEXT_PUBLIC_githubToken}`,
       },
     }
   );
 
-  const responseData: PostResponseType = await response.json();
+  const responseData  = await response.json() as PostResponseType;
 
   const matterResult = (matter(
     responseData.body || ""

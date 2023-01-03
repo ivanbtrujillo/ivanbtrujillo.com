@@ -1,10 +1,10 @@
 export const introduction = `
 Hola 👋, soy un desarrollador enfocado en Javascript y su ecosistema. 
-Me encanta aprender, seguir buenas practicas y aportara los equipos con los que trabajo.
+Me encanta aprender, seguir buenas prácticas y aportar a los equipos con los que trabajo.
 
 Creo que el mejor código es aquel que es facil de leer (declarativo), facil de cambiar 
 y facil de borrar (testeado e inmutable). Esto no es sencillo y requiere dedicación, 
-pero si loconsigues estarás añadiendo un gran valor al producto, al código y a tu equipo.`;
+pero si lo consigues estarás añadiendo un gran valor al producto, al código y a tu equipo.`;
 
 export const about = `
 Soy de Fasnia, Tenerife 🏝 y actualmente vivo en El Sauzal, ubicado en el norte de la isla. Me adentré en el mundo del desarrollo en 2014, cuando finalicé mis estudios como Técnico Superior de Aplicaciones Multiplataforma 📚.
@@ -17,5 +17,5 @@ A finales de 2018 me uní a Expero como Intermediate Frontend Developer 🚀🇺
  
 A principios de cada año celebramos el summit anual en Texas, y el equipo de Expero Tenerife viaja allí a pasar una semana con el resto de la compañía. En el año 2020 fuí premiado por la compañía con un Rising Star, un premio que otorgan a las personas de la empresa que han destacado durante el año. Acompañado del premio, obtuve un bonus económico y un ascenso a Senior Frontend Developer 🏆. Este reconocimiento es especial para mi ya que se basa en el feedback que han obtenido de los compañeros que han trabajado conmigo 🤝.
 
-Actualmente continuo trabajando y aprendiendo. Puedes hablarme a través de mis redes sociales, me encanta conocer gente nueva😜.
+Actualmente soy Senior Frontend Developer en camino a convertirme en Tech Lead. Continuo trabajando y aprendiendo. Puedes hablarme a través de mis redes sociales, me encanta conocer gente nueva😜.
 `;

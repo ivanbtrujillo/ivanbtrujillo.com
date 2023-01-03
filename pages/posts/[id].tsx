@@ -35,7 +35,7 @@ const PostHeader = ({ title, date, author }) => (
 
 const PostFooter = () => (
   <div className="w-full border-t border-border-secondary mt-8 mb-4 pt-4">
-    <p className="text-medium font-semibold text-font-secondary  ">
+    <p className="text-medium font-semibold text-font-remark  ">
       ¿Te ha gustado el artículo? Agradezco si me dejas tu feedback 😜
     </p>
   </div>
@@ -80,7 +80,7 @@ const Post = ({ post, comments }: PostProps) => {
         <meta name="twitter:image" content={post.img} />
       </Head>
       <Layout>
-        <div className="max-w-screen-xl w-full md:mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8">
+        <div className="max-w-screen-xl bg-background-accent w-full md:mx-auto  my-10 px-4 sm:py-12 sm:px-6 lg:px-8">
           <PostHeader title={post.title} date={post.date} author={Author} />
           <ReactMarkdown
             className="markdown text-font-primary mt-8 mb-8"

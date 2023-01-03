@@ -1,27 +1,27 @@
-import { saveComment } from "services/comments.service";
+import {saveComment} from "services/comments.service";
 
-import { FiLogIn, FiLogOut } from "react-icons/fi";
+import {FiLogIn, FiLogOut} from "react-icons/fi";
 
-import { CodeBlock, MarkdownEditor, Button } from "components";
+import {CodeBlock, MarkdownEditor, Button} from "components";
 
 import ReactMarkdown from "react-markdown";
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { useAuth } from "use-auth0-hooks";
-import { generateComment } from "utils/post";
-import { CommentType } from "model/Comment";
+import {useState} from "react";
+import {useRouter} from "next/router";
+import {useAuth} from "use-auth0-hooks";
+import {generateComment} from "utils/post";
+import {CommentType} from "model/Comment";
 
-export const CommentForm = ({ onAddComment, postId }) => {
+export const CommentForm = ({onAddComment, postId}) => {
   const [comment, setComment] = useState("");
-  const { isAuthenticated, isLoading, login, logout, user } = useAuth();
-  const { query, asPath } = useRouter();
+  const {isAuthenticated, isLoading, login, logout, user} = useAuth();
+  const {query, asPath} = useRouter();
 
   const addComment = async (comment: string) => {
     const date = new Date().toISOString();
     try {
       await saveComment({
         postId,
-        comment: generateComment({ date, user, text: comment }),
+        comment: generateComment({date, user, text: comment}),
       });
 
       const newComment: CommentType = {
@@ -48,9 +48,9 @@ export const CommentForm = ({ onAddComment, postId }) => {
       {isLoading && <p> Cargando ...</p>}
       {!isAuthenticated && !isLoading && (
         <Button
-          className="px-4 py-2  mt-4 w-auto text-white bg-background-secondary hover:bg-background-secondary focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50"
+          className="px-4 py-2  mt-4 w-auto text-black bg-background-secondary hover:bg-background-secondary focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50"
           onClick={() =>
-            login({ appState: { returnTo: { pathname: asPath, query } } })
+            login({appState: {returnTo: {pathname: asPath, query}}})
           }
         >
           <>
@@ -60,10 +60,9 @@ export const CommentForm = ({ onAddComment, postId }) => {
       )}
       {!isLoading && isAuthenticated && (
         <div className="flex flex-col">
-          <div className="flex flex-row justify-between flex-1  w-full mb-8">
+          <div className="flex flex-row justify-between flex-1  w-full ">
             <div className="flex items-center">
-              <img src={user.picture} className="w-12 h-12 mb-4 rounded-full" />
-              <p className="ml-4 font-semibold text-lg text-font-primary">
+              <p className="font-semibold text-lg text-font-primary">
                 {user.name}
               </p>
             </div>
@@ -89,21 +88,21 @@ export const CommentForm = ({ onAddComment, postId }) => {
             <div className="sm:col-span-2">
               <label
                 htmlFor="message"
-                className="block text-sm font-medium leading-5 text-gray-700"
+                className="block text-sm font-medium leading-5 text-gray-200 mb-2"
               >
-                Write your comment here
+                ¿Qué te gustaría comentar?
               </label>
-              <div style={{ height: "400px" }}>
+              <div style={{height: "400px"}}>
                 <MarkdownEditor
                   value={comment}
                   renderHTML={(text: string) => (
                     <ReactMarkdown
                       className="markdown mt-2"
                       source={text}
-                      renderers={{ code: CodeBlock }}
+                      renderers={{code: CodeBlock}}
                     />
                   )}
-                  onChange={(e: { text: string }) => setComment(e.text)}
+                  onChange={(e: {text: string}) => setComment(e.text)}
                 />
               </div>
             </div>
@@ -113,7 +112,7 @@ export const CommentForm = ({ onAddComment, postId }) => {
                   disabled={user === "" || comment === ""}
                   className="px-6 py-3 w-full text-white bg-background-secondary hover:bg-blue-500 focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700"
                 >
-                  Send comment
+                  Enviar comentario
                 </Button>
               </span>
             </div>

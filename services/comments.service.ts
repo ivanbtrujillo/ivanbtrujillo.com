@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import matter from "gray-matter";
+import matter from 'gray-matter'
 import { CommentType, CommentResponseType } from "model/Comment";
 
 type MatterResultCommentType = {
@@ -15,11 +15,11 @@ type MatterResultCommentType = {
 export const getPostComments = async (comments_url: string) => {
   const commentsResponse = await fetch(comments_url, {
     headers: {
-      Authorization: `token ${process.env.githubToken}`,
+      Authorization: `token ${process.env.NEXT_PUBLIC_githubToken}`,
     },
   });
 
-  const commentsData: CommentResponseType = await commentsResponse.json();
+  const commentsData = await commentsResponse.json() as CommentResponseType;
 
   const comments: CommentType[] = commentsData
     .map(
@@ -42,12 +42,13 @@ export const saveComment = async ({
   comment: string;
 }) =>
   await fetch(
-    `https://api.github.com/repos/ivanbtrujillo/next-blog/issues/${postId}/comments`,
+    `https://api.github.com/repos/ivanbtrujillo/ivanbtrujillo.com/issues/${postId}/comments`,
     {
       method: "POST",
-      headers: {
-        Authorization: `token ${process.env.githubToken}`,
-      },
+
+        headers: {
+          Authorization: `token ${process.env.NEXT_PUBLIC_githubToken}`,
+        },
       body: JSON.stringify({
         body: comment,
       }),

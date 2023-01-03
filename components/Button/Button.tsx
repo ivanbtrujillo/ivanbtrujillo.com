@@ -5,7 +5,7 @@ type ButtonProps = {
   className?: string;
 };
 
-export const Button: React.SFC<ButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
   children,
   disabled,
   onClick,

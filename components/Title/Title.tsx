@@ -3,7 +3,7 @@ type TitleProps = {
   className?: string;
 };
 
-export const Title: React.SFC<TitleProps> = ({ children, className }) => {
+export const Title: React.FC<TitleProps> = ({children, className}) => {
   return (
     <h1
       className={`text-xl font-semibold text-font-primary mb-4   ${

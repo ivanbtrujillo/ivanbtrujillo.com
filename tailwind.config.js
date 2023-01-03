@@ -1,7 +1,12 @@
-// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
+
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -39,4 +44,4 @@ module.exports = {
     opacity: ["responsive", "hover", "focus", "disabled"],
   },
   plugins: [require("@tailwindcss/ui")],
-};
+}

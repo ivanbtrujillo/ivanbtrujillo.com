@@ -1,27 +1,14 @@
 /* purgecss start ignore */
-.theme-light {
-  --background-primary: #ffffff;
-  --background-secondary: #2c5282;
-  --background-accent: rgb(239, 240, 241);
-  --border-primary: #ffffff;
-  --border-secondary: #2c5282;
-  --border-accent: #e2e8f0;
-  --font-primary: #3b3e44;
-  --font-remark: #000000;
-  --font-secondary: #2c5282;
-  --font-ternary: #ffffff;
-}
-
 .theme-dark {
-  --background-primary: #1f2022;
-  --background-secondary: #0289b4;
-  --background-accent: #0c0c0c;
+  --background-primary: #2d4061;
+  --background-secondary: #06b6d4;
+  --background-accent: #111c29;
   --border-primary: #2d3748;
-  --border-secondary: #0289b4;
+  --border-secondary: #06b6d4;
   --border-accent: #1a202c;
-  --font-primary: #dddddd;
-  --font-remark: #ffffff;
-  --font-secondary: #0486ad;
+  --font-primary: #ffffff;
+  --font-remark: #06b6d4;
+  --font-secondary: #000000;
   --font-ternary: #a0aec0;
 }
 /* purgecss end ignore */

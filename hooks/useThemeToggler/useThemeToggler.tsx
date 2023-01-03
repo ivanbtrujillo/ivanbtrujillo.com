@@ -27,7 +27,7 @@ export const useThemeToggler = () => {
       }
       role="checkbox"
       aria-checked="false"
-      className="text-xl cursor-pointer hover:text-3xl bg-background-secondary rounded-full h-8 w-8 flex items-center justify-center"
+      className="text-xl text-black cursor-pointer hover:text-3xl bg-background-secondary rounded-full h-8 w-8 flex items-center justify-center"
     >
       {theme === "theme-dark" && <FiSun />}
       {theme === "theme-light" && <FiMoon />}
