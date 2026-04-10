@@ -4,7 +4,7 @@
         <title>Iván Trujillo</title>
         <link>https://ivanbtrujillo.com</link>
         <description>Writing on software development, good practices, and the software industry.</description>
-        <lastBuildDate>Fri, 10 Apr 2026 15:56:34 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 10 Apr 2026 16:09:04 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <image>
@@ -14,9 +14,145 @@
         </image>
         <copyright>All rights reserved 2026</copyright>
         <item>
+            <title><![CDATA[What to deliver and what to keep in the age of AI]]></title>
+            <link>https://ivanbtrujillo.com/articles/what-to-deliver-and-what-to-keep-in-the-age-of-ai</link>
+            <guid>https://ivanbtrujillo.com/articles/what-to-deliver-and-what-to-keep-in-the-age-of-ai</guid>
+            <pubDate>Mon, 06 Apr 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[As AI makes tacit knowledge explicit, consultants face a new question: what belongs to the client, what belongs to the company, and what belongs to you?]]></description>
+            <content:encoded><![CDATA[<p>Last Friday I was talking with one of my guidees about what to deliver and what not to deliver as part of our work, now that so much knowledge can be turned into a skill or part of a prompt.</p>
+<p>For years, unwritten knowledge was your best protection. What you knew but couldn&#x27;t easily document was what made you hard to replace.</p>
+<p>With AI it&#x27;s the exact opposite. For it to work well, you have to make explicit what was previously intuitive. You have to write down how you think, what you prioritize, how you structure problems. This has made people with solid work methodologies automatically much more productive.</p>
+<p>Because you&#x27;re able to articulate your work methodology, you can make AI replicate it. This carries a risk: what&#x27;s explicit is transferable.</p>
+<p>If you work for clients and deliver those configurations, you didn&#x27;t just deliver the project. You delivered your way of working, your methodology, and your judgment accumulated over years of practice.</p>
+<h2>The line is clearer than it seems</h2>
+<p>What goes into the project configuration:</p>
+<ul>
+<li>Stack conventions</li>
+<li>Domain rules</li>
+<li>Business-specific context</li>
+</ul>
+<p>Everything that exists because it&#x27;s <em>that</em> project. That belongs to the client and should stay with them.</p>
+<p>What stays with you:</p>
+<ul>
+<li>What questions you ask before starting</li>
+<li>How you evaluate whether the result is good</li>
+<li>How you detect when AI is wrong</li>
+<li>How you orchestrate multiple tools to work together</li>
+<li>How you extract knowledge to build automations</li>
+<li>How much you research and stay up to date</li>
+<li>What patterns you identify in new tools to integrate them into your workflows</li>
+</ul>
+<p>The first list describes the project. The second list describes you.</p>
+<p>A client can keep the first one. The second is built over years of practice and it belongs to you — don&#x27;t give it away.</p>
+<h2>Company-level collective knowledge</h2>
+<p>There&#x27;s another category: collective knowledge at the company level.</p>
+<p>At company level, there are configurations, internal tools and methodologies that multiply the effectiveness of the entire team. Those belong to the company and benefit everyone who works there.</p>
+<p>The key is knowing how to distinguish what&#x27;s personal, what&#x27;s collective knowledge at your company level that you can share with your colleagues for everyone&#x27;s benefit, and what&#x27;s project-specific knowledge that can be delivered to your client.</p>]]></content:encoded>
+            <author>ivan@ivanbtrujillo.com (Iván Trujillo)</author>
+        </item>
+        <item>
+            <title><![CDATA[The leader that AI agents need]]></title>
+            <link>https://ivanbtrujillo.com/articles/the-leader-that-ai-agents-need</link>
+            <guid>https://ivanbtrujillo.com/articles/the-leader-that-ai-agents-need</guid>
+            <pubDate>Fri, 13 Mar 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Agentic systems don't fail because of the model — they fail because nobody designed the coordination. Good leadership principles apply to AI agents too.]]></description>
+            <content:encoded><![CDATA[<p>Most agentic systems don&#x27;t fail because of the model or because AI doesn&#x27;t work. They fail because nobody designed the coordination properly.</p>
+<p>They&#x27;re like employees: a junior needs detailed instructions, a senior acts with little context. If you throw a junior into the jungle, don&#x27;t complain later when they do what you didn&#x27;t expect.</p>
+<h2>Multi-agent systems are teams</h2>
+<p>Multi-agent systems work like teams: they need clear roles, success criteria, mechanisms to escalate blockers, and an orchestrator that synchronizes them and keeps the focus on the overall objective.</p>
+<p>They need leaders. The seat-warmers will be the next token-burners.</p>
+<p>The difference between agent systems and human teams is that there are no meetings, no standups, and no waiting.</p>
+<p>Can you imagine having to wait for the standup to use your next Claude Code session? Or waiting until Thursday&#x27;s meeting with the client to give them the requirements? Or waiting two weeks to define what goes into the next sprint?</p>
+<p>Agents don&#x27;t wait. They receive instructions, execute, report back, and take on the next task. Like a newly hired employee at their dream company who gets paid well to work on an exciting project.</p>
+<h2>Leadership principles that transfer</h2>
+<p>If you&#x27;re a good leader of humans, your agents will thank you. The same principles apply:</p>
+<ul>
+<li><strong>Clear context</strong>: Agents need to understand <em>why</em>, not just <em>what</em>. The more context you provide, the better their decisions.</li>
+<li><strong>Defined boundaries</strong>: What can they decide on their own? When should they escalate? Without this, agents either block on everything or go rogue.</li>
+<li><strong>Success criteria</strong>: How do you know the output is good? If you can&#x27;t define it for a human, you can&#x27;t define it for an agent.</li>
+<li><strong>Feedback loops</strong>: Agents need to know when they got it right and when they didn&#x27;t. This is how you iterate on prompts and configurations.</li>
+</ul>
+<p>The companies that will get the most out of agentic AI are the ones that already know how to lead well. The tool is new, but the skill is ancient.</p>]]></content:encoded>
+            <author>ivan@ivanbtrujillo.com (Iván Trujillo)</author>
+        </item>
+        <item>
+            <title><![CDATA[Employee experience and the cost of ignoring your best people]]></title>
+            <link>https://ivanbtrujillo.com/articles/employee-experience-and-the-cost-of-ignoring-your-best-people</link>
+            <guid>https://ivanbtrujillo.com/articles/employee-experience-and-the-cost-of-ignoring-your-best-people</guid>
+            <pubDate>Tue, 10 Mar 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[In any organization, everyone knows who delivers results and who just makes noise. The question is what happens when the ones who deliver stop trying.]]></description>
+            <content:encoded><![CDATA[<p>Let&#x27;s talk about your EX — Employee Experience.</p>
+<p>It encompasses everything a person lives, feels, and perceives from the moment they join an organization until they leave: the culture, the leadership, the tools, the processes, the recognition, the communication, and the colleagues.</p>
+<p>In some places it&#x27;s treated as a priority. In others it&#x27;s an afterthought. But what&#x27;s absolutely clear is that in any organization, someone who&#x27;s been there for a while knows perfectly well who produces results and who only produces noise.</p>
+<p>You don&#x27;t need a performance report or an evaluation. You can see it in who shows up when there&#x27;s a hard problem, a compromised situation. Who delivers without anyone having to chase them. Who adds to the team and helps everyone improve.</p>
+<h2>The noise makers</h2>
+<p>Generally, the person who produces value and generates results is ignored by whoever only produces noise, because they see their position threatened — worried that others might compare and notice they&#x27;re not contributing.</p>
+<p>Curiously, one way these noise-makers protect themselves is by creating processes and bureaucracy that slow everyone down equally, making it harder to distinguish who actually delivers.</p>
+<h2>The exhaustion of the doers</h2>
+<p>The real exhaustion doesn&#x27;t come from the workload. It comes from proposing improvements that never get implemented.</p>
+<p>From flagging problems that get ignored until they explode — and then suddenly everything is urgent.</p>
+<p>From having conversations that lead nowhere with people who ask a lot and listen very little.</p>
+<p>That exhaustion doesn&#x27;t appear overnight. It accumulates slowly, meeting after meeting, broken promise after broken promise, feedback thrown into the void, watching their proposals get ignored while being asked to solve problems generated by others&#x27; incompetence.</p>
+<p>And not in their own way, but in the way of whoever manages them. The way that they&#x27;ve already seen fail before and will fail again, but that nobody questions because questioning makes uncomfortable whoever doesn&#x27;t want to be questioned.</p>
+<p>Nothing irritates high performers more than: &quot;solve this problem that was created by not listening to you, and solve it my way — the way that never works.&quot;</p>
+<h2>When they stop trying</h2>
+<p>There comes a point when the people who add value stop proposing, stop identifying improvement opportunities, and stop investing energy in a system that doesn&#x27;t give it back.</p>
+<p>That&#x27;s the most expensive moment for any organization — and it&#x27;s almost always invisible until it&#x27;s too late.</p>]]></content:encoded>
+            <author>ivan@ivanbtrujillo.com (Iván Trujillo)</author>
+        </item>
+        <item>
+            <title><![CDATA[Why traditional companies fail at AI adoption]]></title>
+            <link>https://ivanbtrujillo.com/articles/why-traditional-companies-fail-at-ai-adoption</link>
+            <guid>https://ivanbtrujillo.com/articles/why-traditional-companies-fail-at-ai-adoption</guid>
+            <pubDate>Tue, 10 Feb 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Traditional companies keep operating with obsolete work models. They evaluate employees by what they know instead of what they can produce with the tools they master.]]></description>
+            <content:encoded><![CDATA[<p>Traditional companies keep operating with obsolete work models. I talk with a lot of people in the community, and I see the same patterns repeating across many organizations.</p>
+<p>They evaluate their employees by what they know, not by what they&#x27;re capable of producing with the tools they master.</p>
+<p>They&#x27;re reluctant to implement new technologies or new approaches because they have a dinosaur that someone created years ago and worked at the time. Or worse — they ask you to innovate but while carrying the dinosaur with you, using the dinosaur everywhere, and your goal is to make the dinosaur innovative.</p>
+<p>They make you attend meetings to say what you did today, when it could be a message or email.</p>
+<p>They make you sit in meetings to take notes, when summaries are auto-generated and you could use that time on something productive.</p>
+<p>They expect immediate results without giving their teams space to explore, experiment, and learn the technology.</p>
+<h2>The &quot;You&#x27;re totally right&quot; loop</h2>
+<p>Now AI has arrived and the pattern repeats. If your team hasn&#x27;t learned how to use AI and give it correct instructions, it will help them 50% of the time. The other 50% they&#x27;ll be in an infinite loop of &quot;You&#x27;re totally right,&quot; accepting suggestions blindly hoping that this time it works, until they completely lose control of what they&#x27;re doing.</p>
+<p>At that point, the one in control isn&#x27;t that person — it&#x27;s the AI. The only question is who&#x27;s paying for the license and the tokens being burned.</p>
+<h2>What successful companies do differently</h2>
+<p>Meanwhile, the companies that actually succeed:</p>
+<ul>
+<li>Give their teams explicit time to explore without immediate deliverables</li>
+<li>Allow experimentation and failure</li>
+<li>Provide resources to iterate until they find what works</li>
+<li>Integrate everything gradually</li>
+<li>Train their people to use the technology correctly</li>
+</ul>
+<h2>The pattern always repeats</h2>
+<p>The companies that win long-term are the ones that invest in their teams&#x27; learning, not just in the technology.</p>
+<p>This time will be no different.</p>
+<p>Dedicate time to adopt all of this, give your people space to experiment and try without fear, and in a few months you&#x27;ll see the tree starting to bear fruit.</p>]]></content:encoded>
+            <author>ivan@ivanbtrujillo.com (Iván Trujillo)</author>
+        </item>
+        <item>
+            <title><![CDATA[Integrity over demos: building trust in tech]]></title>
+            <link>https://ivanbtrujillo.com/articles/integrity-over-demos-building-trust-in-tech</link>
+            <guid>https://ivanbtrujillo.com/articles/integrity-over-demos-building-trust-in-tech</guid>
+            <pubDate>Thu, 05 Feb 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[A fake demo isn't just technical debt — it's trust debt. You can show vision without deceiving, and honesty is what will speak for you in the long run.]]></description>
+            <content:encoded><![CDATA[<p>Generally, people don&#x27;t like honesty upfront. We all like to hear what we want to hear, and whoever is selling knows it.</p>
+<p>Curiously, when problems appear (and they always do), you usually think: &quot;I wish I had closed the deal with whoever was honest from the beginning.&quot;</p>
+<p>This is what those of us who work in technology face constantly. In the end, it all comes down to integrity and trust.</p>
+<h2>You can show vision without deceiving</h2>
+<p>You don&#x27;t need to create a fake demo to explain where you&#x27;re going. You can use a Figma prototype with a well-explained flow to show the idea and the value.</p>
+<p>Meanwhile, the development team takes care of what matters: building the foundations and a solid base.</p>
+<p>A fake demo isn&#x27;t just technical debt — it&#x27;s trust debt with whoever sees it. You start a relationship with a client or investor based on something you know isn&#x27;t true.</p>
+<h2>Being clear from the start</h2>
+<p>Personally, I prefer being clear from the beginning: explain the vision, the roadmap, where we are today, and where we&#x27;re heading. If the other party values that transparency, you&#x27;ll build something solid together.</p>
+<p>And if they don&#x27;t value it, you probably didn&#x27;t want that client anyway. Because when things get complicated (and they always do), you&#x27;ll wish you had closed with someone who valued honesty.</p>
+<p>Being honest, having integrity, and being reliable will make your clients recommend you. In the long run, that&#x27;s what will speak for you.</p>]]></content:encoded>
+            <author>ivan@ivanbtrujillo.com (Iván Trujillo)</author>
+        </item>
+        <item>
             <title><![CDATA[State machines and ReactJS]]></title>
-            <link>https://ivanbtrujillo.com/articles/rewriting-the-cosmos-kernel-in-rust</link>
-            <guid>https://ivanbtrujillo.com/articles/rewriting-the-cosmos-kernel-in-rust</guid>
+            <link>https://ivanbtrujillo.com/articles/state-machines-and-react-js</link>
+            <guid>https://ivanbtrujillo.com/articles/state-machines-and-react-js</guid>
             <pubDate>Sun, 13 Nov 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[How to use state machines in React JS applications with XState. It covers the steps to define a state machine using XState, create a state machine instance with the useMachine hook from the @xstate/react package, and render the state machine. The article also discusses the advantages of using state machines with XState, including their declarative, composable, testable, and scalable nature.]]></description>
             <content:encoded><![CDATA[<h2>Introduction</h2>
@@ -97,8 +233,8 @@
         </item>
         <item>
             <title><![CDATA[The path to high quality software]]></title>
-            <link>https://ivanbtrujillo.com/articles/crafting-a-design-system-for-a-multiplanetary-future</link>
-            <guid>https://ivanbtrujillo.com/articles/crafting-a-design-system-for-a-multiplanetary-future</guid>
+            <link>https://ivanbtrujillo.com/articles/the-path-to-high-quality-software</link>
+            <guid>https://ivanbtrujillo.com/articles/the-path-to-high-quality-software</guid>
             <pubDate>Mon, 22 Jun 2020 00:00:00 GMT</pubDate>
             <description><![CDATA[Maybe the value of creating software lies in providing solutions to complex problems, maybe in providing value. No matter the answer, it is better if we do it in a simple, team-based and scalable way.]]></description>
             <content:encoded><![CDATA[<p>In 1999 Martin Fowler said: &quot;Any fool can write code that a computer can understand. Good programmers write code that humans can understand.&quot;</p>
