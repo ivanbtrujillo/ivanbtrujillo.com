@@ -39,7 +39,7 @@ export const ArticleLayout: ArticleLayout = ({
       </Head>
       <Container className="mt-16 lg:mt-32">
         <div className="xl:relative">
-          <div className="mx-auto max-w-2xl">
+          <div className=" bg-black px-6 py-8 sm:px-8">
             {previousPathname && (
               <button
                 type="button"

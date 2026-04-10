@@ -126,7 +126,7 @@ const About: NextPage = () => {
           </span>
         </div>
         <div className="animate-on-scroll max-w-3xl bg-black">
-          <div className="relative border border-white/10 bg-grid-fine p-6 sm:p-8">
+          <div className="relative border border-white/10 bg-black bg-grid-fine p-6 sm:p-8">
             {/* Colored top accent */}
             <div aria-hidden className="absolute left-0 top-0 h-0.5 w-full holo-bar-h" />
             {/* Corner brackets */}
@@ -177,7 +177,7 @@ const About: NextPage = () => {
           </span>
         </div>
         <div className="animate-on-scroll max-w-md bg-black">
-          <div className="relative border border-white/10 bg-grid-fine p-6">
+          <div className="relative border border-white/10 bg-black bg-grid-fine p-6">
             {/* Colored top accent */}
             <div aria-hidden className="absolute left-0 top-0 h-0.5 w-full holo-bar-h" />
             <div aria-hidden className="pointer-events-none absolute left-2 top-2 h-4 w-4 border-l border-t border-white/15" />
