@@ -1,0 +1,64 @@
+import { ArticleLayout } from '@/components/article-layout'
+import Image from 'next/image'
+
+export const meta = {
+  author: 'Ivan Trujillo',
+  date: '2020-06-22',
+  title: 'The path to high quality software',
+  description:
+    'Maybe the value of creating software lies in providing solutions to complex problems, maybe in providing value. No matter the answer, it is better if we do it in a simple, team-based and scalable way.',
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+In 1999 Martin Fowler said: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand."
+
+Many times we find ourselves with code that is impossible to maintain, or that we do not know if changing it will modify some behavior we do not want because it is not tested, or even we ourselves create code to complete a task without caring whether it is tested, scalable and maintainable since our mission is to deliver a feature.
+
+As developers, we should be professionals. When code is difficult to test, it is a sign that it is tightly coupled to the rest of the application and likely needs to be refactored. But what does it mean to refactor?
+
+The definition of refactoring is to make changes to the internal structure of software to make it easier to understand and cheaper to modify without changing its behavior.
+
+To achieve this last premise, we need a reliable and measurable way to know whether the behavior has changed or not. We can do this through unit tests, integration tests, and end-to-end tests.
+
+At this point, we know two things:
+
+- What refactoring is
+- To refactor, we need to test our code
+
+There is a "boy scout" principle in software development that says when you encounter code, try to leave it better than you found it. Obviously, we cannot spend the day refactoring every file we open, but we can improve the files we have to work on to implement a new feature or fix a bug.
+
+## First crawl, then walk, then run
+
+When we have to add a new feature to our code but it is not structured correctly, we should first refactor it so that the feature is easy to implement, and then add the feature. This should be done in separate processes, that is, first refactor (commit) and then add the feature (commit). This way, in a code review, it is much easier to explain the reason for the refactoring and explain the functionality without mixing one thing with the other.
+
+We need to be aware that we are not refactoring when we change the code without having tests to verify that its behavior has not changed. We are only changing code, but not refactoring.
+
+The best advice I can give you when you have a large and tightly coupled codebase is to start separating it little by little. Just like when a forensic officer finds a crime scene, we must start looking for evidence that tells us what is happening and allows us to gradually understand what is happening. Once we have evidence ("this piece of code does X"), we can extract it to an independent function and test it.
+
+## Use pure functions
+
+A good tip here is to create pure functions, that is, given the same input, they always return the same output. This way, we can easily test it, and we will have taken a small step in our refactoring. Remember: mutability is the devil.
+
+## A good naming
+
+Another good tip is to give a good name to our functions and variables. X, Y, Z, aux ...are not a good name. The code should tell what it does without going into its implementation.
+
+The truth is that it is quite common to talk about all this but in practice nobody, or very few people do it. It is normal and understandable, many times we do not have all the time in the world to make a perfect code. In this case, I can give you three tips:
+
+Learn TDD. If you test your code first, you will automatically have your code tested and documented. At the beginning the development will be slow, but little by little you will pick up speed until you start delivering high quality tested code. Your customers or your company will see that Pepito's code has very few bugs or in the case of having them, it is easy to detect where and fix them by having a good test coverage.
+
+As you learn TDD, you can create your test after making a feature. It is best to follow the DRY (Don't repeat yourself) and KISS (Keep it stupid simple) principles. This way even if you can't test everything (for example, you don't have time to learn how to test a custom hook in React), most functions and utilities can be tested.
+
+If you don't know how to test, as you learn how to test, add comments to your functions detailing how they should work and a TODO to replace that comment with a test or a series of tests to check (and document) their behavior.
+
+## References
+
+As a final point to this blog entry, I leave here some references to books that will be useful for you:
+
+- Clean Code: A Handbook of Agile Software Craftsmanship (Robert C. Martin)
+- Refactoring: Improving the Design of Existing Code (Martin Fowler)
+
+Finally, if you are a frontend developer and you like React, this book is great for getting started with TDD:
+
+- React Test Driven Development (Daniel Irvine)

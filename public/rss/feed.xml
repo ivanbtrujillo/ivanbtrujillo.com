@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Iván Trujillo</title>
+        <link>https://ivanbtrujillo.com</link>
+        <description>Writing on software development, good practices, and the software industry.</description>
+        <lastBuildDate>Fri, 10 Apr 2026 13:48:06 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <image>
+            <title>Iván Trujillo</title>
+            <url>https://ivanbtrujillo.com/favicon.ico</url>
+            <link>https://ivanbtrujillo.com</link>
+        </image>
+        <copyright>All rights reserved 2026</copyright>
+        <item>
+            <title><![CDATA[State machines and ReactJS]]></title>
+            <link>https://ivanbtrujillo.com/articles/rewriting-the-cosmos-kernel-in-rust</link>
+            <guid>https://ivanbtrujillo.com/articles/rewriting-the-cosmos-kernel-in-rust</guid>
+            <pubDate>Sun, 13 Nov 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[How to use state machines in React JS applications with XState. It covers the steps to define a state machine using XState, create a state machine instance with the useMachine hook from the @xstate/react package, and render the state machine. The article also discusses the advantages of using state machines with XState, including their declarative, composable, testable, and scalable nature.]]></description>
+            <content:encoded><![CDATA[<h2>Introduction</h2>
+<p>State management is an essential aspect of building web applications. In complex applications, state management can become challenging, and manual state management can lead to issues like race conditions, bugs, and other inconsistencies. XState is a JavaScript library that provides a solution to these challenges by allowing developers to model state in a declarative, composable, and testable way. In this article, we will explore how to use state machines in React JS applications with XState.</p>
+<h2>What is XState?</h2>
+<p>XState is a JavaScript library for creating state machines. It is a finite state machine library that makes it easy to create state machines that are composable, testable, and easy to reason about. XState provides a simple, declarative syntax for defining state machines that can be used in any JavaScript environment.</p>
+<h2>What are state machines?</h2>
+<p>State machines are a mathematical concept used to model systems that have a finite number of states and can transition between those states based on events. In the context of web development, state machines are used to model the behavior of the user interface in response to user interactions or system events.</p>
+<h2>How to use state machines in React with XState</h2>
+<p>To use state machines in React with XState, we need to follow these steps:</p>
+<p>Define a state machine: The first step is to define a state machine using the XState library. A state machine is defined using a set of states, events, and transitions. For example, here&#x27;s a simple state machine for a toggle button:</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> createMachine <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">&#x27;xstate&#x27;</span>
+
+<span class="token keyword">const</span> toggleMachine <span class="token operator">=</span> <span class="token function">createMachine</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token string">&#x27;toggle&#x27;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">initial</span><span class="token operator">:</span> <span class="token string">&#x27;off&#x27;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">states</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">off</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">on</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token constant">TOGGLE</span><span class="token operator">:</span> <span class="token string">&#x27;on&#x27;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">on</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">on</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token constant">TOGGLE</span><span class="token operator">:</span> <span class="token string">&#x27;off&#x27;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<p>In this state machine, we define two states: off and on. The state machine starts in the off state. When the TOGGLE event is received, the state machine transitions to the other state.</p>
+<p>Create a state machine instance: Once we have defined our state machine, we need to create an instance of it using the useMachine hook from the @xstate/react package. Here&#x27;s an example:</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> useMachine <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">&#x27;@xstate/react&#x27;</span>
+<span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> toggleMachine <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">&#x27;./toggleMachine&#x27;</span>
+
+<span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">App</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>state<span class="token punctuation">,</span> send<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useMachine</span><span class="token punctuation">(</span>toggleMachine<span class="token punctuation">)</span>
+
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token function">send</span><span class="token punctuation">(</span><span class="token string">&#x27;TOGGLE&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">{</span>state<span class="token punctuation">.</span><span class="token property-access">value</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>In this example, we import our toggleMachine state machine and create an instance of it using the useMachine hook. The useMachine hook returns an array containing the current state and a send function that can be used to send events to the state machine.</p>
+<p>Render the state machine: Finally, we need to render our state machine. We can do this by using the current state returned by the useMachine hook to render the appropriate UI. Here&#x27;s an example:</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> useMachine <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">&#x27;@xstate/react&#x27;</span>
+<span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> toggleMachine <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">&#x27;./toggleMachine&#x27;</span>
+
+<span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">App</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>state<span class="token punctuation">,</span> send<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useMachine</span><span class="token punctuation">(</span>toggleMachine<span class="token punctuation">)</span>
+
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token function">send</span><span class="token punctuation">(</span><span class="token string">&#x27;TOGGLE&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">&gt;</span>
+        <span class="token punctuation">{</span>state<span class="token punctuation">.</span><span class="token property-access">value</span> <span class="token operator">===</span> <span class="token string">&#x27;off&#x27;</span> <span class="token operator">?</span> <span class="token string">&#x27;Turn on&#x27;</span> <span class="token operator">:</span> <span class="token string">&#x27;Turn off&#x27;</span><span class="token punctuation">}</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2>Advantages of using state machines with XState</h2>
+<p>Using state machines with XState in React applications has several advantages:</p>
+<ul>
+<li>
+<p>Declarative: XState provides a declarative syntax for defining state machines. This makes it easier to understand the behavior of the system and how it responds to events.</p>
+</li>
+<li>
+<p>Composable: State machines can be composed to create more complex state machines. This allows developers to break down complex systems into smaller, more manageable pieces.</p>
+</li>
+<li>
+<p>Testable: XState state machines can be tested in isolation, making it easier to write tests for complex systems.</p>
+</li>
+<li>
+<p>Scalable: As applications grow in complexity, XState state machines provide a way to manage state in a scalable and maintainable way.</p>
+</li>
+</ul>
+<h2>Conclusion</h2>
+<p>XState is a powerful tool for managing state in React applications. By using state machines, developers can create composable, testable, and scalable state management solutions. XState provides a declarative syntax for defining state machines and the useMachine hook from the @xstate/react package makes it easy to use state machines in React applications.</p>]]></content:encoded>
+            <author>ivan@ivanbtrujillo.com (Iván Trujillo)</author>
+        </item>
+        <item>
+            <title><![CDATA[The path to high quality software]]></title>
+            <link>https://ivanbtrujillo.com/articles/crafting-a-design-system-for-a-multiplanetary-future</link>
+            <guid>https://ivanbtrujillo.com/articles/crafting-a-design-system-for-a-multiplanetary-future</guid>
+            <pubDate>Mon, 22 Jun 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[Maybe the value of creating software lies in providing solutions to complex problems, maybe in providing value. No matter the answer, it is better if we do it in a simple, team-based and scalable way.]]></description>
+            <content:encoded><![CDATA[<p>In 1999 Martin Fowler said: &quot;Any fool can write code that a computer can understand. Good programmers write code that humans can understand.&quot;</p>
+<p>Many times we find ourselves with code that is impossible to maintain, or that we do not know if changing it will modify some behavior we do not want because it is not tested, or even we ourselves create code to complete a task without caring whether it is tested, scalable and maintainable since our mission is to deliver a feature.</p>
+<p>As developers, we should be professionals. When code is difficult to test, it is a sign that it is tightly coupled to the rest of the application and likely needs to be refactored. But what does it mean to refactor?</p>
+<p>The definition of refactoring is to make changes to the internal structure of software to make it easier to understand and cheaper to modify without changing its behavior.</p>
+<p>To achieve this last premise, we need a reliable and measurable way to know whether the behavior has changed or not. We can do this through unit tests, integration tests, and end-to-end tests.</p>
+<p>At this point, we know two things:</p>
+<ul>
+<li>What refactoring is</li>
+<li>To refactor, we need to test our code</li>
+</ul>
+<p>There is a &quot;boy scout&quot; principle in software development that says when you encounter code, try to leave it better than you found it. Obviously, we cannot spend the day refactoring every file we open, but we can improve the files we have to work on to implement a new feature or fix a bug.</p>
+<h2>First crawl, then walk, then run</h2>
+<p>When we have to add a new feature to our code but it is not structured correctly, we should first refactor it so that the feature is easy to implement, and then add the feature. This should be done in separate processes, that is, first refactor (commit) and then add the feature (commit). This way, in a code review, it is much easier to explain the reason for the refactoring and explain the functionality without mixing one thing with the other.</p>
+<p>We need to be aware that we are not refactoring when we change the code without having tests to verify that its behavior has not changed. We are only changing code, but not refactoring.</p>
+<p>The best advice I can give you when you have a large and tightly coupled codebase is to start separating it little by little. Just like when a forensic officer finds a crime scene, we must start looking for evidence that tells us what is happening and allows us to gradually understand what is happening. Once we have evidence (&quot;this piece of code does X&quot;), we can extract it to an independent function and test it.</p>
+<h2>Use pure functions</h2>
+<p>A good tip here is to create pure functions, that is, given the same input, they always return the same output. This way, we can easily test it, and we will have taken a small step in our refactoring. Remember: mutability is the devil.</p>
+<h2>A good naming</h2>
+<p>Another good tip is to give a good name to our functions and variables. X, Y, Z, aux ...are not a good name. The code should tell what it does without going into its implementation.</p>
+<p>The truth is that it is quite common to talk about all this but in practice nobody, or very few people do it. It is normal and understandable, many times we do not have all the time in the world to make a perfect code. In this case, I can give you three tips:</p>
+<p>Learn TDD. If you test your code first, you will automatically have your code tested and documented. At the beginning the development will be slow, but little by little you will pick up speed until you start delivering high quality tested code. Your customers or your company will see that Pepito&#x27;s code has very few bugs or in the case of having them, it is easy to detect where and fix them by having a good test coverage.</p>
+<p>As you learn TDD, you can create your test after making a feature. It is best to follow the DRY (Don&#x27;t repeat yourself) and KISS (Keep it stupid simple) principles. This way even if you can&#x27;t test everything (for example, you don&#x27;t have time to learn how to test a custom hook in React), most functions and utilities can be tested.</p>
+<p>If you don&#x27;t know how to test, as you learn how to test, add comments to your functions detailing how they should work and a TODO to replace that comment with a test or a series of tests to check (and document) their behavior.</p>
+<h2>References</h2>
+<p>As a final point to this blog entry, I leave here some references to books that will be useful for you:</p>
+<ul>
+<li>Clean Code: A Handbook of Agile Software Craftsmanship (Robert C. Martin)</li>
+<li>Refactoring: Improving the Design of Existing Code (Martin Fowler)</li>
+</ul>
+<p>Finally, if you are a frontend developer and you like React, this book is great for getting started with TDD:</p>
+<ul>
+<li>React Test Driven Development (Daniel Irvine)</li>
+</ul>]]></content:encoded>
+            <author>ivan@ivanbtrujillo.com (Iván Trujillo)</author>
+        </item>
+        <item>
+            <title><![CDATA[Adding a cross-page loader in NextJS]]></title>
+            <link>https://ivanbtrujillo.com/articles/adding-a-cross-page-loader-in-nextjs</link>
+            <guid>https://ivanbtrujillo.com/articles/adding-a-cross-page-loader-in-nextjs</guid>
+            <pubDate>Sat, 25 Apr 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[Sometimes you want to show a loader in NextJS that keeps the progress while switching between pages]]></description>
+            <content:encoded><![CDATA[<p>To display a loading bar while loading the next page, we will use the NextJS hook useRouter which will provide us with a series of event listeners that we can subscribe to and take actions in response to a route change.</p>
+<p>To display the loading bar, we will use NProgress:</p>
+<pre><code>npm install nprogress
+
+</code></pre>
+<p>The next thing we will do is to create a custom hook that we will call useLoading. Inside the hook, we will subscribe to the router events. When the path changes, we will run NProgress.start() to show the loading bar and when the path has finished loading, we will run NProgress.done() to hide it.</p>
+<p>useLayout.tsx</p>
+<pre class="language-typescript"><code class="language-typescript"><span class="token keyword module">import</span> <span class="token imports"><span class="token operator">*</span> <span class="token keyword module">as</span> <span class="token maybe-class-name">React</span></span> <span class="token keyword module">from</span> <span class="token string">&#x27;react&#x27;</span>
+<span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> useRouter <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">&#x27;next/router&#x27;</span>
+<span class="token keyword module">import</span> <span class="token imports"><span class="token maybe-class-name">NProgress</span></span> <span class="token keyword module">from</span> <span class="token string">&#x27;nprogress&#x27;</span>
+
+<span class="token keyword module">export</span> <span class="token keyword">const</span> <span class="token function-variable function">useLoading</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token function">useRouter</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+  <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token method function property-access">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token function-variable function">handleStart</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token maybe-class-name">NProgress</span><span class="token punctuation">.</span><span class="token method function property-access">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">const</span> <span class="token function-variable function">handleComplete</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token maybe-class-name">NProgress</span><span class="token punctuation">.</span><span class="token method function property-access">done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    router<span class="token punctuation">.</span><span class="token property-access">events</span><span class="token punctuation">.</span><span class="token method function property-access">on</span><span class="token punctuation">(</span><span class="token string">&#x27;routeChangeStart&#x27;</span><span class="token punctuation">,</span> handleStart<span class="token punctuation">)</span>
+    router<span class="token punctuation">.</span><span class="token property-access">events</span><span class="token punctuation">.</span><span class="token method function property-access">on</span><span class="token punctuation">(</span><span class="token string">&#x27;routeChangeComplete&#x27;</span><span class="token punctuation">,</span> handleComplete<span class="token punctuation">)</span>
+    router<span class="token punctuation">.</span><span class="token property-access">events</span><span class="token punctuation">.</span><span class="token method function property-access">on</span><span class="token punctuation">(</span><span class="token string">&#x27;routeChangeError&#x27;</span><span class="token punctuation">,</span> handleComplete<span class="token punctuation">)</span>
+
+    <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+      router<span class="token punctuation">.</span><span class="token property-access">events</span><span class="token punctuation">.</span><span class="token method function property-access">off</span><span class="token punctuation">(</span><span class="token string">&#x27;routeChangeStart&#x27;</span><span class="token punctuation">,</span> handleStart<span class="token punctuation">)</span>
+      router<span class="token punctuation">.</span><span class="token property-access">events</span><span class="token punctuation">.</span><span class="token method function property-access">off</span><span class="token punctuation">(</span><span class="token string">&#x27;routeChangeComplete&#x27;</span><span class="token punctuation">,</span> handleComplete<span class="token punctuation">)</span>
+      router<span class="token punctuation">.</span><span class="token property-access">events</span><span class="token punctuation">.</span><span class="token method function property-access">off</span><span class="token punctuation">(</span><span class="token string">&#x27;routeChangeError&#x27;</span><span class="token punctuation">,</span> handleComplete<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>To display the loading bar on all pages, we need to add the NProgress styles globally. Remember to import that .css file into _app.tsx:</p>
+<pre class="language-css"><code class="language-css"><span class="token comment">/* NProgress */</span>
+
+<span class="token comment">/* Make clicks pass-through */</span>
+<span class="token selector"><span class="token id">#nprogress</span></span> <span class="token punctuation">{</span>
+  <span class="token property">pointer-events</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector"><span class="token id">#nprogress</span> <span class="token class">.bar</span></span> <span class="token punctuation">{</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> <span class="token hexcode color">#29d</span><span class="token punctuation">;</span>
+
+  <span class="token property">position</span><span class="token punctuation">:</span> fixed<span class="token punctuation">;</span>
+  <span class="token property">z-index</span><span class="token punctuation">:</span> <span class="token number">1031</span><span class="token punctuation">;</span>
+  <span class="token property">top</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token property">left</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+  <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">100</span><span class="token unit">%</span><span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token unit">px</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* Fancy blur effect */</span>
+<span class="token selector"><span class="token id">#nprogress</span> <span class="token class">.peg</span></span> <span class="token punctuation">{</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
+  <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
+  <span class="token property">right</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token unit">px</span><span class="token punctuation">;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">100</span><span class="token unit">px</span><span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">100</span><span class="token unit">%</span><span class="token punctuation">;</span>
+  <span class="token property">box-shadow</span><span class="token punctuation">:</span> <span class="token number">0</span> <span class="token number">0</span> <span class="token number">10</span><span class="token unit">px</span> <span class="token hexcode color">#29d</span><span class="token punctuation">,</span> <span class="token number">0</span> <span class="token number">0</span> <span class="token number">5</span><span class="token unit">px</span> <span class="token hexcode color">#29d</span><span class="token punctuation">;</span>
+  <span class="token property">opacity</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+  <span class="token property">-webkit-transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token unit">deg</span><span class="token punctuation">)</span> <span class="token function">translate</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token unit">px</span><span class="token punctuation">,</span> <span class="token number">-4</span><span class="token unit">px</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">-ms-transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token unit">deg</span><span class="token punctuation">)</span> <span class="token function">translate</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token unit">px</span><span class="token punctuation">,</span> <span class="token number">-4</span><span class="token unit">px</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token unit">deg</span><span class="token punctuation">)</span> <span class="token function">translate</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token unit">px</span><span class="token punctuation">,</span> <span class="token number">-4</span><span class="token unit">px</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* Remove these to get rid of the spinner */</span>
+<span class="token selector"><span class="token id">#nprogress</span> <span class="token class">.spinner</span></span> <span class="token punctuation">{</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
+  <span class="token property">position</span><span class="token punctuation">:</span> fixed<span class="token punctuation">;</span>
+  <span class="token property">z-index</span><span class="token punctuation">:</span> <span class="token number">1031</span><span class="token punctuation">;</span>
+  <span class="token property">top</span><span class="token punctuation">:</span> <span class="token number">15</span><span class="token unit">px</span><span class="token punctuation">;</span>
+  <span class="token property">right</span><span class="token punctuation">:</span> <span class="token number">15</span><span class="token unit">px</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector"><span class="token id">#nprogress</span> <span class="token class">.spinner-icon</span></span> <span class="token punctuation">{</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">18</span><span class="token unit">px</span><span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">18</span><span class="token unit">px</span><span class="token punctuation">;</span>
+  <span class="token property">box-sizing</span><span class="token punctuation">:</span> border-box<span class="token punctuation">;</span>
+
+  <span class="token property">border</span><span class="token punctuation">:</span> solid <span class="token number">2</span><span class="token unit">px</span> <span class="token color">transparent</span><span class="token punctuation">;</span>
+  <span class="token property">border-top-color</span><span class="token punctuation">:</span> <span class="token hexcode color">#29d</span><span class="token punctuation">;</span>
+  <span class="token property">border-left-color</span><span class="token punctuation">:</span> <span class="token hexcode color">#29d</span><span class="token punctuation">;</span>
+  <span class="token property">border-radius</span><span class="token punctuation">:</span> <span class="token number">50</span><span class="token unit">%</span><span class="token punctuation">;</span>
+
+  <span class="token property">-webkit-animation</span><span class="token punctuation">:</span> nprogress-spinner <span class="token number">400</span><span class="token unit">ms</span> linear infinite<span class="token punctuation">;</span>
+  <span class="token property">animation</span><span class="token punctuation">:</span> nprogress-spinner <span class="token number">400</span><span class="token unit">ms</span> linear infinite<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector"><span class="token class">.nprogress-custom-parent</span></span> <span class="token punctuation">{</span>
+  <span class="token property">overflow</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+  <span class="token property">position</span><span class="token punctuation">:</span> relative<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector"><span class="token class">.nprogress-custom-parent</span> <span class="token id">#nprogress</span> <span class="token class">.spinner</span><span class="token punctuation">,</span>
+<span class="token class">.nprogress-custom-parent</span> <span class="token id">#nprogress</span> <span class="token class">.bar</span></span> <span class="token punctuation">{</span>
+  <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token atrule"><span class="token rule">@-webkit-keyframes</span> nprogress-spinner</span> <span class="token punctuation">{</span>
+  <span class="token selector">0%</span> <span class="token punctuation">{</span>
+    <span class="token property">-webkit-transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token unit">deg</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token selector">100%</span> <span class="token punctuation">{</span>
+    <span class="token property">-webkit-transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span><span class="token number">360</span><span class="token unit">deg</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token atrule"><span class="token rule">@keyframes</span> nprogress-spinner</span> <span class="token punctuation">{</span>
+  <span class="token selector">0%</span> <span class="token punctuation">{</span>
+    <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token unit">deg</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token selector">100%</span> <span class="token punctuation">{</span>
+    <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span><span class="token number">360</span><span class="token unit">deg</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Finally, we will import our custom hook in each page. A good idea is to create a Layout component that imports the hook and receives the content of each page as children. This way we reuse it in a more comfortable way.</p>
+<pre class="language-typescript"><code class="language-typescript"><span class="token keyword module">import</span> <span class="token imports"><span class="token maybe-class-name">Head</span></span> <span class="token keyword module">from</span> <span class="token string">&#x27;next/head&#x27;</span>
+<span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> useLoading <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">&#x27;components/useLoading&#x27;</span>
+
+<span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">LayoutProps</span></span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  children<span class="token operator">:</span> <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token property-access"><span class="token maybe-class-name">ReactChild</span></span> <span class="token operator">|</span> <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token property-access"><span class="token maybe-class-name">ReactChild</span></span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+  title<span class="token operator">:</span> <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword module">export</span> <span class="token keyword">const</span> <span class="token maybe-class-name">Layout</span><span class="token operator">:</span> <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token constant">SFC</span><span class="token operator">&lt;</span><span class="token maybe-class-name">LayoutProps</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> children<span class="token punctuation">,</span> title <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">useLoading</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token maybe-class-name">Head</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>title<span class="token operator">&gt;</span><span class="token punctuation">{</span>title<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>meta
+          name<span class="token operator">=</span><span class="token string">&quot;viewport&quot;</span>
+          content<span class="token operator">=</span><span class="token string">&quot;width=device-width, initial-scale=1&quot;</span>
+        <span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>meta<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token maybe-class-name">Head</span><span class="token operator">&gt;</span>
+      <span class="token punctuation">{</span>children<span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>]]></content:encoded>
+            <author>ivan@ivanbtrujillo.com (Iván Trujillo)</author>
+        </item>
+    </channel>
+</rss>

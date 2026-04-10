@@ -1,28 +1,42 @@
-# ivanbtrujillo.com
+# Spotlight
 
-This is my personal website. It is open source, so you can fork it or clone it if you want.
+Spotlight is a [Tailwind UI](https://tailwindui.com) site template built using [Tailwind CSS](https://tailwindcss.com) and [Next.js](https://nextjs.org).
 
-![Dark Theme](./docs/dark.png)
+## Getting started
 
-## The approach
+To get started with this template, first install the npm dependencies:
 
-I use Github issues as the repository for my blog posts and matter to parse metadata content. Then I use Auth0 to authenticate users, allowing them to leave comments if they want. They won't need a github account, due I store his name and image as comment metadata.
+```bash
+npm install
+```
 
-I've created a theme toggler to switch between light and dark theme.
+Next, create a `.env.local` file in the root of your project and set the `NEXT_PUBLIC_SITE_URL` variable to your site's public URL:
 
-In order to show code in the blog posts I use prism-react-renderer.
+```
+NEXT_PUBLIC_SITE_URL=https://example.com
+```
 
-## Technologies
+Next, run the development server:
 
-- Typescript
-- NextJS
-- TailwindCSS
+```bash
+npm run dev
+```
 
-It is PWA ready.
-It has a 100% Lighthouse Performance Score.
+Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
 
-![Score](./docs/score.png)
+## Customizing
+
+You can start editing this template by modifying the files in the `/src` folder. The site will auto-update as you edit these files.
 
 ## License
 
-MIT
+This site template is a commercial product and is licensed under the [Tailwind UI license](https://tailwindui.com/license).
+
+## Learn more
+
+To learn more about the technologies used in this site template, see the following resources:
+
+- [Tailwind CSS](https://tailwindcss.com/docs) - the official Tailwind CSS documentation
+- [Next.js](https://nextjs.org/docs) - the official Next.js documentation
+- [Headless UI](https://headlessui.dev) - the official Headless UI documentation
+- [MDX](https://mdxjs.com) - the MDX documentation

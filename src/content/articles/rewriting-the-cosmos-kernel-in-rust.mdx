@@ -1,0 +1,102 @@
+import { ArticleLayout } from '@/components/article-layout'
+
+export const meta = {
+  author: 'Iván Trujillo',
+  date: '2022-11-13',
+  title: 'State machines and ReactJS',
+  description:
+    'How to use state machines in React JS applications with XState. It covers the steps to define a state machine using XState, create a state machine instance with the useMachine hook from the @xstate/react package, and render the state machine. The article also discusses the advantages of using state machines with XState, including their declarative, composable, testable, and scalable nature.',
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+## Introduction
+
+State management is an essential aspect of building web applications. In complex applications, state management can become challenging, and manual state management can lead to issues like race conditions, bugs, and other inconsistencies. XState is a JavaScript library that provides a solution to these challenges by allowing developers to model state in a declarative, composable, and testable way. In this article, we will explore how to use state machines in React JS applications with XState.
+
+## What is XState?
+
+XState is a JavaScript library for creating state machines. It is a finite state machine library that makes it easy to create state machines that are composable, testable, and easy to reason about. XState provides a simple, declarative syntax for defining state machines that can be used in any JavaScript environment.
+
+## What are state machines?
+
+State machines are a mathematical concept used to model systems that have a finite number of states and can transition between those states based on events. In the context of web development, state machines are used to model the behavior of the user interface in response to user interactions or system events.
+
+## How to use state machines in React with XState
+
+To use state machines in React with XState, we need to follow these steps:
+
+Define a state machine: The first step is to define a state machine using the XState library. A state machine is defined using a set of states, events, and transitions. For example, here's a simple state machine for a toggle button:
+
+```javascript
+import { createMachine } from 'xstate'
+
+const toggleMachine = createMachine({
+  id: 'toggle',
+  initial: 'off',
+  states: {
+    off: {
+      on: { TOGGLE: 'on' },
+    },
+    on: {
+      on: { TOGGLE: 'off' },
+    },
+  },
+})
+```
+
+In this state machine, we define two states: off and on. The state machine starts in the off state. When the TOGGLE event is received, the state machine transitions to the other state.
+
+Create a state machine instance: Once we have defined our state machine, we need to create an instance of it using the useMachine hook from the @xstate/react package. Here's an example:
+
+```javascript
+import { useMachine } from '@xstate/react'
+import { toggleMachine } from './toggleMachine'
+
+function App() {
+  const [state, send] = useMachine(toggleMachine)
+
+  return (
+    <div>
+      <button onClick={() => send('TOGGLE')}>{state.value}</button>
+    </div>
+  )
+}
+```
+
+In this example, we import our toggleMachine state machine and create an instance of it using the useMachine hook. The useMachine hook returns an array containing the current state and a send function that can be used to send events to the state machine.
+
+Render the state machine: Finally, we need to render our state machine. We can do this by using the current state returned by the useMachine hook to render the appropriate UI. Here's an example:
+
+```javascript
+import { useMachine } from '@xstate/react'
+import { toggleMachine } from './toggleMachine'
+
+function App() {
+  const [state, send] = useMachine(toggleMachine)
+
+  return (
+    <div>
+      <button onClick={() => send('TOGGLE')}>
+        {state.value === 'off' ? 'Turn on' : 'Turn off'}
+      </button>
+    </div>
+  )
+}
+```
+
+## Advantages of using state machines with XState
+
+Using state machines with XState in React applications has several advantages:
+
+- Declarative: XState provides a declarative syntax for defining state machines. This makes it easier to understand the behavior of the system and how it responds to events.
+
+- Composable: State machines can be composed to create more complex state machines. This allows developers to break down complex systems into smaller, more manageable pieces.
+
+- Testable: XState state machines can be tested in isolation, making it easier to write tests for complex systems.
+
+- Scalable: As applications grow in complexity, XState state machines provide a way to manage state in a scalable and maintainable way.
+
+## Conclusion
+
+XState is a powerful tool for managing state in React applications. By using state machines, developers can create composable, testable, and scalable state management solutions. XState provides a declarative syntax for defining state machines and the useMachine hook from the @xstate/react package makes it easy to use state machines in React applications.
