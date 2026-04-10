@@ -1,6 +1,8 @@
 declare global {
   type PropsFrom<TComponent> = TComponent extends React.FC<infer Props>
     ? Props
+    : TComponent extends React.ComponentType<infer Props>
+    ? Props
     : never
 
   type IconComponent = React.FC<React.SVGProps<SVGSVGElement>>

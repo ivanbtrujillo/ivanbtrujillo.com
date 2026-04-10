@@ -63,6 +63,7 @@
   .bg-accent { background-color: rgb(var(--accent-rgb)); }
   .bg-accent-secondary { background-color: rgb(var(--accent-secondary-rgb)); }
   .border-accent { border-color: rgb(var(--accent-rgb)); }
+  .ring-accent { --tw-ring-color: rgb(var(--accent-rgb)); }
 
   /* Accent with specific opacities */
   .text-accent\/25 { color: rgb(var(--accent-rgb) / 0.25); }
@@ -78,16 +79,6 @@
   .bg-accent-secondary\/15 { background-color: rgb(var(--accent-secondary-rgb) / 0.15); }
   .bg-accent-secondary\/10 { background-color: rgb(var(--accent-secondary-rgb) / 0.10); }
   .border-accent\/25 { border-color: rgb(var(--accent-rgb) / 0.25); }
-
-  .bg-split {
-    background: linear-gradient(
-      90deg,
-      #09090b 0%,
-      #09090b 50%,
-      #ffffff 50%,
-      #ffffff 100%
-    );
-  }
 
   /* Arcade / futuristic background layers */
   @keyframes bg-sweep {

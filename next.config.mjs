@@ -6,9 +6,6 @@ import rehypePrism from '@mapbox/rehype-prism'
 const nextConfig = {
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'mdx'],
   reactStrictMode: true,
-  experimental: {
-    scrollRestoration: true,
-  },
 }
 
 const withMDX = nextMDX({

@@ -1,7 +1,13 @@
 import * as React from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { Popover, Transition } from '@headlessui/react'
+import { useRouter } from 'next/compat/router'
+import {
+  CloseButton,
+  Popover,
+  PopoverBackdrop,
+  PopoverButton,
+  PopoverPanel,
+} from '@headlessui/react'
 import clsx from 'clsx'
 
 import { Container } from '@/components/container'
@@ -19,7 +25,7 @@ const MobileNavItem: MobileNavItem = ({ href, children }) => {
     <li>
       <Link
         href={href}
-        className="block py-2 text-zinc-800 dark:text-zinc-300"
+        className="block py-2 text-zinc-300"
       >
         {children}
       </Link>
@@ -34,6 +40,7 @@ const MobileNavigation: MobileNavigation = (props) => {
   const [menuKey, setMenuKey] = React.useState(0)
 
   React.useEffect(() => {
+    if (!router) return
     const closeMenuOnNavigate = () => {
       setMenuKey((k) => k + 1)
     }
@@ -43,55 +50,37 @@ const MobileNavigation: MobileNavigation = (props) => {
 
   return (
     <Popover key={menuKey} {...props}>
-      <Popover.Button
+      <PopoverButton
         aria-label="Open menu"
         className="flex h-10 w-10 items-center justify-center border border-white/10 bg-zinc-900/90 text-zinc-200 backdrop-blur transition hover:border-white/20 hover:text-white"
       >
         <MenuBarsIcon className="h-5 w-5 stroke-current" />
-      </Popover.Button>
-      <Transition.Root>
-        <Transition.Child
-          as={React.Fragment}
-          enter="duration-150 ease-out"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="duration-150 ease-in"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <Popover.Overlay className="fixed inset-0 z-50 bg-zinc-800/40 backdrop-blur-sm dark:bg-black/80" />
-        </Transition.Child>
-        <Transition.Child
-          as={React.Fragment}
-          enter="duration-150 ease-out"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="duration-150 ease-in"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
-        >
-          <Popover.Panel
-            focus
-            className="fixed inset-x-4 top-8 z-50 origin-top border border-black/10 bg-white p-8 dark:border-white/10 dark:bg-zinc-900"
-          >
-            <div className="flex flex-row-reverse items-center justify-between">
-              <Popover.Button aria-label="Close menu" className="-m-1 p-1">
-                <CloseIcon className="h-6 w-6 text-zinc-500 dark:text-zinc-400" />
-              </Popover.Button>
-              <h2 className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                Navigation
-              </h2>
-            </div>
-            <nav className="mt-6">
-              <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
-                <MobileNavItem href="/">Main</MobileNavItem>
-                <MobileNavItem href="/about">About</MobileNavItem>
-                <MobileNavItem href="/articles">Articles</MobileNavItem>
-              </ul>
-            </nav>
-          </Popover.Panel>
-        </Transition.Child>
-      </Transition.Root>
+      </PopoverButton>
+      <PopoverBackdrop
+        transition
+        className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm transition duration-150 data-[closed]:opacity-0"
+      />
+      <PopoverPanel
+        focus
+        transition
+        className="fixed inset-x-4 top-8 z-50 origin-top border border-white/10 bg-zinc-900 p-8 transition duration-150 data-[closed]:scale-95 data-[closed]:opacity-0"
+      >
+        <div className="flex flex-row-reverse items-center justify-between">
+          <CloseButton aria-label="Close menu" className="-m-1 p-1">
+            <CloseIcon className="h-6 w-6 text-zinc-400" />
+          </CloseButton>
+          <h2 className="text-sm font-medium text-zinc-400">
+            Navigation
+          </h2>
+        </div>
+        <nav className="mt-6">
+          <ul className="-my-2 divide-y divide-zinc-100/5 text-base text-zinc-300">
+            <MobileNavItem href="/">Main</MobileNavItem>
+            <MobileNavItem href="/about">About</MobileNavItem>
+            <MobileNavItem href="/articles">Articles</MobileNavItem>
+          </ul>
+        </nav>
+      </PopoverPanel>
     </Popover>
   )
 }
@@ -144,7 +133,8 @@ type DesktopNavigationProps = React.ComponentPropsWithoutRef<'nav'>
 type DesktopNavigation = React.FC<DesktopNavigationProps>
 
 const DesktopNavigation: DesktopNavigation = (props) => {
-  const { pathname } = useRouter()
+  const router = useRouter()
+  const pathname = router?.pathname ?? '/'
 
   return (
     <nav {...props}>
@@ -166,7 +156,7 @@ const DesktopNavigation: DesktopNavigation = (props) => {
 type Header = React.FC
 export const Header: Header = () => {
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 w-full border-b border-black/10 bg-zinc-950/95 backdrop-blur-md dark:border-white/10">
+    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 w-full border-b border-white/10 bg-zinc-950/95 backdrop-blur-md">
       <Container className="py-3">
         <div className="relative flex items-center justify-end md:justify-center">
           <MobileNavigation className="pointer-events-auto md:hidden" />

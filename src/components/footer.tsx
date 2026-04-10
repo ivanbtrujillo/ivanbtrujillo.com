@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import { Container } from '@/components/container'
 
 type Footer = React.FC
@@ -32,9 +30,6 @@ export const Footer: Footer = () => {
                   [+]
                 </span>
                 <div className="barcode-holo h-3 w-20 opacity-30" />
-                <span className="font-hud text-[9px] tracking-[0.3em] text-accent/30">
-                  ////FOOTER;
-                </span>
                 <div className="ml-auto flex gap-1.5">
                   <div className="h-1 w-1 rounded-full bg-white/10" />
                   <div className="h-1 w-1 rounded-full bg-accent/10" />

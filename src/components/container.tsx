@@ -3,11 +3,11 @@ import clsx from 'clsx'
 
 type OuterContainerProps = React.ComponentPropsWithoutRef<'div'>
 
-type OuterContianer = React.ForwardRefExoticComponent<
+type OuterContainerType = React.ForwardRefExoticComponent<
   OuterContainerProps & React.RefAttributes<HTMLDivElement>
 >
 
-const OuterContainer: OuterContianer = React.forwardRef(function OuterContainer(
+const OuterContainer: OuterContainerType = React.forwardRef(function OuterContainer(
   { className, children, ...props },
   ref
 ) {
@@ -19,10 +19,10 @@ const OuterContainer: OuterContianer = React.forwardRef(function OuterContainer(
 })
 
 type InnerContainerProps = React.ComponentPropsWithoutRef<'div'>
-type InnerContianer = React.ForwardRefExoticComponent<
+type InnerContainerType = React.ForwardRefExoticComponent<
   InnerContainerProps & React.RefAttributes<HTMLDivElement>
 >
-const InnerContainer: InnerContianer = React.forwardRef(function InnerContainer(
+const InnerContainer: InnerContainerType = React.forwardRef(function InnerContainer(
   { className, children, ...props },
   ref
 ) {
@@ -41,8 +41,8 @@ type ContainerProps = React.ComponentPropsWithoutRef<'div'>
 type Container = React.ForwardRefExoticComponent<
   ContainerProps & React.RefAttributes<HTMLDivElement>
 > & {
-  Outer?: OuterContianer
-  Inner?: InnerContianer
+  Outer: OuterContainerType
+  Inner: InnerContainerType
 }
 
 export const Container: Container = React.forwardRef(function Container(

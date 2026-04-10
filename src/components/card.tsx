@@ -111,7 +111,7 @@ const CardEyebrow: CardEyebrow = ({
     <Component
       className={clsx(
         className,
-        'relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500',
+        'relative z-10 order-first mb-3 flex items-center text-sm text-zinc-500',
         decorate && 'pl-3.5'
       )}
       {...props}
@@ -121,7 +121,7 @@ const CardEyebrow: CardEyebrow = ({
           className="absolute inset-y-0 left-0 flex items-center"
           aria-hidden="true"
         >
-          <span className="h-3 w-px bg-black dark:bg-white" />
+          <span className="h-3 w-px bg-white" />
         </span>
       )}
       {children}

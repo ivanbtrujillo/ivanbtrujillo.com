@@ -6,7 +6,8 @@ import { getAllArticles } from './get-all-articles'
 
 export async function generateRssFeed() {
   let articles = await getAllArticles()
-  let siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  if (!siteUrl) throw new Error('NEXT_PUBLIC_SITE_URL env var is not set')
   let author = {
     name: 'Iván Trujillo',
     email: 'ivan@ivanbtrujillo.com',

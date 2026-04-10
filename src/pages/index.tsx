@@ -1,10 +1,9 @@
 import Head from 'next/head'
 import Image, { StaticImageData } from 'next/image'
 import Link from 'next/link'
-import clsx from 'clsx'
-
 import { Card } from '@/components/card'
 import { Container } from '@/components/container'
+import { HudBracket, HudCross, HudDots, HudBarcode } from '@/components/hud'
 import { BriefCaseIcon, SocialIcon } from '@/components/icons'
 
 import logoInerza from '@/images/logos/inerza.png'
@@ -18,74 +17,6 @@ import { NextPage } from 'next'
 
 const byMostRecentDate = (a: { date: string }, b: { date: string }) =>
   new Date(b.date).getTime() - new Date(a.date).getTime()
-
-/* ── HUD decorative elements ─────────────────────────────────── */
-
-const HudBracket = ({
-  className = '',
-  flip = false,
-}: {
-  className?: string
-  flip?: boolean
-}) => (
-  <span
-    aria-hidden
-    className={clsx(
-      'pointer-events-none font-hud text-[10px] leading-none text-zinc-300',
-      flip && 'scale-x-[-1]',
-      className
-    )}
-  >
-    [+]
-  </span>
-)
-
-const HudCross = ({ className = '' }: { className?: string }) => (
-  <span
-    aria-hidden
-    className={clsx(
-      'pointer-events-none inline-block font-hud text-lg leading-none text-accent-light',
-      className
-    )}
-  >
-    &#x2716;
-  </span>
-)
-
-const HudDots = ({ className = '' }: { className?: string }) => (
-  <span
-    aria-hidden
-    className={clsx(
-      'pointer-events-none inline-flex gap-1',
-      className
-    )}
-  >
-    {[...Array(4)].map((num) => (
-      <span
-        key={`dots-${num}`}
-        className="h-1 w-1 rounded-full bg-zinc-300"
-        aria-hidden
-      />
-    ))}
-  </span>
-)
-
-const HudBarcode = ({
-  className = '',
-  colorful = false,
-}: {
-  className?: string
-  colorful?: boolean
-}) => (
-  <div
-    aria-hidden
-    className={clsx(
-      'pointer-events-none h-3 w-16',
-      colorful ? 'barcode-holo' : 'barcode text-zinc-200',
-      className
-    )}
-  />
-)
 
 type ArticleCardProps = {
   article: Domain.Article
@@ -194,33 +125,34 @@ const Resume = () => {
         className="pointer-events-none absolute bottom-2 right-2 h-4 w-4 border-b border-r border-white/15"
       />
       <div className="flex items-center gap-3">
-        <span className="bg-zinc-950 px-2 py-1 font-hud text-[10px] font-semibold uppercase tracking-[0.2em] text-white">
+        <span className="holo-text bg-zinc-950 px-2 py-1 font-hud text-[19px] font-semibold uppercase tracking-[0.2em]">
           Work
         </span>
         <BriefCaseIcon className="h-5 w-5 flex-none fill-zinc-500 stroke-zinc-500" />
-        <span aria-hidden className="ml-auto font-hud text-[9px] tracking-[0.2em] text-accent-light">
-          _EXP;
+        <span aria-hidden className="ml-auto font-hud text-[12px] tracking-[0.2em] text-accent-light">
+          _EXP
         </span>
       </div>
       <ol className="relative mt-8">
         {resume.map((role, roleIndex) => (
           <li
             key={`${role.company}-${role.title}`}
-            className="relative flex gap-4 pb-10 last:pb-0"
+            className="relative flex gap-4  last:pb-0"
           >
             <div className="relative flex w-5 shrink-0 flex-col items-center pt-0.5">
               <div
-                className="relative z-10 h-2.5 w-2.5 shrink-0 rounded-full bg-zinc-950 ring-2 ring-zinc-100"
+                className="relative z-10 h-2.5 w-2.5 shrink-0 rounded-full bg-zinc-950 ring-2 ring-accent"
                 aria-hidden
               />
               {roleIndex < lastIndex ? (
                 <div
                   aria-hidden
-                  className="absolute left-1/2 top-[0.875rem] bottom-0 w-px -translate-x-1/2 bg-gradient-to-b from-zinc-300 via-zinc-200 to-transparent"
+                  className="absolute left-1/2 top-[0.875rem] bottom-0 w-px -translate-x-1/2"
+                  style={{ background: 'linear-gradient(to bottom, var(--g1), var(--g3), var(--g5))' }}
                 />
               ) : null}
             </div>
-            <div className="min-w-0 flex-1 space-y-3">
+            <div className="min-w-0 flex-1 space-y-3 pb-10">
               <p className="font-hud text-[10px] uppercase tracking-[0.2em] text-zinc-400">
                 {role.start.dateTime ? (
                   <time dateTime={role.start.dateTime}>{role.start.label}</time>
@@ -412,38 +344,32 @@ const Home: Home = ({ articles }) => {
             {
               title: 'AI & Generative UI',
               description:
-                'Building AI-powered interfaces and generative UI systems that turn structured data into dynamic, context-aware components — from dashboards to PDFs to videos.',
-              tags: ['LLMs', 'AI SDK', 'JSON-to-UI', 'Streaming'],
+                'Building AI-powered interfaces and generative UI systems that turn structured data into dynamic, context-aware components that are generated dynamically based on the user\'s interaction.',
             },
             {
               title: 'Front-End Architecture',
               description:
-                'Designing scalable TypeScript monorepos, component libraries, and design systems that help teams ship fast without sacrificing quality.',
-              tags: ['React', 'Next.js', 'TypeScript', 'Monorepos'],
+                'Designing scalable TypeScript monorepos, component libraries, and design systems that help teams ship fast without sacrificing quality. Robust and scalable architecture that is easy to maintain and scale.',
             },
             {
               title: 'Engineering Leadership',
               description:
-                'Leading cross-functional teams with a focus on developer experience, TDD culture, code review practices, and continuous delivery.',
-              tags: ['Team Building', 'DX', 'Code Review', 'CI/CD'],
+                'Leading cross-functional teams with a focus on developer experience, TDD culture, code review practices, and continuous delivery. Building high-performing engineering teams that are able to ship high-quality code quickly and efficiently.',
             },
             {
               title: 'Design Systems',
               description:
-                'Creating cohesive component catalogs with Tailwind CSS, style guides, and tokens that ensure visual consistency across products.',
-              tags: ['Tailwind', 'Tokens', 'Component Libs', 'Figma'],
+                'Creating cohesive component catalogs, style guides, and design tokens that ensure visual consistency across products. Ensuring that the design system is easy to use and maintain.',
             },
             {
               title: 'Testing & Quality',
               description:
-                'Championing test-driven development with Vitest and Playwright. Building CI pipelines that catch bugs before they reach production.',
-              tags: ['TDD', 'Vitest', 'Playwright', 'E2E'],
+                'Championing test-driven development and end-to-end testing. Building CI pipelines that catch bugs before they reach production.',
             },
             {
               title: 'Developer Tooling',
               description:
-                'Crafting custom AI-assisted workflows, automated code review pipelines, and tools that multiply team productivity.',
-              tags: ['Automation', 'MCP', 'Claude Code', 'Terraform'],
+                'Crafting custom AI-assisted workflows, automated code review pipelines, and tools that multiply team productivity. Tools that help teams ship high-quality code quickly and efficiently.',
             },
           ].map((item, index) => (
             <div
@@ -478,16 +404,6 @@ const Home: Home = ({ articles }) => {
               <p className="mt-3 text-base leading-relaxed text-zinc-400">
                 {item.description}
               </p>
-              <div className="mt-4 flex flex-wrap gap-x-3 gap-y-1">
-                {item.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="font-hud text-[10px] uppercase tracking-wider text-zinc-400"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
             </div>
           ))}
         </div>
@@ -503,7 +419,7 @@ const Home: Home = ({ articles }) => {
         </div>
         <div className="animate-on-scroll mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2 bg-black">
           <div className="flex flex-col gap-16">
-            {articles
+            {[...articles]
               .sort(byMostRecentDate)
               .slice(0, 3)
               .map((article) => (

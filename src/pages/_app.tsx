@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { JetBrains_Mono, Space_Grotesk } from '@next/font/google'
+import { JetBrains_Mono, Space_Grotesk } from 'next/font/google'
 import clsx from 'clsx'
 
 import { Footer } from '@/components/footer'
@@ -7,7 +7,6 @@ import { Header } from '@/components/header'
 import { PalettePicker } from '@/components/palette-picker'
 
 import '@/styles/tailwind.css'
-import 'focus-visible'
 import { AppProps } from 'next/app'
 
 const fontDisplay = Space_Grotesk({
@@ -22,8 +21,8 @@ const fontMono = JetBrains_Mono({
   display: 'swap',
 })
 
-function usePrevious(value) {
-  let ref = useRef()
+function usePrevious<T>(value: T): T | undefined {
+  const ref = useRef<T>()
 
   useEffect(() => {
     ref.current = value
@@ -37,7 +36,8 @@ type App = React.FC<AppProps>
 const App: App = ({ Component, pageProps, router }) => {
   const previousPathname = usePrevious(router.pathname)
 
-  // Scroll-triggered animations
+  // Scroll-triggered animations — re-run when route changes so new DOM elements get observed
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -52,7 +52,7 @@ const App: App = ({ Component, pageProps, router }) => {
     const elements = document.querySelectorAll('.animate-on-scroll')
     elements.forEach((el) => { observer.observe(el) })
     return () => observer.disconnect()
-  }, [])
+  }, [router.pathname])
 
   return (
     <>
@@ -268,18 +268,3 @@ const App: App = ({ Component, pageProps, router }) => {
 }
 
 export default App
-
-/*
-
-      <div className="flex justify-center sm:px-8">
-        <div className="flex w-full max-w-7xl lg:px-8">
-          <div className="w-full bg-white ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-300/20">
-            <Header />
-            <main>
-              <Component previousPathname={previousPathname} {...pageProps} />
-            </main>
-            <Footer />
-          </div>
-        </div>
-      </div>
-      */
