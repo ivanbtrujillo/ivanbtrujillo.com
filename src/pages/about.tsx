@@ -6,7 +6,7 @@ import { Container } from '@/components/container'
 import { HudBracket, HudCross, HudDots, HudBarcode } from '@/components/hud'
 import { SocialIcon } from '@/components/icons'
 import portraitImage from '@/images/portrait-2.jpeg'
-import type NextPage from 'next'
+import type { NextPage } from 'next'
 
 type SocialLinkProps = {
   href: string
