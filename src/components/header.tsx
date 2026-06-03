@@ -11,6 +11,7 @@ import {
 import clsx from 'clsx'
 
 import { Container } from '@/components/container'
+import { PaletteList } from '@/components/palette-picker'
 import { CloseIcon, MenuBarsIcon } from './icons'
 
 type MobileNavItemProps = {
@@ -80,6 +81,12 @@ const MobileNavigation: MobileNavigation = (props) => {
             <MobileNavItem href="/articles">Articles</MobileNavItem>
           </ul>
         </nav>
+        <div className="mt-6 border-t border-zinc-100/5 pt-6">
+          <span className="font-hud text-[9px] uppercase tracking-[0.2em] text-zinc-500">
+            Color palette
+          </span>
+          <PaletteList className="mt-2 -mx-3 max-h-56" />
+        </div>
       </PopoverPanel>
     </Popover>
   )
@@ -88,19 +95,10 @@ const MobileNavigation: MobileNavigation = (props) => {
 type NavItemProps = {
   href: string
   children: React.ReactNode
-}
-
-type NavItemWithIndexProps = NavItemProps & {
-  index: string
   currentPath: string
 }
 
-const NavItem: React.FC<NavItemWithIndexProps> = ({
-  href,
-  children,
-  index,
-  currentPath,
-}) => {
+const NavItem: React.FC<NavItemProps> = ({ href, children, currentPath }) => {
   const isActive =
     href === '/'
       ? currentPath === '/'
@@ -111,19 +109,13 @@ const NavItem: React.FC<NavItemWithIndexProps> = ({
       <Link
         href={href}
         className={clsx(
-          'font-hud relative flex items-baseline gap-2 px-3 py-2 text-xs uppercase tracking-[0.2em] transition',
+          'font-hud relative block px-4 py-2 text-xs font-semibold text-white uppercase tracking-[0.2em] transition',
           isActive
-            ? 'text-accent'
-            : 'text-zinc-400 hover:text-white'
+            ? 'bg-accent text-on-accent'
+            : 'hover:text-accent'
         )}
       >
-        <span className={clsx('text-[10px]', isActive ? 'text-accent-light' : 'text-zinc-500')}>
-          {index}
-        </span>
-        <span>{children}</span>
-        {isActive && (
-          <span className="absolute inset-x-2 -bottom-px h-px holo-bar-h" />
-        )}
+        {children}
       </Link>
     </li>
   )
@@ -138,14 +130,14 @@ const DesktopNavigation: DesktopNavigation = (props) => {
 
   return (
     <nav {...props}>
-      <ul className="flex border border-white/10 bg-zinc-900/90 px-1 backdrop-blur">
-        <NavItem href="/" index="00" currentPath={pathname}>
+      <ul className="flex border border-white/10 bg-zinc-900   backdrop-blur">
+        <NavItem href="/" currentPath={pathname}>
           Main
         </NavItem>
-        <NavItem href="/articles" index="01" currentPath={pathname}>
+        <NavItem href="/articles" currentPath={pathname}>
           Articles
         </NavItem>
-        <NavItem href="/about" index="02" currentPath={pathname}>
+        <NavItem href="/about" currentPath={pathname}>
           About
         </NavItem>
       </ul>
@@ -156,7 +148,7 @@ const DesktopNavigation: DesktopNavigation = (props) => {
 type Header = React.FC
 export const Header: Header = () => {
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 w-full border-b border-white/10 bg-zinc-950/95 backdrop-blur-md">
+    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 w-full bg-accent backdrop-blur-md">
       <Container className="py-3">
         <div className="relative flex items-center justify-end md:justify-center">
           <MobileNavigation className="pointer-events-auto md:hidden" />

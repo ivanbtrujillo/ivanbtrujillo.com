@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 
 type Palette = {
   name: string
@@ -9,6 +9,12 @@ type Palette = {
 
 const palettes: Palette[] = [
   // Default
+  {
+    name: 'Forge',
+    g1: '#fb923c', g2: '#f97316', g3: '#ea580c', g4: '#f59e0b', g5: '#fbbf24',
+    g1Light: '#fdba74', g2Light: '#fb923c', g4Light: '#fcd34d',
+    accentRgb: '234 88 12', accentLightRgb: '251 146 60', accentSecondaryRgb: '245 158 11',
+  },
   {
     name: 'Lavender',
     g1: '#c084fc', g2: '#a78bfa', g3: '#818cf8', g4: '#f0abfc', g5: '#f472b6',
@@ -118,6 +124,25 @@ const palettes: Palette[] = [
   },
 ]
 
+/* WCAG relative luminance for an "r g b" channel string (0–255 each). */
+function relativeLuminance(rgb: string) {
+  const [r, g, b] = rgb.split(/\s+/).map((c) => {
+    const v = Number(c) / 255
+    return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4
+  })
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b
+}
+
+/* Pick black or white as the foreground that has the higher WCAG contrast
+   against the given accent background, so text on an accent panel stays
+   legible across every palette. */
+function accentForeground(accentRgb: string) {
+  const L = relativeLuminance(accentRgb)
+  const contrastWhite = 1.05 / (L + 0.05)
+  const contrastBlack = (L + 0.05) / 0.05
+  return contrastBlack >= contrastWhite ? '9 9 11' : '255 255 255'
+}
+
 function applyPalette(p: Palette) {
   const root = document.documentElement.style
   root.setProperty('--g1', p.g1)
@@ -131,9 +156,37 @@ function applyPalette(p: Palette) {
   root.setProperty('--accent-rgb', p.accentRgb)
   root.setProperty('--accent-light-rgb', p.accentLightRgb)
   root.setProperty('--accent-secondary-rgb', p.accentSecondaryRgb)
+  root.setProperty('--accent-foreground', accentForeground(p.accentRgb))
 }
 
-const PaletteIcon = ({ className = '' }: { className?: string }) => (
+/* Shared active-palette store, so the desktop dropdown and the in-menu mobile
+   list stay in sync (they're never visible at once, but both reflect the same
+   choice). The palette itself is applied globally to <html>. */
+/* Sunset is the default theme (index 4); its values match the :root CSS
+   defaults in tailwind.css, so the page renders correctly before any click. */
+let activeIndex = 4
+const listeners = new Set<() => void>()
+
+function selectPalette(index: number) {
+  activeIndex = index
+  applyPalette(palettes[index])
+  listeners.forEach((l) => l())
+}
+
+function subscribe(listener: () => void) {
+  listeners.add(listener)
+  return () => listeners.delete(listener)
+}
+
+function useActivePalette() {
+  return useSyncExternalStore(
+    subscribe,
+    () => activeIndex,
+    () => activeIndex
+  )
+}
+
+export const PaletteIcon = ({ className = '' }: { className?: string }) => (
   <svg
     viewBox="0 0 24 24"
     fill="none"
@@ -151,8 +204,44 @@ const PaletteIcon = ({ className = '' }: { className?: string }) => (
   </svg>
 )
 
+/* The scrollable list of palette swatches, shared by the desktop dropdown and
+   the mobile in-menu section. */
+export const PaletteList = ({ className = '' }: { className?: string }) => {
+  const active = useActivePalette()
+
+  return (
+    <div className={'max-h-72 overflow-y-auto ' + className}>
+      {palettes.map((p, i) => (
+        <button
+          key={p.name}
+          onClick={() => selectPalette(i)}
+          className={
+            'flex w-full items-center gap-3 px-3 py-1.5 font-hud text-[11px] uppercase tracking-wider transition ' +
+            (active === i
+              ? 'bg-white/10 text-white'
+              : 'text-zinc-400 hover:bg-white/5 hover:text-zinc-200')
+          }
+        >
+          <span
+            className="h-3 w-8 shrink-0 rounded-sm"
+            style={{
+              background: `linear-gradient(90deg, ${p.g1}, ${p.g3}, ${p.g5})`,
+            }}
+          />
+          <span>{p.name}</span>
+          {active === i && (
+            <span className="ml-auto text-[10px] text-accent">✓</span>
+          )}
+        </button>
+      ))}
+    </div>
+  )
+}
+
+/* Desktop-only floating picker. On mobile the palette lives inside the nav
+   menu instead (see Header), so this is hidden below md to avoid overlapping
+   the menu button. Sized to match the nav bar height. */
 export const PalettePicker = () => {
-  const [active, setActive] = useState(0)
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
@@ -167,50 +256,26 @@ export const PalettePicker = () => {
   }, [])
 
   return (
-    <div ref={ref} className="pointer-events-auto fixed right-4 top-3 z-[60] sm:right-8">
+    <div
+      ref={ref}
+      className="pointer-events-auto fixed right-4 top-3 z-[60] hidden sm:right-8 md:block"
+    >
       <button
         onClick={() => setOpen((o) => !o)}
-        className="flex h-8 w-8 items-center justify-center border border-white/10 bg-zinc-900/90 text-zinc-400 backdrop-blur transition hover:border-white/20 hover:text-white"
+        className="flex h-10 w-10 items-center justify-center border border-white/10 bg-zinc-900/90 text-zinc-400 backdrop-blur transition hover:border-white/20 hover:text-white"
         aria-label="Change color palette"
       >
-        <PaletteIcon className="h-4 w-4" />
+        <PaletteIcon className="h-5 w-5" />
       </button>
 
       {open && (
-        <div className="absolute right-0 top-10 w-52 border border-white/10 bg-zinc-950/95 py-1 backdrop-blur-md">
+        <div className="absolute right-0 top-12 w-52 border border-white/10 bg-zinc-950/95 py-1 backdrop-blur-md">
           <div className="px-3 py-1.5">
             <span className="font-hud text-[9px] uppercase tracking-[0.2em] text-zinc-500">
               Color palette
             </span>
           </div>
-          <div className="max-h-72 overflow-y-auto">
-            {palettes.map((p, i) => (
-              <button
-                key={p.name}
-                onClick={() => {
-                  setActive(i)
-                  applyPalette(p)
-                }}
-                className={
-                  'flex w-full items-center gap-3 px-3 py-1.5 font-hud text-[11px] uppercase tracking-wider transition ' +
-                  (active === i
-                    ? 'bg-white/10 text-white'
-                    : 'text-zinc-400 hover:bg-white/5 hover:text-zinc-200')
-                }
-              >
-                <span
-                  className="h-3 w-8 shrink-0 rounded-sm"
-                  style={{
-                    background: `linear-gradient(90deg, ${p.g1}, ${p.g3}, ${p.g5})`,
-                  }}
-                />
-                <span>{p.name}</span>
-                {active === i && (
-                  <span className="ml-auto text-[9px] text-zinc-500">&check;</span>
-                )}
-              </button>
-            ))}
-          </div>
+          <PaletteList />
         </div>
       )}
     </div>

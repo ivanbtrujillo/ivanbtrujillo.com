@@ -24,7 +24,27 @@ const ArrowDownIcon: IconComponent = (props) => {
   )
 }
 
+const ArrowUpRightIcon: IconComponent = (props) => {
+  return (
+    <svg
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      aria-hidden="true"
+      {...props}
+    >
+      <path
+        d="M4.75 11.25 11.25 4.75M6.25 4.75h5v5"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
 export const ArrowIcon = {
   Left: ArrowLeftIcon,
   Down: ArrowDownIcon,
+  UpRight: ArrowUpRightIcon,
 }

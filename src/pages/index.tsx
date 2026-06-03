@@ -1,14 +1,14 @@
+import { useEffect, useRef } from 'react'
 import Head from 'next/head'
-import Image, { StaticImageData } from 'next/image'
+import Image from 'next/image'
 import Link from 'next/link'
+import clsx from 'clsx'
 import { Card } from '@/components/card'
 import { Container } from '@/components/container'
-import { HudBracket, HudCross, HudDots, HudBarcode } from '@/components/hud'
-import { BriefCaseIcon, SocialIcon } from '@/components/icons'
+import { HudCross } from '@/components/hud'
+import { ArrowIcon, SocialIcon } from '@/components/icons'
+import { Typewriter } from '@/components/typewriter'
 
-import logoInerza from '@/images/logos/inerza.png'
-import logoBluesky from '@/images/logos/bluesky.jpeg'
-import logoExpero from '@/images/logos/expero.png'
 import portraitImage from '@/images/portrait-2.jpeg'
 import { formatDate } from '@/lib/format-date'
 import { generateRssFeed } from '@/lib/generate-rss-feed'
@@ -28,7 +28,7 @@ const ArticleCard: ArticleCard = ({ article }) => {
   return (
     <Card as="article">
       <Card.Title href={`/articles/${article.slug}`}>
-        {article.title}
+        <Typewriter text={article.title} />
       </Card.Title>
       <Card.Eyebrow as="time" dateTime={article.date} decorate>
         {formatDate(article.date)}
@@ -54,146 +54,135 @@ const SocialLink: SocialLink = ({ icon: Icon, ...props }) => {
   )
 }
 
-type ResumeEntry = {
-  company: string
-  title: string
-  logo: StaticImageData
-  start: { label: string; dateTime?: string }
-  end: { label: string; dateTime?: string }
-}
-
-const resume: ResumeEntry[] = [
-  {
-    company: 'Expero inc.',
-    title: 'Tech lead',
-    logo: logoExpero,
-    start: { label: '2025' },
-    end: {
-      label: 'Present',
-      dateTime: String(new Date().getFullYear()),
-    },
-  },
-    {
-    company: 'Expero inc.',
-    title: 'Senior front end developer',
-    logo: logoExpero,
-    start: { label: '2020' },
-    end: {
-      label: '2025',
-      dateTime: String(new Date().getFullYear()),
-    },
-  },
-    {
-    company: 'Expero inc.',
-    title: 'Intermediate front end developer',
-    logo: logoExpero,
-    start: { label: '2018' },
-    end: {
-      label: '2020',
-    },
-  },
-
-  {
-    company: 'Blue Sky Technology',
-    title: 'Full stack web developer',
-    logo: logoBluesky,
-    start: { label: '2016' },
-    end: { label: '2018' },
-  },
-  {
-    company: 'Inerza',
-    title: 'Computer Technician',
-    logo: logoInerza,
-    start: { label: '2010' },
-    end: { label: '2016' },
-  },
-]
-const Resume = () => {
-  const lastIndex = resume.length - 1
-
-  return (
-    <div className="relative border border-white/10 bg-grid-fine p-6">
-      {/* Colored right accent */}
-      <div aria-hidden className="absolute right-0 top-0 h-full w-1 holo-bar" />
-      {/* Corner brackets */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-2 top-2 h-4 w-4 border-l border-t border-white/15"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute bottom-2 right-2 h-4 w-4 border-b border-r border-white/15"
-      />
-      <div className="flex items-center gap-3">
-        <span className="holo-text bg-zinc-950 px-2 py-1 font-hud text-[19px] font-semibold uppercase tracking-[0.2em]">
-          Work
-        </span>
-        <BriefCaseIcon className="h-5 w-5 flex-none fill-zinc-500 stroke-zinc-500" />
-        <span aria-hidden className="ml-auto font-hud text-[12px] tracking-[0.2em] text-accent-light">
-          _EXP
-        </span>
-      </div>
-      <ol className="relative mt-8">
-        {resume.map((role, roleIndex) => (
-          <li
-            key={`${role.company}-${role.title}`}
-            className="relative flex gap-4  last:pb-0"
-          >
-            <div className="relative flex w-5 shrink-0 flex-col items-center pt-0.5">
-              <div
-                className="relative z-10 h-2.5 w-2.5 shrink-0 rounded-full bg-zinc-950 ring-2 ring-accent"
-                aria-hidden
-              />
-              {roleIndex < lastIndex ? (
-                <div
-                  aria-hidden
-                  className="absolute left-1/2 top-[0.875rem] bottom-0 w-px -translate-x-1/2"
-                  style={{ background: 'linear-gradient(to bottom, var(--g1), var(--g3), var(--g5))' }}
-                />
-              ) : null}
-            </div>
-            <div className="min-w-0 flex-1 space-y-3 pb-10">
-              <p className="font-hud text-[10px] uppercase tracking-[0.2em] text-zinc-400">
-                {role.start.dateTime ? (
-                  <time dateTime={role.start.dateTime}>{role.start.label}</time>
-                ) : (
-                  <span>{role.start.label}</span>
-                )}
-                <span aria-hidden="true" className="mx-1.5">
-                  —
-                </span>
-                {role.end.dateTime ? (
-                  <time dateTime={role.end.dateTime}>{role.end.label}</time>
-                ) : (
-                  <span>{role.end.label}</span>
-                )}
-              </p>
-              <div className="flex gap-3">
-                <div className="relative mt-0.5 flex h-12 w-12 flex-none items-center justify-center overflow-hidden rounded-md">
-                  <Image src={role.logo} alt="" className="h-12 w-12 object-contain" unoptimized />
-                </div>
-                <dl className="min-w-0">
-                  <dt className="sr-only">Company</dt>
-                  <dd className="text-base font-medium tracking-tight text-zinc-100">
-                    {role.company}
-                  </dd>
-                  <dt className="sr-only">Role</dt>
-                  <dd className="mt-0.5 text-sm text-zinc-400">
-                    {role.title}
-                  </dd>
-                </dl>
-              </div>
-            </div>
-          </li>
-        ))}
-      </ol>
-    </div>
-  )
-}
-
 type Home = NextPage<{ articles: Domain.Article[] }>
 
 const Home: Home = ({ articles }) => {
+  const yearsExperience = new Date().getFullYear() - 2010
+  const whatIDoRef = useRef<HTMLDivElement>(null)
+
+  /* "What I do" boxes spin up into place, staggered, scrubbed directly to the
+     scroll position: every scroll frame recomputes the grid's progress through
+     the viewport and writes each box's transform itself. Because nothing is
+     played on a timer, scrolling fast lands the boxes exactly where the user
+     stops — they track the scrollbar. No fade. Skips under reduced-motion,
+     leaving the boxes in their resting position. */
+  useEffect(() => {
+    const grid = whatIDoRef.current
+    if (!grid) return
+
+    const cards = Array.from(grid.children) as HTMLElement[]
+    if (!cards.length) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    /* Start each box well below the fold (off the page) so it visibly travels
+       up into its slot while rotating, rather than spinning in place. */
+    const enterOffset = Math.max(320, Math.round(window.innerHeight * 0.6))
+
+    /* outBack easing — overshoots past the target then settles, matching the
+       spring-like feel of anime's outBack(1.3). */
+    const overshoot = 1.70158 * 1.3
+    const outBack = (x: number) =>
+      1 + (overshoot + 1) * Math.pow(x - 1, 3) + overshoot * Math.pow(x - 1, 2)
+
+    /* Fraction of the overall scroll progress by which each successive box's
+       reveal is delayed, so they spin in one-by-one instead of all together. */
+    const stagger = 0.18
+    const total = 1 + (cards.length - 1) * stagger
+
+    cards.forEach((card) => {
+      card.style.transformOrigin = 'center'
+      card.style.willChange = 'transform'
+      /* Initial hidden state: below the fold, rotated, slightly shrunk. */
+      card.style.transform = `translateY(${enterOffset}px) rotate(-90deg) scale(0.8)`
+    })
+
+    let raf = 0
+    let maxProgress = 0
+    let done = false
+    let teardown = () => {}
+
+    const render = () => {
+      raf = 0
+      if (done) return
+      const rect = grid.getBoundingClientRect()
+      const vh = window.innerHeight
+      /* Global progress: 0 when the grid's top is at the viewport bottom (just
+         peeking in), 1 when the grid's centre meets the viewport centre. */
+      const span = vh * 0.5 + rect.height * 0.5
+      const gp =
+        span <= 0 ? 1 : Math.min(1, Math.max(0, (vh - rect.top) / span))
+      /* Play once: progress only ever moves forward, so a box that has spun in
+         never reverses, and scrolling back up leaves the grid at rest. */
+      if (gp <= maxProgress) return
+      maxProgress = gp
+      cards.forEach((card, i) => {
+        const local = Math.min(1, Math.max(0, maxProgress * total - i * stagger))
+        const eased = outBack(local)
+        const ty = enterOffset * (1 - eased)
+        const rot = -90 * (1 - eased)
+        const scale = 0.8 + 0.2 * eased
+        card.style.transform = `translateY(${ty}px) rotate(${rot}deg) scale(${scale})`
+      })
+      if (maxProgress >= 1) {
+        /* Fully revealed — drop the boxes to their natural resting transform
+           and stop listening, so the reveal never replays for this mount. */
+        done = true
+        cards.forEach((card) => {
+          card.style.transform = ''
+          card.style.willChange = ''
+        })
+        teardown()
+      }
+    }
+
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(render)
+    }
+
+    /* The page scrolls on <body> (html is overflow:hidden), so a window scroll
+       listener never fires. Capture-phase on document catches scroll from
+       whichever element actually scrolls. */
+    document.addEventListener('scroll', onScroll, {
+      passive: true,
+      capture: true,
+    })
+    window.addEventListener('resize', onScroll)
+    teardown = () => {
+      document.removeEventListener('scroll', onScroll, { capture: true })
+      window.removeEventListener('resize', onScroll)
+    }
+    render()
+
+    return () => {
+      teardown()
+      if (raf) cancelAnimationFrame(raf)
+      cards.forEach((card) => {
+        card.style.transform = ''
+        card.style.willChange = ''
+      })
+    }
+  }, [])
+
+  const stats: { value: string; label: string }[] = [
+    {
+      value: `${yearsExperience}+`,
+      label: 'Years crafting software for clients around the world.',
+    },
+    {
+      value: '9',
+      label:
+        'International clients delivered for, across finance, pharma and telecom.',
+    },
+    {
+      value: '3',
+      label: 'Core industries served end-to-end, from architecture to delivery.',
+    },
+    {
+      value: '100%',
+      label: 'Remote — collaborating with distributed teams worldwide.',
+    },
+  ]
+
   return (
     <>
       <Head>
@@ -203,63 +192,84 @@ const Home: Home = ({ articles }) => {
           content="I'm Iván Trujillo — software consultant, tech lead, and AI engineer specializing in front-end architecture, generative UI, and engineering leadership."
         />
       </Head>
-      <Container className="mt-9">
-        <div className="relative max-w-4xl lg:max-w-6xl bg-black">
-          {/* Holographic vertical accent bar */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -left-8 top-0 hidden h-full w-1 holo-bar rounded-full lg:block"
-          />
-          <div className="relative gap-10 lg:grid lg:grid-cols-[1fr_minmax(0,18rem)] lg:items-start lg:gap-12 xl:grid-cols-[1fr_minmax(0,20rem)] xl:gap-16">
-            <div className="relative">
-              {/* Top-left corner bracket */}
-              <div
-                aria-hidden
-                className="pointer-events-none absolute -left-4 -top-4 h-10 w-10 border-l-2 border-t-2 border-white/40 sm:-left-6"
+      <Container className="mt-9 sm:mt-[86px]">
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,20rem)_1fr] lg:gap-[75px]">
+          {/* Portrait */}
+          <div className="relative mx-auto w-full max-w-xs lg:mx-0 lg:max-w-none">
+            <div className="relative aspect-[4/5] w-full overflow-hidden bg-zinc-900 ring-1 ring-white/10">
+              <Image
+                src={portraitImage}
+                alt="Iván Trujillo"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 20rem, 20rem"
+                priority
               />
-              {/* Bottom-right corner bracket */}
-              <div
-                aria-hidden
-                className="pointer-events-none absolute -bottom-4 -right-4 hidden h-10 w-10 border-b-2 border-r-2 border-white/15 lg:block"
-              />
-              {/* Technical annotations */}
-              <div className="mb-4 flex items-center gap-3">
-                <HudBracket />
-                <p className="font-hud text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-200">
-                  Canary  <span className="text-accent-secondary"> Islands · </span><span className="text-accent"> Remote </span>
-                </p>
-                <HudBracket flip  />
-                <HudDots className="ml-2 hidden sm:inline-flex" />
-              </div>
-              <h1 className="text-5xl font-bold uppercase tracking-tight text-white sm:text-6xl sm:tracking-tight">
-                <span className="block tracking-[0.08em]">Iván Trujillo</span>
-                <span className="mt-2 block max-w-3xl font-hud text-xl font-normal normal-case tracking-[0.05em] text-zinc-400 sm:text-xl">
-                  Software Consultant &middot; Tech Lead &middot; AI Engineer
-                </span>
-              </h1>
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <span className="inline-flex items-center gap-2 border border-white/15 bg-white/[0.05] px-2 py-1 font-hud text-[10px] uppercase tracking-widest text-zinc-300">
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-500" aria-hidden />
-                  Open to consulting
-                </span>
-                <span className="font-hud text-[10px] text-zinc-200">FE / AI / UI</span>
-                <HudBarcode colorful className="ml-auto hidden sm:block" />
-              </div>
-              <p className="mt-6 max-w-3xl text-lg leading-relaxed text-zinc-400">
-                I&apos;m Iván, a software consultant and tech lead with 15+ years of
-                experience crafting modern web applications. I specialize in
-                front-end architecture, generative UI, AI-powered interfaces,
-                and building high-performing engineering teams. Based in the
-                Canary Islands, working remotely with teams worldwide.
-              </p>
-              {/* Decorative vertical label */}
-              <p
-                className="pointer-events-none absolute -right-6 top-8 hidden font-hud text-[10px] uppercase tracking-[0.35em] text-zinc-300 [writing-mode:vertical-rl] lg:block"
-                aria-hidden
+            </div>
+          </div>
+          {/* Intro */}
+          <div className="relative">
+            <p className="font-hud text-sm uppercase tracking-[0.25em] text-zinc-400">
+              Hey there, I&apos;m
+            </p>
+            <h1 className="mt-4 font-heading text-6xl uppercase leading-[0.92] tracking-tight text-white sm:text-7xl lg:text-8xl">
+              Iván
+              <br />
+              Trujillo
+            </h1>
+            <div className="mt-6 flex flex-col gap-2 font-hud text-[11px] uppercase tracking-[0.2em] text-zinc-400 sm:flex-row sm:items-center sm:gap-5">
+              <span className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 bg-accent" aria-hidden />
+                Software Consultant &amp; Tech Lead
+              </span>
+              <span className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 bg-accent" aria-hidden />
+                <span className="text-accent ">🇮🇨 Canary Islands</span> · Remote
+              </span>
+            </div>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Link
+                href="https://www.linkedin.com/in/ivanbtrujillo/"
+                target="_blank"
+                className="group inline-flex items-center gap-3 bg-accent px-6 py-3 font-hud text-xs font-semibold uppercase tracking-[0.2em] text-on-accent transition hover:opacity-90"
               >
-                Generative UI · AI · Engineering Leadership
+                Let&apos;s talk
+                <ArrowIcon.UpRight
+                  aria-hidden
+                  className="h-4 w-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </Link>
+              <Link
+                href="#work"
+                className="group inline-flex items-center gap-3 border border-white/20 px-6 py-3 font-hud text-xs font-semibold uppercase tracking-[0.2em] text-zinc-200 transition hover:border-white/40 hover:text-white"
+              >
+                Read my writing
+                <ArrowIcon.UpRight
+                  aria-hidden
+                  className="h-4 w-4 text-accent transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </Container>
+
+      {/* About — light section */}
+      <section className="mt-20 bg-white py-20 sm:mt-24 md:py-28">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+            <div>
+              <p className="flex items-center gap-2 font-hud text-xs font-bold uppercase tracking-[0.25em] text-zinc-500">
+                <span className="h-2 w-2 bg-accent" aria-hidden />
+                About me
               </p>
-              <div className="mt-8 flex items-center gap-6">
+              <h2 className="mt-6 font-heading text-4xl uppercase leading-none tracking-tight text-zinc-900 sm:text-5xl">
+                I build ambitious web products with AI at the core
+              </h2>
+              <p className="mt-8 font-hud text-xs font-bold uppercase tracking-[0.25em] text-zinc-500">
+                Social media
+              </p>
+              <div className="mt-4 flex items-center gap-6">
                 <SocialLink
                   href="https://twitter.com/ivanbtrujillo"
                   aria-label="Follow on Twitter"
@@ -280,57 +290,74 @@ const Home: Home = ({ articles }) => {
                   aria-label="Follow on LinkedIn"
                   icon={SocialIcon.LinkedIn}
                 />
-
               </div>
-              {/* CTA Button */}
+            </div>
+            <div className="flex flex-col justify-center">
+              <p className="font-hud text-xs font-bold uppercase tracking-[0.25em] text-zinc-500">
+                {yearsExperience}+ years of front-end &amp; AI engineering
+              </p>
+              <p className="mt-5 text-base leading-relaxed text-zinc-600">
+                I&apos;m Iván, a software consultant and tech lead with{' '}
+                {yearsExperience}+ years of experience crafting modern web
+                applications. I specialize in front-end architecture, generative
+                UI, and AI-powered interfaces — and in building high-performing
+                engineering teams. From concept to delivery, I obsess over
+                quality, performance, and developer experience.
+              </p>
               <Link
-                href="https://www.linkedin.com/in/ivanbtrujillo/"
-                target="_blank"
-                className="holo-border mt-8 inline-flex items-center gap-3 rounded-sm px-6 py-3 font-hud text-xs uppercase tracking-[0.2em] text-zinc-200 transition hover:text-white"
+                href="/about"
+                className="group mt-8 inline-flex w-fit items-center gap-3 bg-zinc-900 px-6 py-3 font-hud text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-zinc-800"
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden />
-                Let&apos;s work together
-                <span aria-hidden className="text-accent">&rarr;</span>
+                More about me
+                <ArrowIcon.UpRight
+                  aria-hidden
+                  className="h-4 w-4 text-accent transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
               </Link>
             </div>
-            <div className="relative mx-auto mt-12 w-full max-w-xs shrink-0 lg:mx-0 lg:mt-0 lg:max-w-none lg:justify-self-end">
-              <span className="mb-3 block font-hud text-[10px] uppercase tracking-[0.35em] text-zinc-200 lg:text-right">
-                Profile
-              </span>
-              <div className=" relative aspect-square w-full overflow-hidden bg-zinc-900 ring-1 ring-white/10">
-                {/* Holographic side accent on portrait */}
-              
-                {/* Corner target markers on portrait */}
-                <div aria-hidden className="pointer-events-none absolute left-2 top-2 z-10 h-10 w-10 border-l-2 border-t-2 border-black/90" />
-                <div aria-hidden className="pointer-events-none absolute right-3 top-2 z-10 h-10 w-10 border-r-2 border-t-2 border-black/90" />
-                <div aria-hidden className="pointer-events-none absolute bottom-2 left-2 z-10 h-10 w-10 border-b-2 border-l-2 border-black/90" />
-                <div aria-hidden className="pointer-events-none absolute bottom-2 right-3 z-10 h-10 w-10 border-b-2 border-r-2 border-black/90" />
-                
-                <Image
-                  src={portraitImage}
-                  alt="Iván Trujillo"
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1024px) 20rem, 20rem"
-                  priority
-                />
-              </div>
-              <div aria-hidden className="mt-2 flex items-center justify-between">
-                <span className="font-hud text-[9px] tracking-[0.2em] text-zinc-300">
-                  ID:001
-                </span>
-                <HudBarcode colorful />
-              </div>
-            </div>
           </div>
-        </div>
-      </Container>
-      {/* Holographic horizontal divider */}
+
+          {/* Stats */}
+          <div className="mt-16 md:mt-20">
+            <p className="flex items-center gap-2 font-hud text-xs font-bold uppercase tracking-[0.25em] text-zinc-500">
+              <span className="h-2 w-2 bg-accent" aria-hidden />
+              My expertise in numbers
+            </p>
+            <dl className="mt-6 grid grid-cols-1 gap-px border border-zinc-200 bg-zinc-200 sm:grid-cols-2 lg:grid-cols-4">
+              {stats.map((stat, index) => (
+                <div
+                  key={stat.label}
+                  className={clsx('p-8', index === 0 ? 'bg-zinc-900' : 'bg-white')}
+                >
+                  <dt
+                    className={clsx(
+                      'font-heading text-5xl leading-none sm:text-6xl',
+                      index === 0 ? 'text-accent' : 'text-zinc-900'
+                    )}
+                  >
+                    {stat.value}
+                  </dt>
+                  <dd
+                    className={clsx(
+                      'mt-4 leading-relaxed',
+                      index === 0 ? 'text-zinc-300' : 'text-zinc-500'
+                    )}
+                  >
+                    {stat.label}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </Container>
+      </section>
+
+      {/* Horizontal divider */}
       <div aria-hidden className="mx-auto mt-20 h-1 max-w-5xl holo-bar-h rounded-full md:mt-24" />
       <Container className="mt-12 md:mt-16">
         <div className="mb-10 flex items-center gap-4 border-b border-white/10 pb-3 ">
           <HudCross className="text-sm" />
-          <span className="holo-text font-hud text-2xl uppercase tracking-[0.05em] bg-black">
+          <span className="font-heading text-3xl uppercase tracking-tight text-white bg-black">
             What I do
           </span>
         </div>
@@ -339,7 +366,10 @@ const Home: Home = ({ articles }) => {
           front-end engineering and artificial intelligence. Here&apos;s where I
           focus my energy.
         </p>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 bg-black">
+        <div
+          ref={whatIDoRef}
+          className="grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-3"
+        >
           {[
             {
               title: 'AI & Generative UI',
@@ -362,75 +392,101 @@ const Home: Home = ({ articles }) => {
                 'Creating cohesive component catalogs, style guides, and design tokens that ensure visual consistency across products. Ensuring that the design system is easy to use and maintain.',
             },
             {
-              title: 'Testing & Quality',
+              title: 'AX Experience',
               description:
-                'Championing test-driven development and end-to-end testing. Building CI pipelines that catch bugs before they reach production.',
+                'Designing for Agentic Experience (AX) — apps that AI agents love to use. I structure interfaces, semantics, and actions so agents can reliably do what users ask, the way good UX serves people.',
             },
             {
               title: 'Developer Tooling',
               description:
                 'Crafting custom AI-assisted workflows, automated code review pipelines, and tools that multiply team productivity. Tools that help teams ship high-quality code quickly and efficiently.',
             },
-          ].map((item, index) => (
-            <div
-              key={item.title}
-              className="animate-on-scroll group relative border border-white/10 bg-grid-fine p-6 transition-colors hover:border-white/25"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              {/* Top-left corner bracket */}
+          ].map((item, index) => {
+            const isDark = index === 0
+            return (
               <div
-                aria-hidden
-                className="pointer-events-none absolute left-2 top-2 h-4 w-4 border-l border-t border-white/15 transition-colors group-hover:border-white/30"
-              />
-              {/* Bottom-right corner bracket */}
-              <div
-                aria-hidden
-                className="pointer-events-none absolute bottom-2 right-2 h-4 w-4 border-b border-r border-white/15 transition-colors group-hover:border-white/30"
-              />
-              {/* Colored top accent */}
-              <div aria-hidden className="absolute left-0 top-0 h-0.5 w-full holo-bar-h" />
-              <div className="flex items-center justify-between">
+                key={item.title}
+                className={clsx(
+                  'group p-8 transition-colors',
+                  isDark
+                    ? 'bg-zinc-900 hover:bg-zinc-800'
+                    : 'bg-white hover:bg-zinc-50'
+                )}
+              >
                 <span
                   aria-hidden
-                  className="font-hud text-[10px] tracking-[0.2em] text-accent"
+                  className="font-heading text-3xl leading-none text-accent"
                 >
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <HudDots />
+                <h3
+                  className={clsx(
+                    'mt-4 font-hud text-base font-semibold uppercase tracking-[0.15em]',
+                    isDark ? 'text-white' : 'text-zinc-900'
+                  )}
+                >
+                  {item.title}
+                </h3>
+                <p
+                  className={clsx(
+                    'mt-3 text-base leading-relaxed',
+                    isDark ? 'text-zinc-400' : 'text-zinc-600'
+                  )}
+                >
+                  {item.description}
+                </p>
               </div>
-              <h3 className="mt-3 font-hud text-base font-semibold uppercase tracking-[0.15em] text-white">
-                {item.title}
-              </h3>
-              <p className="mt-3 text-base leading-relaxed text-zinc-400">
-                {item.description}
-              </p>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </Container>
       {/* Holographic horizontal divider */}
       <div aria-hidden className="mx-auto mt-20 h-1 max-w-5xl holo-bar-h rounded-full md:mt-24" />
-      <Container className="mt-12 md:mt-16">
+      <Container id="work" className="mt-12 scroll-mt-24 md:mt-16">
         <div className="mb-10 flex items-center gap-4 border-b border-white/10 pb-3">
           <HudCross className="text-sm" />
-          <span className="holo-text font-hud text-2xl uppercase tracking-[0.05em] bg-black">
+          <span className="font-heading text-3xl uppercase tracking-tight text-white bg-black">
             Latest writing
           </span>
         </div>
-        <div className="animate-on-scroll mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2 bg-black">
-          <div className="flex flex-col gap-16">
-            {[...articles]
-              .sort(byMostRecentDate)
-              .slice(0, 3)
-              .map((article) => (
-                <ArticleCard key={article.slug} article={article} />
-              ))}
-          </div>
-          <div className="space-y-10 lg:pl-16 xl:pl-24 bg-black">
-            <Resume />
-          </div>
+        <div className="animate-on-scroll grid grid-cols-1 gap-x-12 gap-y-16 md:grid-cols-2">
+          {[...articles]
+            .sort(byMostRecentDate)
+            .slice(0, 4)
+            .map((article) => (
+              <ArticleCard key={article.slug} article={article} />
+            ))}
         </div>
       </Container>
+
+      {/* Closing CTA — accent band */}
+      <section className="mt-20 bg-accent py-20 sm:mt-24 md:py-28">
+        <Container>
+          <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <p className="font-hud text-xs font-bold uppercase tracking-[0.25em] text-on-accent/70">
+                Let&apos;s work together
+              </p>
+              <h2 className="mt-4 font-heading text-4xl uppercase leading-none tracking-tight text-on-accent sm:text-5xl lg:text-6xl">
+                Have a project in mind?
+                <br />
+                Let&apos;s build it.
+              </h2>
+            </div>
+            <Link
+              href="https://www.linkedin.com/in/ivanbtrujillo/"
+              target="_blank"
+              className="group inline-flex shrink-0 items-center gap-3 bg-zinc-950 px-8 py-4 font-hud text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-zinc-800"
+            >
+              Let&apos;s talk
+              <ArrowIcon.UpRight
+                aria-hidden
+                className="h-5 w-5 text-accent transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
+            </Link>
+          </div>
+        </Container>
+      </section>
     </>
   )
 }

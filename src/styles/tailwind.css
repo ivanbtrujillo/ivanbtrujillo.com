@@ -10,20 +10,23 @@
     --scrollbar-thumb: #3f3f46;
     --scrollbar-thumb-hover: #52525b;
 
-    /* Palette: gradient stops (default: Lavender) */
-    --g1: #c084fc;
-    --g2: #a78bfa;
-    --g3: #818cf8;
-    --g4: #f0abfc;
-    --g5: #f472b6;
+    /* Palette: gradient stops (default: Sunset) */
+    --g1: #ef4444;
+    --g2: #f97316;
+    --g3: #facc15;
+    --g4: #fb923c;
+    --g5: #ef4444;
     /* Palette: lighter variants (hover states) */
-    --g1-light: #d8b4fe;
-    --g2-light: #c4b5fd;
-    --g4-light: #f5d0fe;
+    --g1-light: #fca5a5;
+    --g2-light: #fdba74;
+    --g4-light: #fcd34d;
     /* Palette: accent RGB channels (for opacity) */
-    --accent-rgb: 167 139 250;
-    --accent-light-rgb: 196 181 253;
-    --accent-secondary-rgb: 240 171 252;
+    --accent-rgb: 249 115 22;
+    --accent-light-rgb: 253 186 116;
+    --accent-secondary-rgb: 250 204 21;
+    /* Text color to use ON an accent background — auto-picked (black/white) for
+       WCAG contrast by the palette picker; this default matches the accent above. */
+    --accent-foreground: 9 9 11;
   }
 
   * {
@@ -65,12 +68,17 @@
   .border-accent { border-color: rgb(var(--accent-rgb)); }
   .ring-accent { --tw-ring-color: rgb(var(--accent-rgb)); }
 
+  /* Foreground color to use ON an accent background (auto-picked black/white). */
+  .text-on-accent { color: rgb(var(--accent-foreground)); }
+  .text-on-accent\/70 { color: rgb(var(--accent-foreground) / 0.7); }
+
   /* Accent with specific opacities */
   .text-accent\/25 { color: rgb(var(--accent-rgb) / 0.25); }
   .text-accent\/22 { color: rgb(var(--accent-rgb) / 0.22); }
   .text-accent\/20 { color: rgb(var(--accent-rgb) / 0.2); }
   .text-accent\/30 { color: rgb(var(--accent-rgb) / 0.30); }
   .text-accent-light\/30 { color: rgb(var(--accent-light-rgb) / 0.30); }
+  .bg-accent\/40 { background-color: rgb(var(--accent-rgb) / 0.40); }
   .bg-accent\/22 { background-color: rgb(var(--accent-rgb) / 0.22); }
   .bg-accent\/20 { background-color: rgb(var(--accent-rgb) / 0.20); }
   .bg-accent\/18 { background-color: rgb(var(--accent-rgb) / 0.18); }
@@ -115,16 +123,13 @@
     animation: bg-sweep 30s linear infinite;
   }
 
+  /* Solid accent (matches the light sections) — formerly multi-stop gradients */
   .holo-strip {
     background: linear-gradient(
       180deg,
       transparent 0%,
-      var(--g1) 10%,
-      var(--g2) 25%,
-      var(--g3) 40%,
-      var(--g4) 55%,
-      var(--g5) 70%,
-      var(--g4) 85%,
+      rgb(var(--accent-rgb)) 15%,
+      rgb(var(--accent-rgb)) 85%,
       transparent 100%
     );
   }
@@ -133,50 +138,22 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      var(--g1) 10%,
-      var(--g2) 25%,
-      var(--g3) 40%,
-      var(--g4) 55%,
-      var(--g5) 70%,
-      var(--g4) 85%,
+      rgb(var(--accent-rgb)) 15%,
+      rgb(var(--accent-rgb)) 85%,
       transparent 100%
     );
   }
 
   .holo-bar {
-    background: linear-gradient(
-      180deg,
-      var(--g1),
-      var(--g2),
-      var(--g3),
-      var(--g4),
-      var(--g5)
-    );
+    background: rgb(var(--accent-rgb));
   }
 
   .holo-text {
-    background: linear-gradient(
-      90deg,
-      var(--g1),
-      var(--g2),
-      var(--g3),
-      var(--g4),
-      var(--g5)
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: rgb(var(--accent-rgb));
   }
 
   .holo-bar-h {
-    background: linear-gradient(
-      90deg,
-      var(--g1),
-      var(--g2),
-      var(--g3),
-      var(--g4),
-      var(--g5)
-    );
+    background: rgb(var(--accent-rgb));
   }
 
   .barcode-holo {
@@ -259,6 +236,30 @@
     animation-play-state: running;
   }
 
+  /* Accessibility / robustness: never keep content hidden when motion is reduced */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-on-scroll {
+      opacity: 1;
+      animation: none;
+    }
+  }
+
+  /* Typewriter caret — blinking accent bar shown while/after titles type. */
+  @keyframes twBlink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+
+  .tw-caret {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    margin-left: 3px;
+    vertical-align: -0.1em;
+    background-color: rgb(var(--accent-rgb));
+    animation: twBlink 1s steps(1) infinite;
+  }
+
   /* Floating particles */
   @keyframes float-particle {
     0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
@@ -322,7 +323,7 @@
     inset: 0;
     padding: 1px;
     border-radius: inherit;
-    background: linear-gradient(135deg, var(--g1), var(--g2), var(--g3), var(--g4), var(--g5));
+    background: rgb(var(--accent-rgb));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -330,7 +331,7 @@
   }
 
   .holo-border:hover::before {
-    background: linear-gradient(135deg, var(--g1-light), var(--g2-light), var(--g2-light), var(--g4-light), var(--g4-light));
+    background: rgb(var(--accent-light-rgb));
   }
 
   .barcode {

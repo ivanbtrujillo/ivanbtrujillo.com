@@ -10,17 +10,17 @@ type SimpleLayout = React.FC<SimpleLayoutProps>
 
 export const SimpleLayout: SimpleLayout = ({ title, intro, children }) => {
   return (
-    <Container className="mt-9">
+    <Container className="mt-9 sm:mt-[86px]">
       <div className="bg-black">
-        <header className="max-w-2xl">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-100 sm:text-5xl">
+        <header className="max-w-3xl">
+          <h1 className="text-balance font-heading text-4xl uppercase leading-[0.95] tracking-tight text-white sm:text-5xl lg:text-6xl">
             {title}
           </h1>
-          <p className="mt-6 text-base text-zinc-400">
+          <p className="mt-6 max-w-2xl text-pretty text-base leading-relaxed text-zinc-400">
             {intro}
           </p>
         </header>
-        <div className="mt-16 sm:mt-20">{children}</div>
+        <div className="mt-12 sm:mt-16">{children}</div>
       </div>
     </Container>
   )

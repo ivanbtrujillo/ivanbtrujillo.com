@@ -1,52 +1,74 @@
+import Link from 'next/link'
+
 import { Container } from '@/components/container'
+import { SocialIcon } from '@/components/icons'
+
+type SocialLinkProps = {
+  href: string
+  'aria-label': string
+  icon: React.FC<React.SVGProps<SVGSVGElement>>
+}
+
+const SocialLink: React.FC<SocialLinkProps> = ({ icon: Icon, ...props }) => (
+  <Link
+    target="_blank"
+    rel="noopener noreferrer"
+    className="group -m-1 p-1"
+    {...props}
+  >
+    <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-accent" />
+  </Link>
+)
 
 type Footer = React.FC
 export const Footer: Footer = () => {
   return (
     <footer className="mt-32">
       <Container.Outer>
-        {/* Holographic top border */}
-        <div aria-hidden className="mx-auto h-0.5 max-w-5xl holo-bar-h rounded-full opacity-60" />
+        {/* Accent top border */}
+        <div aria-hidden className="h-px w-full bg-accent" />
         <div className="pt-10 pb-16">
           <Container.Inner>
-            <div className="flex flex-col gap-8 bg-black">
-              {/* Top row — tagline + back to top */}
-              <div className="flex items-start justify-between">
+            <div className="flex flex-col gap-8">
+              {/* Top row — name + tagline / social */}
+              <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
                 <div>
-                  <p className="font-hud text-[10px] uppercase tracking-[0.35em] text-zinc-200">
+                  <p className="font-heading text-2xl uppercase tracking-tight text-white">
                     Iván Trujillo
                   </p>
-                  <p className="mt-2 max-w-sm text-base text-zinc-200">
+                  <p className="mt-2 max-w-sm text-pretty text-base text-zinc-400">
                     Building at the intersection of front-end engineering and AI.
                   </p>
                 </div>
-              </div>
-              {/* Decorative row */}
-              <div
-                aria-hidden
-                className="flex items-center gap-4 border-t border-white/10 pt-6"
-              >
-                <span className="font-hud text-[10px] tracking-[0.15em] text-zinc-700">
-                  [+]
-                </span>
-                <div className="barcode-holo h-3 w-20 opacity-30" />
-                <div className="ml-auto flex gap-1.5">
-                  <div className="h-1 w-1 rounded-full bg-white/10" />
-                  <div className="h-1 w-1 rounded-full bg-accent/10" />
-                  <div className="h-1 w-1 rounded-full bg-white/10" />
-                  <div className="h-1 w-1 rounded-full bg-white/10" />
+                <div className="flex items-center gap-6">
+                  <SocialLink
+                    href="https://twitter.com/ivanbtrujillo"
+                    aria-label="Follow on Twitter"
+                    icon={SocialIcon.Twitter}
+                  />
+                  <SocialLink
+                    href="https://www.instagram.com/ivanbtrujillo.dev/"
+                    aria-label="Follow on Instagram"
+                    icon={SocialIcon.Instagram}
+                  />
+                  <SocialLink
+                    href="https://github.com/ivanbtrujillo"
+                    aria-label="Follow on GitHub"
+                    icon={SocialIcon.GitHub}
+                  />
+                  <SocialLink
+                    href="https://www.linkedin.com/in/ivanbtrujillo/"
+                    aria-label="Follow on LinkedIn"
+                    icon={SocialIcon.LinkedIn}
+                  />
                 </div>
-                <span className="font-hud text-[10px] tracking-[0.15em] text-zinc-700">
-                  [+]
-                </span>
               </div>
               {/* Bottom row — copyright */}
-              <div className="flex items-center justify-between">
-                <p className="text-base text-zinc-200">
+              <div className="flex items-center justify-between border-t border-white/10 pt-6">
+                <p className="text-sm text-zinc-400">
                   &copy; {new Date().getFullYear()} Iván Trujillo. All rights
                   reserved.
                 </p>
-                
               </div>
             </div>
           </Container.Inner>
