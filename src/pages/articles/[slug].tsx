@@ -8,6 +8,7 @@ import LeaderAgentsNeed from '@/content/articles/the-leader-that-ai-agents-need.
 import EmployeeExperience from '@/content/articles/employee-experience-and-the-cost-of-ignoring-your-best-people.mdx'
 import TraditionalCompanies from '@/content/articles/why-traditional-companies-fail-at-ai-adoption.mdx'
 import IntegrityOverDemos from '@/content/articles/integrity-over-demos-building-trust-in-tech.mdx'
+import VerifiedCommitSignatures from '@/content/articles/verified-commit-and-tag-signatures-on-github.mdx'
 
 const articlesBySlug: Record<string, React.ComponentType> = {
   'adding-a-cross-page-loader-in-nextjs': AddingCrossPageLoader,
@@ -18,6 +19,7 @@ const articlesBySlug: Record<string, React.ComponentType> = {
   'employee-experience-and-the-cost-of-ignoring-your-best-people': EmployeeExperience,
   'why-traditional-companies-fail-at-ai-adoption': TraditionalCompanies,
   'integrity-over-demos-building-trust-in-tech': IntegrityOverDemos,
+  'verified-commit-and-tag-signatures-on-github': VerifiedCommitSignatures,
 }
 
 type ArticlePageProps = {
