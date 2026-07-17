@@ -1,0 +1,106 @@
+import { ArticleLayout } from '@/components/article-layout'
+
+export const meta = {
+  author: 'Iván Trujillo',
+  date: '2026-07-17',
+  title: 'Verified commit and tag signatures on GitHub',
+  description:
+    'How to sign Git commits and tags with SSH so GitHub shows them as Verified — from creating a key to rewriting history and signing tags.',
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+The "Unverified" label is not about the commit message format: it means GitHub cannot prove that the commit was made by its declared author. The name and email on a commit are free text — anyone can write anything there. To prove authorship, the commit is **signed** with a cryptographic key, and GitHub verifies it against the corresponding public key.
+
+This guide signs with **SSH**, so you can reuse the key you already use for GitHub (simpler than setting up GPG from scratch).
+
+## Locate or create an SSH key
+
+```bash
+ls ~/.ssh/*.pub
+```
+
+If none exists, create one:
+
+```bash
+ssh-keygen -t ed25519 -C "your-email@example.com"
+```
+
+## Configure Git to sign with SSH
+
+```bash
+git config --global gpg.format ssh
+git config --global user.signingkey ~/.ssh/id_ed25519.pub
+git config --global commit.gpgsign true     # sign every commit automatically
+git config --global tag.gpgsign true         # also sign tags
+```
+
+(The settings are still named "gpg" for historical reasons, but with `gpg.format ssh` signing happens via SSH.)
+
+## Register the public key on GitHub as a Signing Key
+
+Copy the public key to the clipboard:
+
+```bash
+cat ~/.ssh/id_ed25519.pub | pbcopy      # on macOS. On Linux: xclip -sel clip < ~/.ssh/id_ed25519.pub
+```
+
+On GitHub: **Settings → SSH and GPG keys → New SSH key**. In the **Key type** dropdown, select **Signing Key**. Paste the key and save.
+
+## Verify the account email
+
+GitHub only marks a commit as "Verified" if the commit email is among the verified emails on the account.
+
+```bash
+git config user.email
+```
+
+That email must appear, verified, under **Settings → Emails** on GitHub.
+
+## Sign existing commits
+
+Turning on signing does not change previous commits; to sign them you have to rewrite history. To sign every commit on the branch from the start:
+
+```bash
+git rebase --exec 'git commit --amend --no-edit -S --no-verify' --root
+```
+
+- `-S`: signs each commit.
+- `--no-verify`: skips hooks during the rebase (those commits were already validated when they were created).
+
+If you also need to fix the email on old commits, set the correct email first:
+
+```bash
+git config user.email "correct@example.com"
+git rebase --exec 'git commit --amend --no-edit -S --no-verify --reset-author' --root
+```
+
+`--reset-author` updates the author and email to match the current Git config.
+
+If a rebase stops mid-way because of an error, cancel it with `git rebase --abort` and try again.
+
+## Push the rewritten history
+
+Rewriting history that was already published requires a force push:
+
+```bash
+git push --force-with-lease
+```
+
+`--force-with-lease` only overwrites if nobody else has pushed new changes in the meantime (safer than `--force`). On a shared repository, tell the team before rewriting published history.
+
+## Sign tags
+
+With `tag.gpgsign true` (configured above), tags are signed automatically. Manually:
+
+```bash
+git tag -s v1.0.0 -m "v1.0.0"
+git push origin v1.0.0
+```
+
+Verify a signature locally:
+
+```bash
+git tag -v v1.0.0
+git log --show-signature -1
+```
