@@ -104,3 +104,48 @@ Verify a signature locally:
 git tag -v v1.0.0
 git log --show-signature -1
 ```
+
+## Signing in non-interactive environments (agents & CI)
+
+If you sign fine from your terminal but an automated agent (Claude Code, a CI job, a git hook, a background script) fails with something like "cannot sign — key not loaded", the cause is almost always this: your signing key is passphrase-protected and not present in ssh-agent. An interactive shell would prompt you for the passphrase; a non-interactive one can't, so ssh-keygen -Y sign fails and the commit is rejected.
+
+The fix is to sign with a key that can be used without a prompt — one that is either passphrase-free on disk, or already loaded into your agent.
+
+Diagnose
+
+First, see which key you're signing with and which keys your agent actually holds:
+
+git config --get user.signingkey
+ssh-add -l
+
+The identities in ssh-add -l are shown by fingerprint, not filename. Match each fingerprint back to a file:
+
+for f in ~/.ssh/*.pub; do ssh-keygen -lf "$f"; done
+
+Then check whether a given private key needs a passphrase (this only reads the key, it changes nothing):
+
+ssh-keygen -y -P '' -f ~/.ssh/id_ed25519 >/dev/null 2>&1 \
+  && echo "no passphrase — usable non-interactively" \
+  || echo "passphrase-protected"
+
+You're looking for a key that is both loaded in the agent (or passphrase-free on disk) and whose identity matches your committer email (git config user.email).
+
+Fix
+
+Repoint Git at that key:
+
+git config --global user.signingkey ~/.ssh/your_signing_key.pub
+
+- If user.signingkey is also set at the repository level, the local value shadows the global one — check with git config --get user.signingkey inside the repo and unset the redundant override so it can't win:
+
+git config --unset user.signingkey   # run inside the repo, only if a local override exists
+
+A passphrase-free key on disk is the most robust choice: ssh-keygen can read it directly whether or not the agent is running, so signing keeps working across reboots and fresh shells.
+
+Verify without making a commit
+
+Confirm signing succeeds non-interactively — no throwaway commit needed. This is the exact operation Git runs under the hood:
+
+printf 'test' | ssh-keygen -Y sign -n git -f ~/.ssh/your_signing_key.pub
+
+If it prints a -----BEGIN SSH SIGNATURE----- block with no passphrase prompt, your agent/CI can now sign commits. Remember that the Verified badge still requires this same public key to be registered as a Signing Key on GitHub (see the earlier section) — signing succeeding locally and the badge appearing are two separate things.
